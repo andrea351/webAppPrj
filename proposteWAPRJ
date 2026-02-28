@@ -34,3 +34,76 @@ server (node.js, php)
 15 minuti
 
 da computer personale
+
+PROPOSTA SMART HOME DASHBOARD:
+
+0) CHIEDERE AL PROF SE VA BENE 
+
+1) IDEA
+
+    Definizione: Simulazione smart home realistica. L'app è finalizzata alla gestione di dispositivi virtuali (simulati) IoT.
+
+    1.1 Caratteristiche comuni a ogni dispositivo virtuale:
+    - stato persistente (salvato in database)
+    - aggiornamenti in tempo reale (via WebSocket)
+    - automazioni semplici (es. luce accessa alle 10 di mattina -> spegnila)
+    - log storico delle azioni (chi ha acceso a cosa e quando. es. mia madre non ha accesso alla luce della mia stanza)
+
+    1.2 Cosa possiamo aggiungere per abbellire l'applicazione:
+    - autenticazione utenti
+    - log attività (utenti e dispositivi)
+    - stato persistente con feedback immediato sul frontend
+
+    1.3 Nota: ogni dispositivo intelligente è simulato. Motivazione: al professore non interessa l’interazione reale con l’hardware, ma che l’app abbia i seguenti requisiti:
+    - front-end: HTML, CSS, JS
+    - back-end: Node.js (o PHP)
+    - discreta interazione client-server
+    - accessibile sia da PC che smartphone
+
+    1.4 Extra: per aggiungere un tocco in più possiamo integrare un IoT reale (es. Shelly Plug S) con API HTTP locale, ma solo come implementazione opzionale.
+
+2) IMPLEMENTAZIONE
+
+    2.1 Architettura generale:
+    Frontend (HTML/CSS/JS)  <- REST API / WebSocket ->  Backend (Node.js + Express)  <->  Database (PostgreSQL) -> Dispositivo reale (Shelly) [opzionale]
+
+    2.2 Frontend:
+    - dashboard coi bottoncini
+    - toggle ON/OFF per ogni dispositivo
+    - feedback immediato sullo stato
+    - visualizzazione log storico e consumo simulato
+    - layout: griglia su PC, colonna verticale su smartphone
+
+    2.3 Backend (Node.js):
+    - Gestione REST API (comunicazione fron-end & back-end):
+    - GET /devices -> lista dispositivi
+    - POST /devices/:id/toggle -> cambia stato ON/OFF
+    - GET /logs -> storico attività
+    - WebSocket per aggiornamenti in tempo reale
+    - gestione dispositivi simulati (aggiornamento DB)
+    - integrazione eventuale Shelly Plug S tramite API HTTP: fetch(`http://IP_DEL_DISPOSITIVO/relay/0?turn=on`)
+    - salvataggio log in database
+    - gestione autenticazione utenti (login/logout)
+
+    2.4 Database:
+    - tabella users (id, username, password_hash, ruolo (admin/user))
+    - tabella devices (id, nome, tipo (luce/presa/termometro), modalita (simulato/reale), stato, ip (per dispositivi reali))
+    - tabella logs (id,	user_id, device_id, azione (ON/OFF), timestamp)
+        
+3) TABELLA DI MARCIA (3 mesi) 
+
+--- DISCLAMER : fatta completamente da chat, fa cagare ma ciucciatemelo la metto comunque ---
+
+Settimana	Obiettivi principali
+1	Installazione Node.js, Express, SQL; creare progetto base con struttura cartelle; test server “Hello World”
+2	Creazione database e tabelle; implementazione CRUD dispositivi simulati (ON/OFF, stato persistente)
+3	Frontend base: dashboard con lista dispositivi e toggle ON/OFF
+4	Implementazione REST API tra frontend e backend; test CRUD completo
+5	Introduzione WebSocket: aggiornamento in tempo reale dello stato dei dispositivi
+6	Login utente e autenticazione; gestione ruoli (admin/user)
+7	Implementazione log storico e visualizzazione nella dashboard
+8	Layout responsive (griglia PC, colonna smartphone)
+9	Simulazione consumi elettrici e automazioni di base
+10	Rifinitura UI (icone, colori, feedback stato)
+11	Integrazione eventuale Shelly Plug S (solo 1 dispositivo reale)
+12	Test finale, debug, preparazione demo e documentazione
