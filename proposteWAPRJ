@@ -111,3 +111,22 @@ Settimana	Obiettivi principali
 10	Rifinitura UI (icone, colori, feedback stato)
 11	Integrazione eventuale Shelly Plug S (solo 1 dispositivo reale)
 12	Test finale, debug, preparazione demo e documentazione
+
+
+SITO CINEMA 
+
+premessa: film già comprati così 
+
+schermata 0: 
+pop-up per registrazione (posizione:centrale), sfondo
+
+schermata principale:
+    barra-alta : (contiene) listino prezzi, logo, punti accumulati, consigliati, profilo, contatti, lavora con noi, dove siamo
+    titolo, barra di ricerca, bottoni sentimenti -> scorrendo sotto -> listino film 
+
+profilo: 
+    accedi, registrati, cancella registrazione, procedi senza account, storico film (log)
+
+seconda schermata:
+
+
