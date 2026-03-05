@@ -1,0 +1,11 @@
+prenotazione diretta tramite carta
+qr code per prenotazione e pagarlo successivamente al botteghino.
+trailer quando clicco sul film(da youtube)
+punti per il login
+sconti per eta ecc...
+pacchetti pop corn
+sezione prenota le tue feste di compleanno
+sezione lavora con noi
+scelta dei film in base al mood
+
+(Prenotazione Sociale Condivisa (Split Booking): Risolvi un problema reale: organizzare il cinema con gli amici. Permetti a un utente di selezionare 4 posti, pagarne uno solo e generare un link (o un QR code) da mandare su WhatsApp agli amici. Gli amici hanno 15 minuti per cliccare il link e pagare il loro posto, altrimenti torna libero.)
