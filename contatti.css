@@ -1,0 +1,119 @@
+/* Reset base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    line-height: 1.6;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #222;
+    color: #fff;
+    padding: 1rem;
+    text-align: center;
+}
+
+/* Link del menu */
+header nav a {
+    color: #fff;
+    background-color: #800020; /* Burgundy */
+    margin: 0 0.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+/* Effetto hover */
+header nav a:hover {
+    background-color: #5a0016; /* Burgundy più scuro */
+}
+
+/* Main */
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Container per due sezioni affiancate */
+.contenitore-sezioni {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Stile base per le sezioni */
+section {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    flex: 1 1 45%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+    margin-bottom: 1rem;
+    color: #d6336c;
+}
+
+.info-contatti p {
+    margin-bottom: 0.5rem;
+}
+
+.mappa {
+    margin-top: 1rem;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin-top: 0.5rem;
+}
+
+form input, form textarea {
+    padding: 0.5rem;
+    margin-top: 0.2rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    margin-top: 1rem;
+    padding: 0.7rem;
+    border: none;
+    background-color: #d6336c;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #b82a57;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #222;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .contenitore-sezioni {
+        flex-direction: column;
+    }
+}
