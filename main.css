@@ -1,0 +1,117 @@
+@font-face {
+    font-family: 'Stronger-Thinker-Bold'; /*do un nome al font per poterlo richiamare*/
+    src: url('Stronger-Thinker-Bold.ttf');
+}
+
+/* --- PANNELLO SUPERIORE --- */
+.pannello-superiore {
+    display: flex; /* linea in orizzontale */
+    align-items: center; /* allinea al centro e verticalmente */
+    background: linear-gradient(90deg, #5e0015 0%, #800020 50%, #5e0015 100%);
+    padding: 2px 40px;
+    color: white; /* testo bianco */
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* --- MENU SINISTRA --- */
+.menu-sx {
+    flex: 1;
+    display: flex;
+    gap: 50px; /* DISTANZA tra i LINK */
+}
+
+.menu-sx a {
+    color: #ffffff;
+    text-decoration: none; /* NO sottolineatura Link */
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.menu-sx a:hover {
+    color: #f0c0d0; /* Cambio colore se si passa sopra */
+    transform: scale(1.1);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- LOGO CENTRO --- */
+.logo-centro {
+    display: flex;
+    justify-content: center; 
+    padding-left: 25px;
+}
+.img-logo {
+    height: 180px; /* Altezza LOGO */
+    width: auto; 
+    cursor: pointer;
+}
+
+/* --- MENU DESTRA --- */
+.bottone-profilo {
+    background: none; /* Rimuove lo sfondo grigio di default del bottone */
+    border: none; 
+    color: white; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease; /* DURATA movimento ANIMAZIONE */
+    margin-right: 40px; 
+    transform: scale(1.3);
+}
+
+.bottone-profilo:hover {
+    transform: scale(1.5); /* L'omino si ingrandisce di un certo valore quando ci passo sopra */
+}
+
+.menu-destra {
+    flex: 1; 
+    display: flex;
+    align-items: center;
+    gap: 120px;
+}
+
+.input-ricerca {
+    padding: 8px 16px 8px 40px;
+    border-radius: 20px; /*Arrotonda i BORDI della BARRA di RICERCA*/
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    outline: none;
+    font-size: 14px;
+    width: 200px;
+    height: 20px;
+    line-height: 20px;
+    background-color:transparent;
+    color: white;
+    transition: width 0.3s, box-shadow 0.3s ease;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.input-ricerca::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- STILE BARRA DI RICERCA --- */
+.contenitore-ricerca {
+    position: relative; /* Serve per poter posizionare la lente liberamente qui dentro */
+    display: flex;
+    align-items: center;
+}
+
+.icona-lente {
+    position: absolute; 
+    left: 12px; /* Sposta la LENTE leggermente verso l'interno partendo da sinistra */
+    color: rgba(255, 255, 255, 0.7); 
+    pointer-events: none;
+    margin-left: 50px;
+}
+
+.input-ricerca::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Quando l'utente clicca sulla barra per scrivere */
+.input-ricerca:focus {
+    width: 250px; /* Quando premo sulla BARRA di RICERCA, quest'ultima si ALLUNGA */
+    border-color: white; 
+    background-color: rgba(0, 0, 0, 0.1); 
+}
