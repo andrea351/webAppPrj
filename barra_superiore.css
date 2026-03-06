@@ -15,21 +15,21 @@
 
 /* --- MENU SINISTRA --- */
 .menu-sx {
-    flex:1;
+    flex: 1;
     display: flex;
-    gap: 40px; /* distanza tra i link */
+    gap: 50px; /* DISTANZA tra i LINK */
 }
 
 .menu-sx a {
     color: #ffffff;
-    text-decoration: none; /* no sottolineatura link */
+    text-decoration: none; /* NO sottolineatura Link */
     font-size: 16px;
     font-weight: 600;
     letter-spacing: 1px;
 }
 
 .menu-sx a:hover {
-    color: #f0c0d0; /* cambio colore se si passa sopra */
+    color: #f0c0d0; /* Cambio colore se si passa sopra */
     transform: scale(1.1);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -38,9 +38,10 @@
 .logo-centro {
     display: flex;
     justify-content: center; 
+    padding-left: 25px;
 }
 .img-logo {
-    height: 180px; /* altezza logo */
+    height: 180px; /* Altezza LOGO */
     width: auto; 
     cursor: pointer;
 }
@@ -53,31 +54,40 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    transition: transform 0.2s; 
+    transition: transform 0.2s ease; /* DURATA movimento ANIMAZIONE */
+    margin-right: 40px; 
+    transform: scale(1.3);
 }
 
 .bottone-profilo:hover {
-    transform: scale(1.1); /* l'omino si ingrandisce un po' quando ci passo sopra! */
+    transform: scale(1.5); /* L'omino si ingrandisce di un certo valore quando ci passo sopra */
 }
 
 .menu-destra {
     flex: 1; 
     display: flex;
-    justify-content: flex-end; /* Spinge il bottone dell'omino tutto a destra */
     align-items: center;
-    gap:120px;
+    gap: 120px;
 }
 
-.input-ricerca{
-    padding: 15px 16px 8px 40px;
-    border-radius: 20px; /*arrotonda i bordi*/
-    border: 1px solid rgba(255, 255, 255, 0.5);
+.input-ricerca {
+    padding: 8px 16px 8px 40px;
+    border-radius: 20px; /*Arrotonda i BORDI della BARRA di RICERCA*/
+    border: 1px solid rgba(255, 255, 255, 0.4);
     outline: none;
     font-size: 14px;
     width: 200px;
+    height: 20px;
+    line-height: 20px;
     background-color:transparent;
     color: white;
-    transition: width 0.3s,box-shadow 0.3s ease;
+    transition: width 0.3s, box-shadow 0.3s ease;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.input-ricerca::placeholder {
+    color: rgba(255, 255, 255, 0.2);
 }
 
 /* --- STILE BARRA DI RICERCA --- */
@@ -89,18 +99,19 @@
 
 .icona-lente {
     position: absolute; 
-    left: 12px; /* sposta la lente leggermente verso l'interno partendo da sinistra */
+    left: 12px; /* Sposta la LENTE leggermente verso l'interno partendo da sinistra */
     color: rgba(255, 255, 255, 0.7); 
-    pointer-events: none; 
+    pointer-events: none;
+    margin-left: 50px;
 }
 
 .input-ricerca::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
 
-/* Quando l'utente clicca sulla barra per scrivere... */
+/* Quando l'utente clicca sulla barra per scrivere */
 .input-ricerca:focus {
-    width: 250px; /* si allunga */
+    width: 250px; /* Quando premo sulla BARRA di RICERCA, quest'ultima si ALLUNGA */
     border-color: white; 
     background-color: rgba(0, 0, 0, 0.1); 
 }
