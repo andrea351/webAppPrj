@@ -1,7 +1,3 @@
-@font-face {
-    font-family: 'Stronger-Thinker-Bold'; /*do un nome al font per poterlo richiamare*/
-    src: url('Stronger-Thinker-Bold.ttf');
-}
 
 /* --- PANNELLO SUPERIORE --- */
 .pannello-superiore {
@@ -39,7 +35,7 @@
 .logo-centro {
     display: flex;
     justify-content: center; 
-    padding-left: 10px;
+    padding-left: 0;
 }
 .img-logo {
     height: 180px; /* Altezza LOGO */
@@ -126,6 +122,8 @@
     margin-bottom: 40px;
     border-radius: 16px;
     box-shadow: 0px 4px 20px #000;
+    flex-direction: column;
+    align-items: center;
 
     opacity: 0;
     transform: translateY(40px);
@@ -162,6 +160,9 @@
 }
 
 #contenitore-film {
-    padding: 0 80px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* TRE COLONNE */
+    gap: 30px;
+    padding: 40 80px;
     margin-top: 30px;
 }
