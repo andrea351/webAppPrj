@@ -20,7 +20,7 @@ body{
 /* POPUP */
 .pop-up-contenuto{
     position: relative;
-    background:white;
+    background:#FFFDD0;
     width:350px;
     padding:50px 30px;
     border-radius:15px;
@@ -36,8 +36,14 @@ body{
 }
 
 @keyframes slideIn{
-    from{ opacity:0; transform:translateY(-30px); }
-    to{ opacity:1; transform:translateY(0); }
+    from{
+        opacity:0;
+        transform:translateY(-40px) scale(0.95);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
 @keyframes fadeOut{
@@ -53,15 +59,20 @@ body{
     font-size:28px;
     cursor:pointer;
     z-index:10;
+    transition: transform 0.2s ease;
+}
+
+.chiudi:hover{
+    transform: rotate(90deg);
 }
 
 /* Logo */
 .immagine-logo {
-    background-color: #1e90ff;
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 150px;
+    height: 80px;
     border-radius: 15px;
 }
 
@@ -91,13 +102,22 @@ body{
     border:1px solid #ccc;
     outline:none;
     font-size:16px;
-    transition: all 0.3s ease;
+
+    transition: 
+    border-color 0.25s ease,
+    transform 0.15s ease,
+    background-color 0.25s ease;
 }
 
-/* FOCUS input */
+.campo input:hover{
+    border-color:#1e90ff;
+    transform:scale(1.02);
+}
+
 .campo input:focus{
     border-color:#1e90ff;
-    box-shadow:0 0 5px rgba(30,144,255,0.5);
+    border-width: 2px;
+    transform:scale(1.02);
 }
 
 /* LABEL floating */
@@ -118,7 +138,7 @@ body{
     left:10px;
     font-size:11px;
     color:#1e90ff;
-    background:white;
+    
     padding:0 5px;
 }
 
@@ -140,11 +160,15 @@ body{
     padding:12px;
     border-radius:10px;
     border:none;
-    background-color:#1e90ff;
+    background-color:rgba(0, 0, 0, 0.6);
     color:white;
     font-size:16px;
     cursor:pointer;
     transition: all 0.3s ease;
+}
+
+.btn-login:active{
+    transform: scale(0.97);
 }
 
 .btn-login:hover{
@@ -153,9 +177,12 @@ body{
     box-shadow:0 5px 15px rgba(0,0,0,0.2);
 }
 
+.btn-login:active{
+    transform: translateY(-2px) scale(0.97);
+}
 /* Link password dimenticata */
 .link-recupero-pswd{
-    color:black;
+    color: black;
     display:block;
     text-align:center;
     margin-top:10px;
@@ -180,6 +207,47 @@ body{
     white-space:nowrap;
 }
 
+/* TESTO NON HAI ACCOUNT */
+.noAccount{
+    text-align:center;
+    margin-top:20px;
+    color:#444;
+    font-size:14px;
+}
+
+/* BOTTONE REGISTRATI */
+.btn-sign{
+    width:80%;
+    max-width:300px;
+    margin:10px auto;
+    display:block;
+    padding:12px;
+
+    border-radius:10px;
+    border:2px solid rgba(0, 0, 0, 0.6);
+
+    background-color:white;
+    color:rgba(0, 0, 0, 0.6);
+
+    font-size:16px;
+    cursor:pointer;
+
+    transition: all 0.25s ease;
+}
+
+/* Hover */
+.btn-sign:hover{
+    background-color:#1e90ff;
+    color:white;
+    transform:translateY(-2px);
+    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* Click */
+.btn-sign:active{
+    transform:scale(0.97);
+}
+
 /* Responsive */
 @media (max-width:400px){
     .pop-up-contenuto {
@@ -190,3 +258,4 @@ body{
         width:100%;
     }
 }
+
