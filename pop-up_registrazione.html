@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ita">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="pop-up_registrazione.css">
+<title>Login</title>
+</head>
+
+<body>
+
+<main>
+    <div class="overlay" id="overlay">
+
+        <div class="pop-up-contenuto">
+
+            <!-- X chiudi -->
+            <span class="chiudi" id="chiudi">&times;</span>
+
+            <!-- Logo -->
+            <div class="immagine-logo">
+                <img src="logo.png" alt="cineMood">
+            </div>
+
+            <h2 class="testo-log-in">LOG IN</h2>
+
+            <!-- Email -->
+            <div class="campo">
+                <input type="email" id="email" required>
+                <label>indirizzo email</label>
+            </div>
+
+            <!-- Password -->
+            <div class="campo">
+                <input type="password" id="pwd" required>
+                <label>password</label>
+                <span class="show-pass" onclick="togglePassword()">👁</span>
+            </div>
+
+            <!-- Bottone Login -->
+            <button class="btn-login">Accedi</button>
+
+            <!-- Link password dimenticata -->
+            <a href="recupero pswd.html" class="link-recupero-pswd">
+                <strong>password dimenticata?</strong>
+            </a>
+
+            <!-- Separatore -->
+            <div class="linea-con-testo">
+                <hr>
+                <span>oppure</span>
+                <hr>
+            </div>
+
+        </div>
+
+    </div>
+</main>
+
+<!-- Script -->
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const overlay = document.getElementById("overlay");
+    const chiudi = document.getElementById("chiudi");
+
+    // Funzione chiudi popup con fade-out
+    function closePopup() {
+        overlay.classList.add("closing");
+        setTimeout(() => overlay.style.display = "none", 300);
+    }
+
+    chiudi.onclick = closePopup;
+
+    overlay.onclick = function(event){
+        if(event.target === overlay){
+            closePopup();
+        }
+    };
+});
+
+// Mostra/nascondi password
+function togglePassword() {
+    const pwd = document.getElementById("pwd");
+    if(pwd.type === "password") pwd.type = "text";
+    else pwd.type = "password";
+}
+</script>
+
+</body>
+</html>
