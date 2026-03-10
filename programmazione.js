@@ -253,13 +253,15 @@ function mostraFilm(giornoSelezionato) {
 
         let orari_html = ``;
 
-        const orariDaMostrare = giornoSelezionato === "tutti" ? f.orari : { [giornoSelezionato]: f.orari[giornoSelezionato] };
+        const orariDaMostrare = giornoSelezionato === "tutti" ? null : { [giornoSelezionato]: f.orari[giornoSelezionato] };
 
-        for (const [giorno, ore] of Object.entries(orariDaMostrare)) {
-            orari_html += `<p><strong>${giorno}:</strong></p>`;
-            ore.forEach(ora => {
-                orari_html += `<button class="bottone-orario">${ora}</button>`;
-            })
+        if (orariDaMostrare !== null) {
+            for (const [giorno, ore] of Object.entries(orariDaMostrare)) {
+                // orari_html += `<p><strong>${giorno}:</strong></p>`;
+                ore.forEach(ora => {
+                    orari_html += `<button class="bottone-orario">${ora}</button>`;
+                })
+            }
         }
 
         // 'innerHTML' è un comando di JS che inserisce dentro 'contenitore-film' la CARD COMPLETA del film CORRENTE 'f', usando proprio i dati di 'f' appena strutturati
@@ -284,11 +286,75 @@ function mostraFilm(giornoSelezionato) {
     });
 }
 
+// CALENDARIO
+
+// Mette in un Set TUTTI i giorni in cui c'è una Programmazione
+const giorniConFilm = new Set();
+film.forEach(f => {
+    Object.keys(f.orari).forEach(giorno => giorniConFilm.add(giorno));
+});
+
+const mappaGiorni = {
+    "2026-06-01": "LUNEDI 1 GIUGNO",
+    "2026-06-02": "MARTEDI 2 GIUGNO",
+    "2026-06-03": "MERCOLEDI 3 GIUGNO",
+    "2026-06-04": "GIOVEDI 4 GIUGNO",
+    "2026-06-05": "VENERDI 5 GIUGNO",
+    "2026-06-06": "SABATO 6 GIUGNO",
+    "2026-06-07": "DOMENICA 7 GIUGNO",
+    "2026-06-08": "LUNEDI 8 GIUGNO",
+    "2026-06-09": "MARTEDI 9 GIUGNO",
+    "2026-06-10": "MERCOLEDI 10 GIUGNO"
+}
+
+function costruisciCalendario() {
+    const cal = document.getElementById("calendario");
+    cal.innerHTML = ``;
+
+    const titolo = document.createElement("div");
+    titolo.className = "cal-titolo";
+    titolo.textContent = "GIUGNO 2026";
+    cal.appendChild(titolo);
+
+    const intestazioni = ["LUN", "MAR", "MER", "GIO", "VEN", "SAB", "DOM"];
+    intestazioni.forEach(g => {
+        const cell = document.createElement("div");
+        cell.className = "cal-intestazione";
+        cell.textContent = g;
+        cal.appendChild(cell);
+    });
+
+    for (let giorno = 1; giorno <= 30; giorno++) {
+        const cell = document.createElement("div");
+        const dataKey = `2026-06-${String(giorno).padStart(2, "0")}`;
+        const nomeGiorno = mappaGiorni[dataKey];
+
+        cell.textContent = giorno;
+        cell.className = "cal-giorno";
+
+        if (nomeGiorno && giorniConFilm.has(nomeGiorno)) {
+            cell.classList.add("cal-attivo");
+            cell.addEventListener("click", () => {
+                document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
+                cell.classList.add("cal-selezionato");
+                mostraFilm(nomeGiorno);
+            });
+        } else cell.classList.add("cal-disabilitato");
+    
+        cal.appendChild(cell);
+    }
+
+    const btnTutti = document.createElement("button");
+    btnTutti.textContent = "🍿 Tutti i film";
+    btnTutti.className = "cal-btn-tutti";
+    btnTutti.addEventListener("click", () => {
+        document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
+        mostraFilm("tutti");
+    });
+    document.getElementById("wrapper").appendChild(btnTutti);
+}
+
+// AVVIO
 mostraFilm("tutti");
-
-document.getElementById("scelta-film").addEventListener("change", (e) => {
-    console.log("Cambio Rilevato: ", e.target.value);
-    mostraFilm(e.target.value);
-})
-
+costruisciCalendario();
 });
