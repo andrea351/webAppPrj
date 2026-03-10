@@ -257,7 +257,7 @@ function mostraFilm(giornoSelezionato) {
 
         if (orariDaMostrare !== null) {
             for (const [giorno, ore] of Object.entries(orariDaMostrare)) {
-                orari_html += `<p><strong>${giorno}:</strong></p>`;
+                // orari_html += `<p><strong>${giorno}:</strong></p>`;
                 ore.forEach(ora => {
                     orari_html += `<button class="bottone-orario">${ora}</button>`;
                 })
@@ -351,7 +351,7 @@ function costruisciCalendario() {
         document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
         mostraFilm("tutti");
     });
-    cal.after(btnTutti);
+    document.getElementById("wrapper").appendChild(btnTutti);
 }
 
 // AVVIO

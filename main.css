@@ -197,10 +197,20 @@
 
 .contenitore-scelta-film {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 100px;
     margin: 30px 0;
-    gap: 10px;
+    gap: 50px;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.8);
+    /* margin-left: -50px; */
 }
 
 #calendario {
@@ -262,7 +272,6 @@
 
 .cal-btn-tutti {
     display: block;
-    margin: 10px auto;
     background-color: #800020;
     color: white;
     border: none;
@@ -271,8 +280,34 @@
     cursor: pointer;
     font-size: 14px;
     transition: transform 0.2s ease;
+    align-self: center;
 }
 
 .cal-btn-tutti:hover {
+    transform: scale(1.05);
+}
+
+#mood-btn{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-self: center;
+    margin-bottom: 10px;
+    margin-left: 170px;
+}
+
+#mood-btn button {
+    background-color: #bb2248;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: transform 0.2s ease;
+    text-align: left;
+}
+
+#mood-btn button:hover {
     transform: scale(1.05);
 }
