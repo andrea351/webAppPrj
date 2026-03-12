@@ -5,7 +5,8 @@ const film = [
         titolo: "Billy Elliot",
         locandina: "locandine/billy_elliot.jpg",
         pagina: "",
-        orari: {
+        mood: ["Serata in famiglia 🧸", "Zero pensieri 🍿"],
+        orari:{
             "LUNEDI 1 GIUGNO":    ["15:00", "21:30"],
             "MERCOLEDI 3 GIUGNO": ["14:00", "19:00"],
             "SABATO 6 GIUGNO":    ["17:00", "22:30"],
@@ -16,6 +17,7 @@ const film = [
         titolo: "La vita è bella",
         locandina: "locandine/la_vita_e_bella.jpg",
         pagina: "",
+        mood: ["Lacrime in arrivo 🥲", "Docu-film 📖"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["17:00", "21:00"],
             "MARTEDI 2 GIUGNO":   ["15:00", "20:00"],
@@ -29,6 +31,7 @@ const film = [
         titolo: "Il re leone",
         locandina: "locandine/re_leone.jpg",
         pagina: "",
+        mood: ["Serata in famiglia 🧸"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["10:00", "14:30"],
             "MARTEDI 2 GIUGNO":   ["10:00", "14:00", "17:30"],
@@ -41,6 +44,7 @@ const film = [
         titolo: "Fantozzi",
         locandina: "locandine/fantozzi.jpg",
         pagina: "",
+        mood: ["Ridiamoci sopra 😂", "Zero pensieri 🍿"],
         orari: {
             "MARTEDI 2 GIUGNO":   ["18:00", "21:00"],
             "MERCOLEDI 3 GIUGNO": ["17:00", "20:30"],
@@ -54,6 +58,7 @@ const film = [
         titolo: "Natale sul Nilo",
         locandina: "locandine/natale_sul_nilo.jpg",
         pagina: "",
+        mood: ["Ridiamoci sopra 😂"],
         orari: {
             "MERCOLEDI 3 GIUGNO": ["18:00", "21:00"],
             "VENERDI 5 GIUGNO":   ["20:00", "22:30"],
@@ -66,6 +71,7 @@ const film = [
         titolo: "La ladra di libri",
         locandina: "locandine/ladra_libri.jpg",
         pagina: "",
+        mood: ["Lacrime in arrivo 🥲", "Curioso 👀"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["16:00", "20:00"],
             "MARTEDI 2 GIUGNO":   ["17:30", "21:00"],
@@ -78,6 +84,7 @@ const film = [
         titolo: "C'è ancora domani",
         locandina: "locandine/ce_ancora_domani.jpg",
         pagina: "",
+        mood: ["Docu-film 📖"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["18:30", "21:30"],
             "MARTEDI 2 GIUGNO":   ["19:00", "22:00"],
@@ -91,6 +98,7 @@ const film = [
         titolo: "Wonder",
         locandina: "locandine/wonder.jpg",
         pagina: "",
+        mood:["Serata in famiglia 🧸"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["15:00", "19:00"],
             "MARTEDI 2 GIUGNO":   ["14:30", "18:30"],
@@ -103,6 +111,7 @@ const film = [
         titolo: "Oppenheimer",
         locandina: "locandine/oppenheimer.jpg",
         pagina: "",
+        mood:["Fiato sospeso 🤫"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["17:00", "21:00"],
             "MARTEDI 2 GIUGNO":   ["17:00", "21:00"],
@@ -117,6 +126,7 @@ const film = [
         titolo: "Una notte da leoni",
         locandina: "locandine/notte_leoni.jpg",
         pagina: "",
+        mood: ["Ridiamoci sopra 😂"],
         orari: {
             "GIOVEDI 4 GIUGNO":   ["21:00"],
             "VENERDI 5 GIUGNO":   ["21:00", "23:30"],
@@ -129,6 +139,7 @@ const film = [
         titolo: "Orgoglio e pregiudizio",
         locandina: "locandine/org_pred.jpg",
         pagina: "",
+        mood: ["Love mode ON 💘"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["16:30", "20:00"],
             "MERCOLEDI 3 GIUGNO": ["15:00", "19:00"],
@@ -141,6 +152,7 @@ const film = [
         titolo: "La vita di Pi",
         locandina: "locandine/vita_pi.jpg",
         pagina: "",
+        mood: ["All’avventura 🧭", "Curioso 👀"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["14:00", "18:00"],
             "MARTEDI 2 GIUGNO":   ["15:30", "20:00"],
@@ -153,6 +165,7 @@ const film = [
         titolo: "La ricerca della felicità",
         locandina: "locandine/ricerca_felicita.jpg",
         pagina: "",
+        mood: ["Lacrime in arrivo 🥲", "Docu-film 📖"],
         orari: {
             "MARTEDI 2 GIUGNO":   ["16:30", "20:30"],
             "MERCOLEDI 3 GIUGNO": ["17:00", "21:00"],
@@ -165,6 +178,7 @@ const film = [
         titolo: "Mamma ho perso l'aereo",
         locandina: "locandine/mamma_perso_aereo.jpg",
         pagina: "",
+        mood: ["Ridiamoci sopra 😂"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["10:30", "14:00"],
             "MARTEDI 2 GIUGNO":   ["10:00", "13:30"],
@@ -177,6 +191,7 @@ const film = [
         titolo: "Toy Story",
         locandina: "locandine/toy_story.jpg",
         pagina: "",
+        mood: ["Serata in famiglia 🧸"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["11:00", "14:30"],
             "MERCOLEDI 3 GIUGNO": ["11:00", "14:00"],
@@ -189,6 +204,7 @@ const film = [
         titolo: "Il bambino con il pigiama a righe",
         locandina: "locandine/b_p_righe.jpg",
         pagina: "",
+        mood: ["Lacrime in arrivo 🥲"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["19:00", "21:30"],
             "MARTEDI 2 GIUGNO":   ["18:30", "21:00"],
@@ -202,6 +218,7 @@ const film = [
         titolo: "Conclave",
         locandina: "locandine/conclave.jpg",
         pagina: "",
+        mood:["Fiato sospeso 🤫", "Mind-blowing 🤯"],
         orari: {
             "MARTEDI 2 GIUGNO":   ["19:30", "22:30"],
             "MERCOLEDI 3 GIUGNO": ["20:00", "22:30"],
@@ -215,6 +232,7 @@ const film = [
         titolo: "Snowden",
         locandina: "locandine/snowden.jpg",
         pagina: "",
+        mood:["Curioso 👀","Solo adrenalina ⚡"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["19:00", "21:00"],
             "MARTEDI 2 GIUGNO":   ["20:00", "22:30"],
@@ -227,64 +245,97 @@ const film = [
     }
 ];
 
+const tuttiIMood = [
+    "Fiato sospeso 🤫",
+    "Ridiamoci sopra 😂",
+    "Curioso 👀",
+    "Lacrime in arrivo 🥲",
+    "Love mode ON 💘",
+    "Mind-blowing 🤯",
+    "Serata in famiglia 🧸",
+    "Solo adrenalina ⚡",
+    "Docu-film 📖",
+    "All'avventura 🧭",
+    "Zero pensieri 🍿",
+    "Da urlo 😱"
+];
+
 const contenitore = document.getElementById("contenitore-film"); // Indica dove METTERE le CARD dei FILM
 
 // API di JS che evita l'utilizzo di Librerie Esterne. Questo SCRIPT rileva quando un oggetto entra nel campo visivo e fa partire un'ANIMAZIONE definita
 // È un CODICE PREDEFINITO in quanto è un API di JS
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-        } else entry.target.classList.remove("visible");
-    });
-}, { threshold: 0.1 });
-
-function mostraFilm(giornoSelezionato) {
-
-    console.log("Giorno Selezionato: ", giornoSelezionato);
-
-    contenitore.innerHTML = "";
-
-    film.forEach(f => { // SCORRE l'ARRAY 'film' e PER OGNI FILM esegue il codice dentro le '{ }'. 'f' è il FILM CORRENTE [' for f in film ']
-        
-        const giorniFilm = Object.keys(f.orari); // Mette in un ARRAY, che chiamo 'giorniFilm', i GIORNI in cui è PRESENTE la PROGRAMMAZIONE del FILM 'f'
-        
-        if (giornoSelezionato !== "tutti" && !giorniFilm.includes(giornoSelezionato)) return; 
-
-        let orari_html = ``;
-
-        const orariDaMostrare = giornoSelezionato === "tutti" ? null : { [giornoSelezionato]: f.orari[giornoSelezionato] };
-
-        if (orariDaMostrare !== null) {
-            for (const [giorno, ore] of Object.entries(orariDaMostrare)) {
-                // orari_html += `<p><strong>${giorno}:</strong></p>`;
-                ore.forEach(ora => {
-                    orari_html += `<button class="bottone-orario">${ora}</button>`;
-                })
-            }
+            setTimeout(() => {
+                entry.target.classList.add("visible");
+            }, index * 100); 
+            obs.unobserve(entry.target);
         }
-
-        // 'innerHTML' è un comando di JS che inserisce dentro 'contenitore-film' la CARD COMPLETA del film CORRENTE 'f', usando proprio i dati di 'f' appena strutturati
-
-        contenitore.innerHTML +=
-            `
-                <div class="film-card">
-                    <a href="${f.pagina}">
-                        <img src="${f.locandina}" alt="${f.titolo}" width="400" height="600">
-                    </a>
-
-                    <div class="orari">
-                        ${orari_html}
-                    </div>
-                </div> 
-            `
-            ;
     });
+}, { 
+    rootMargin: "150px", 
+    threshold: 0        
+});
 
-    document.querySelectorAll(".film-card").forEach(card => {
-        observer.observe(card);
+let giornoAttivo = "tutti";
+function costruisciPag(){
+    contenitore.innerHTML="";
+
+    tuttiIMood.forEach(m=>{
+        const film_appartiene_al_mood=film.filter(f=>{
+            if(!f.mood.includes(m)) return false; //se il film non appartiene a quel mood lo scarta
+            if(giornoAttivo === "tutti") return true;
+            return Object.keys(f.orari).includes(giornoAttivo);
+        });
+        const sezione=document.createElement("div");
+        sezione.className="mood-sezione";
+        sezione.id="mood-"+m.replace(/[^a-zA-Z]/g, "");
+
+        sezione.innerHTML=`
+            <div class="mood-sezione-header">
+                <span class="mood-sezione-label">${m}</span>
+            </div>`;
+
+        const riga = document.createElement("div");
+        riga.className = "mood-riga-film"; //creo una scatola orizzontale dove si allineano le locandine
+        film_appartiene_al_mood.forEach(f=>{
+            const card=document.createElement("div");
+            card.className="film-card"; 
+
+            let orari_html = "";
+                if (giornoAttivo !== "tutti") {
+                    f.orari[giornoAttivo]?.forEach(ora => {
+                        orari_html += `<button class="bottone-orario">${ora}</button>`;
+                    });
+                }
+
+                card.innerHTML = `
+                    <a href="${f.pagina}">
+                        <img src="${f.locandina}" alt="${f.titolo}">
+                    </a>
+                    <div class="orari">${orari_html}</div>
+                `;
+                riga.appendChild(card);
+                observer.observe(card); //per ogni film appartenente al mood viene creata una film card con gli orari
+            });
+
+        sezione.appendChild(riga);
+        contenitore.appendChild(sezione);
     });
 }
+
+// Bottoni mood → scroll alla sezione corrispondente
+document.querySelectorAll("#mood-btn button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const moodLabel = btn.textContent.trim();
+        const idPulito = "mood-" + moodLabel.replace(/[^a-zA-Z]/g, "");
+        const sezione = document.getElementById(idPulito);
+        if (sezione) {
+            sezione.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    });
+});
 
 // CALENDARIO
 
@@ -355,6 +406,6 @@ function costruisciCalendario() {
 }
 
 // AVVIO
-mostraFilm("tutti");
+costruisciPag();
 costruisciCalendario();
 });
