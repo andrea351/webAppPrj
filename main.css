@@ -116,27 +116,27 @@
     background-color: rgba(0, 0, 0, 0.1); 
 }
 
+/* Card singola — ridimensionata per la riga orizzontale */
 .film-card {
     display: flex;
-    gap: 30px;
-    align-items: flex-start;
-    margin-bottom: 20px;
-    border-radius: 16px;
     flex-direction: column;
     align-items: center;
-    line-height: 0;
-    padding: 0;
+    flex-shrink: 0;       /* impedisce che si restringano */
+    flex-basis: calc(25% - 23px); /*max 4 per riga*/
+    min-width: 160px;
     opacity: 0;
     transform: translateY(40px);
     transition: opacity 0.6s ease, transform 0.6s ease;
+    padding: 0;
+    line-height: normal;
 }
 
 .film-card img {
     display: block;
     box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.4);
     border-radius: 16px;
-    width: 300px; /* Adjust this value to make it smaller or larger */
-    height: 400px; /* Adjust this to maintain the desired poster proportion */
+    width:100%;
+    aspect-ratio: 2/3;
     object-fit: cover;
 }
 
@@ -146,8 +146,8 @@
 }
 
 .film-card.visible:hover {
-    transform: scale(1.05) translateY(-5px); 
-    transition: transform 0.3s ease; 
+    transform: scale(1.05) translateY(-5px);
+    transition: transform 0.3s ease;
 }
 
 .orari {
@@ -174,11 +174,9 @@
 }
 
 #contenitore-film {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* TRE COLONNE */
-    gap: 45px;
-    padding: 40px 80px;
-    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 80px;
 }
 
     /* - - - - - */
@@ -317,4 +315,52 @@
 
 #mood-btn button:hover {
     transform: scale(1.05);
+}
+ /*---------*/
+ .mood-sezione {
+    padding: 30px 0 10px 0;
+    border-bottom: none;
+}
+
+/* --- INTESTAZIONE DEL MOOD --- */
+.mood-sezione-header {
+    margin-bottom: 30px; /* ⬅️ AUMENTATO DRASTICAMENTE: Ora spinge i film molto più in basso, così non coprono la linea! */
+}
+
+/* TESTO CENTRALE */
+.mood-sezione-label {
+    position: relative;
+    font-size: 16px;
+    color: rgba(128, 0, 32, 0.75);
+    letter-spacing: 1.5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 15px; /* Spazio per far respirare la linea verticale */
+}
+
+
+
+
+
+/* Riga film che va a capo automaticamente (NO SCROLL) */
+.mood-riga-film {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; /*  Manda i film a capo quando finisce lo spazio! */
+    gap: 30px;
+    padding-bottom: 4px;
+    justify-content: flex-start;
+    padding-left: 30px;
+}
+
+
+
+
+/* Bottone mood attivo */
+#mood-btn button.mood-attivo {
+    background-color: #5e0015;
+    box-shadow: 0 0 12px rgba(255, 77, 109, 0.5);
+    transform: scale(1.08);
 }

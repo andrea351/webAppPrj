@@ -5,6 +5,7 @@ const film = [
         titolo: "Billy Elliot",
         locandina: "locandine/billy_elliot.jpg",
         pagina: "",
+        mood: ["Per tutta la famiglia", "Intrattenimento"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["15:00", "21:30"],
             "MERCOLEDI 3 GIUGNO": ["14:00", "19:00"],
@@ -16,6 +17,7 @@ const film = [
         titolo: "La vita è bella",
         locandina: "locandine/la_vita_e_bella.jpg",
         pagina: "",
+        mood: ["Emotivo", "Basato su storia vera"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["17:00", "21:00"],
             "MARTEDI 2 GIUGNO":   ["15:00", "20:00"],
@@ -29,6 +31,7 @@ const film = [
         titolo: "Il re leone",
         locandina: "locandine/re_leone.jpg",
         pagina: "",
+        mood: ["Per tutta la famiglia"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["10:00", "14:30"],
             "MARTEDI 2 GIUGNO":   ["10:00", "14:00", "17:30"],
@@ -41,19 +44,21 @@ const film = [
         titolo: "Fantozzi",
         locandina: "locandine/fantozzi.jpg",
         pagina: "",
+        mood: ["Leggerezza", "Intrattenimento"],
         orari: {
             "MARTEDI 2 GIUGNO":   ["18:00", "21:00"],
             "MERCOLEDI 3 GIUGNO": ["17:00", "20:30"],
             "GIOVEDI 4 GIUGNO":   ["19:00", "22:00"],
             "VENERDI 5 GIUGNO":   ["18:30", "21:30"],
             "SABATO 6 GIUGNO":    ["17:00", "20:00"],
-            "LUNEDI 8 GIUGNO":  ["16:00", "19:30"]
+            "LUNEDI 8 GIUGNO":    ["16:00", "19:30"]
         }
     },
     {
         titolo: "Natale sul Nilo",
         locandina: "locandine/natale_sul_nilo.jpg",
         pagina: "",
+        mood: ["Leggerezza"],
         orari: {
             "MERCOLEDI 3 GIUGNO": ["18:00", "21:00"],
             "VENERDI 5 GIUGNO":   ["20:00", "22:30"],
@@ -66,6 +71,7 @@ const film = [
         titolo: "La ladra di libri",
         locandina: "locandine/ladra_libri.jpg",
         pagina: "",
+        mood: ["Emotivo", "Intrigante"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["16:00", "20:00"],
             "MARTEDI 2 GIUGNO":   ["17:30", "21:00"],
@@ -78,6 +84,7 @@ const film = [
         titolo: "C'è ancora domani",
         locandina: "locandine/ce_ancora_domani.jpg",
         pagina: "",
+        mood: ["Basato su storia vera"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["18:30", "21:30"],
             "MARTEDI 2 GIUGNO":   ["19:00", "22:00"],
@@ -91,18 +98,20 @@ const film = [
         titolo: "Wonder",
         locandina: "locandine/wonder.jpg",
         pagina: "",
+        mood: ["Per tutta la famiglia"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["15:00", "19:00"],
             "MARTEDI 2 GIUGNO":   ["14:30", "18:30"],
             "MERCOLEDI 3 GIUGNO": ["15:00", "19:30"],
             "SABATO 6 GIUGNO":    ["11:30", "15:00", "18:30"],
-            "MERCOLEDI 10 GIUGNO":  ["11:00", "14:30", "18:00"]
+            "MERCOLEDI 10 GIUGNO":["11:00", "14:30", "18:00"]
         }
     },
     {
         titolo: "Oppenheimer",
         locandina: "locandine/oppenheimer.jpg",
         pagina: "",
+        mood: ["Tensione", "Basato su storia vera"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["17:00", "21:00"],
             "MARTEDI 2 GIUGNO":   ["17:00", "21:00"],
@@ -117,6 +126,7 @@ const film = [
         titolo: "Una notte da leoni",
         locandina: "locandine/notte_leoni.jpg",
         pagina: "",
+        mood: ["Leggerezza", "Intrattenimento"],
         orari: {
             "GIOVEDI 4 GIUGNO":   ["21:00"],
             "VENERDI 5 GIUGNO":   ["21:00", "23:30"],
@@ -129,6 +139,7 @@ const film = [
         titolo: "Orgoglio e pregiudizio",
         locandina: "locandine/org_pred.jpg",
         pagina: "",
+        mood: ["Romantico"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["16:30", "20:00"],
             "MERCOLEDI 3 GIUGNO": ["15:00", "19:00"],
@@ -141,6 +152,7 @@ const film = [
         titolo: "La vita di Pi",
         locandina: "locandine/vita_pi.jpg",
         pagina: "",
+        mood: ["Avventura", "Sorprendente"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["14:00", "18:00"],
             "MARTEDI 2 GIUGNO":   ["15:30", "20:00"],
@@ -153,6 +165,7 @@ const film = [
         titolo: "La ricerca della felicità",
         locandina: "locandine/ricerca_felicita.jpg",
         pagina: "",
+        mood: ["Emotivo", "Basato su storia vera"],
         orari: {
             "MARTEDI 2 GIUGNO":   ["16:30", "20:30"],
             "MERCOLEDI 3 GIUGNO": ["17:00", "21:00"],
@@ -165,6 +178,7 @@ const film = [
         titolo: "Mamma ho perso l'aereo",
         locandina: "locandine/mamma_perso_aereo.jpg",
         pagina: "",
+        mood: ["Leggerezza", "Per tutta la famiglia"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["10:30", "14:00"],
             "MARTEDI 2 GIUGNO":   ["10:00", "13:30"],
@@ -177,6 +191,7 @@ const film = [
         titolo: "Toy Story",
         locandina: "locandine/toy_story.jpg",
         pagina: "",
+        mood: ["Per tutta la famiglia", "Intrattenimento"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["11:00", "14:30"],
             "MERCOLEDI 3 GIUGNO": ["11:00", "14:00"],
@@ -189,19 +204,21 @@ const film = [
         titolo: "Il bambino con il pigiama a righe",
         locandina: "locandine/b_p_righe.jpg",
         pagina: "",
+        mood: ["Emotivo", "Basato su storia vera"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["19:00", "21:30"],
             "MARTEDI 2 GIUGNO":   ["18:30", "21:00"],
             "GIOVEDI 4 GIUGNO":   ["19:30", "22:00"],
             "VENERDI 5 GIUGNO":   ["19:00", "21:30"],
             "SABATO 6 GIUGNO":    ["20:00", "22:30"],
-            "MERCOLEDI 10 GIUGNO":  ["16:00", "18:30", "22:00"]
+            "MERCOLEDI 10 GIUGNO":["16:00", "18:30", "22:00"]
         }
     },
     {
         titolo: "Conclave",
         locandina: "locandine/conclave.jpg",
         pagina: "",
+        mood: ["Tensione", "Sorprendente"],
         orari: {
             "MARTEDI 2 GIUGNO":   ["19:30", "22:30"],
             "MERCOLEDI 3 GIUGNO": ["20:00", "22:30"],
@@ -215,6 +232,7 @@ const film = [
         titolo: "Snowden",
         locandina: "locandine/snowden.jpg",
         pagina: "",
+        mood: ["Intrigante", "Basato su storia vera", "Adrenalina"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["19:00", "21:00"],
             "MARTEDI 2 GIUGNO":   ["20:00", "22:30"],
@@ -224,69 +242,190 @@ const film = [
             "SABATO 6 GIUGNO":    ["18:30", "20:30", "23:00"],
             "DOMENICA 7 GIUGNO":  ["18:00", "20:00"]
         }
+    },
+    {
+        titolo: "The Conjuring",
+        locandina: "locandine/t_c.jpg",
+        pagina: "",
+        mood: ["Horror", "Tensione"],
+        orari: {
+            "MARTEDI 2 GIUGNO":   ["21:00", "23:00"],
+            "GIOVEDI 4 GIUGNO":   ["21:30", "23:30"],
+            "VENERDI 5 GIUGNO":   ["21:00", "23:00"],
+            "SABATO 6 GIUGNO":    ["22:00"],
+            "DOMENICA 7 GIUGNO":  ["21:30"]
+        }
+    },
+    {
+        titolo: "Cena con delitto",
+        locandina: "locandine/c_c_d.jpg",
+        pagina: "",
+        mood: ["Tensione", "Intrigante", "Leggerezza"],
+        orari: {
+            "LUNEDI 1 GIUGNO":    ["20:00"],
+            "MERCOLEDI 3 GIUGNO": ["20:30"],
+            "GIOVEDI 4 GIUGNO":   ["19:00", "21:30"],
+            "SABATO 6 GIUGNO":    ["19:30", "22:00"],
+            "DOMENICA 7 GIUGNO":  ["19:00", "21:30"],
+            "LUNEDI 8 GIUGNO":    ["20:00", "22:30"]
+        }
+    },
+    {
+        titolo: "Avatar",
+        locandina: "locandine/avatar.jpg",
+        pagina: "",
+        mood: ["Avventura", "Adrenalina", "Sorprendente"],
+        orari: {
+            "LUNEDI 1 GIUGNO":    ["16:00", "20:30"],
+            "MARTEDI 2 GIUGNO":   ["16:00", "20:30"],
+            "MERCOLEDI 3 GIUGNO": ["15:30", "20:00"],
+            "SABATO 6 GIUGNO":    ["14:00", "18:30"],
+            "DOMENICA 7 GIUGNO":  ["14:00", "18:30"],
+            "MARTEDI 9 GIUGNO":   ["17:00", "21:00"]
+        }
+    },
+    {
+        titolo: "Interstellar",
+        locandina: "locandine/interstellar.jpg",
+        pagina: "",
+        mood: ["Avventura", "Sorprendente", "Tensione"],
+        orari: {
+            "LUNEDI 1 GIUGNO":    ["17:30", "21:30"],
+            "MARTEDI 2 GIUGNO":   ["17:30", "21:30"],
+            "MERCOLEDI 3 GIUGNO": ["17:00", "21:00"],
+            "GIOVEDI 4 GIUGNO":   ["17:00", "21:30"],
+            "VENERDI 5 GIUGNO":   ["17:00", "21:00"],
+            "MERCOLEDI 10 GIUGNO":["17:00", "21:00"]
+        }
+    },
+    {
+        titolo: "Top Gun - Maverick",
+        locandina: "locandine/t_g_m.jpg",
+        pagina: "",
+        mood: ["Adrenalina", "Avventura", "Intrattenimento"],
+        orari: {
+            "MARTEDI 2 GIUGNO":   ["16:00", "20:00"],
+            "MERCOLEDI 3 GIUGNO": ["16:30", "20:30"],
+            "GIOVEDI 4 GIUGNO":   ["16:00", "20:00"],
+            "VENERDI 5 GIUGNO":   ["15:30", "19:30"],
+            "SABATO 6 GIUGNO":    ["15:00", "19:00"],
+            "MARTEDI 9 GIUGNO":   ["16:00", "20:00"]
+        }
+    },
+    {
+        titolo: "Le pagine della nostra vita",
+        locandina: "locandine/le_pag_vita.jpg",
+        pagina: "",
+        mood: ["Romantico", "Emotivo"],
+        orari: {
+            "LUNEDI 1 GIUGNO":    ["15:30", "19:30"],
+            "MERCOLEDI 3 GIUGNO": ["15:30", "19:30"],
+            "GIOVEDI 4 GIUGNO":   ["15:00", "19:00"],
+            "SABATO 6 GIUGNO":    ["13:00", "17:00"],
+            "DOMENICA 7 GIUGNO":  ["13:00", "17:00"],
+            "LUNEDI 8 GIUGNO":    ["15:00", "19:00"]
+        }
     }
+];
+
+const tuttiIMood = [
+    "Tensione",
+    "Leggerezza",
+    "Intrigante",
+    "Emotivo",
+    "Romantico",
+    "Sorprendente",
+    "Per tutta la famiglia",
+    "Adrenalina",
+    "Basato su una storia vera",
+    "Avventura",
+    "Intrattenimento",
+    "Horror"
 ];
 
 const contenitore = document.getElementById("contenitore-film"); // Indica dove METTERE le CARD dei FILM
 
 // API di JS che evita l'utilizzo di Librerie Esterne. Questo SCRIPT rileva quando un oggetto entra nel campo visivo e fa partire un'ANIMAZIONE definita
 // È un CODICE PREDEFINITO in quanto è un API di JS
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry, index) => {
         if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
+            setTimeout(() => {
+                entry.target.classList.add("visible");
+            }, index * 100); 
         } else entry.target.classList.remove("visible");
     });
-}, { threshold: 0.1 });
+}, { 
+    rootMargin: "150px", 
+    threshold: 0        
+});
 
-function mostraFilm(giornoSelezionato) {
+// GESTIONE FILM - MOOD ⤵️
 
-    console.log("Giorno Selezionato: ", giornoSelezionato);
+let giornoAttivo = "tutti";
 
-    contenitore.innerHTML = "";
+function costruisciPag(){
+    contenitore.innerHTML="";
 
-    film.forEach(f => { // SCORRE l'ARRAY 'film' e PER OGNI FILM esegue il codice dentro le '{ }'. 'f' è il FILM CORRENTE [' for f in film ']
-        
-        const giorniFilm = Object.keys(f.orari); // Mette in un ARRAY, che chiamo 'giorniFilm', i GIORNI in cui è PRESENTE la PROGRAMMAZIONE del FILM 'f'
-        
-        if (giornoSelezionato !== "tutti" && !giorniFilm.includes(giornoSelezionato)) return; 
+    tuttiIMood.forEach(m=>{
+        const film_appartiene_al_mood=film.filter(f=>{
+            if(!f.mood.includes(m)) return false; // Se il Mood NON appartiene a quel Film, allora lo SCARTA
+            if(giornoAttivo === "tutti") return true;
+            return Object.keys(f.orari).includes(giornoAttivo);
+        });
 
-        let orari_html = ``;
+        if (film_appartiene_al_mood.length === 0) return;
 
-        const orariDaMostrare = giornoSelezionato === "tutti" ? null : { [giornoSelezionato]: f.orari[giornoSelezionato] };
+        const sezione=document.createElement("div");
+        sezione.className="mood-sezione";
+        sezione.id="mood-"+m.replace(/[^a-zA-Z]/g, "");
 
-        if (orariDaMostrare !== null) {
-            for (const [giorno, ore] of Object.entries(orariDaMostrare)) {
-                // orari_html += `<p><strong>${giorno}:</strong></p>`;
-                ore.forEach(ora => {
-                    orari_html += `<button class="bottone-orario">${ora}</button>`;
-                })
-            }
-        }
+        sezione.innerHTML=`
+            <div class="mood-sezione-header">
+                <span class="mood-sezione-label">${m}</span>
+            </div>`;
 
-        // 'innerHTML' è un comando di JS che inserisce dentro 'contenitore-film' la CARD COMPLETA del film CORRENTE 'f', usando proprio i dati di 'f' appena strutturati
+        const riga = document.createElement("div");
+        riga.className = "mood-riga-film"; // Creo una scatola orizzontale dove si allineano le Locandine
+        film_appartiene_al_mood.forEach(f=>{
+            const card=document.createElement("div");
+            card.className="film-card"; 
 
-        contenitore.innerHTML +=
-            `
-                <div class="film-card">
+            let orari_html = "";
+                if (giornoAttivo !== "tutti") {
+                    f.orari[giornoAttivo]?.forEach(ora => {
+                        orari_html += `<button class="bottone-orario">${ora}</button>`;
+                    });
+                }
+
+                card.innerHTML = `
                     <a href="${f.pagina}">
-                        <img src="${f.locandina}" alt="${f.titolo}" width="400" height="600">
+                        <img src="${f.locandina}" alt="${f.titolo}">
                     </a>
+                    <div class="orari">${orari_html}</div>
+                `;
+                riga.appendChild(card);
+                observer.observe(card); // Per ogni FILM appartenente al MOOD viene creata una filmCard con gli orari
+            });
 
-                    <div class="orari">
-                        ${orari_html}
-                    </div>
-                </div> 
-            `
-            ;
-    });
-
-    document.querySelectorAll(".film-card").forEach(card => {
-        observer.observe(card);
+        sezione.appendChild(riga);
+        contenitore.appendChild(sezione);
     });
 }
 
-// CALENDARIO
+// Bottoni Mood → Scroll alla SEZIONE CORRISPONDENTE
+document.querySelectorAll("#mood-btn button").forEach(btn => {
+    btn.addEventListener("click", () => {
+        const moodLabel = btn.textContent.trim();
+        const idPulito = "mood-" + moodLabel.replace(/[^a-zA-Z]/g, "");
+        const sezione = document.getElementById(idPulito);
+        if (sezione) {
+            sezione.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+    });
+});
+
+// CALENDARIO ⤵️
 
 // Mette in un Set TUTTI i giorni in cui c'è una Programmazione
 const giorniConFilm = new Set();
@@ -337,7 +476,8 @@ function costruisciCalendario() {
             cell.addEventListener("click", () => {
                 document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
                 cell.classList.add("cal-selezionato");
-                mostraFilm(nomeGiorno);
+                giornoAttivo = nomeGiorno;
+                costruisciPag();
             });
         } else cell.classList.add("cal-disabilitato");
     
@@ -349,12 +489,13 @@ function costruisciCalendario() {
     btnTutti.className = "cal-btn-tutti";
     btnTutti.addEventListener("click", () => {
         document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
-        mostraFilm("tutti");
+        giornoAttivo = "tutti";
+        costruisciPag();
     });
     document.getElementById("wrapper").appendChild(btnTutti);
 }
 
 // AVVIO
-mostraFilm("tutti");
+costruisciPag();
 costruisciCalendario();
 });
