@@ -1,221 +1,202 @@
-/*body {
-    background-color: ; 🫥 DA DECIDERE
-}*/
-/* --- PANNELLO SUPERIORE --- */
+@font-face {
+    font-family: 'Stronger-Thinker-Bold';
+    src: url('Stronger-Thinker-Bold.ttf');
+}
+
+/* ===================== VARIABILI ===================== */
+:root {
+    --burgundy:       #800020;
+    --burgundy-dark:  #5e0015;
+    --burgundy-deep:  #3a000d;
+    --burgundy-light: #bb2248;
+    --burgundy-glow:  rgba(128, 0, 32, 0.4);
+    --rose:           #ff4d6d;
+    --cream:          #f5e6ea;
+    --text-main:      #faeef1;
+    --text-muted:     rgba(250, 238, 241, 0.65);
+    --bg:             #1a0810;
+    --border:         rgba(128, 0, 32, 0.25);
+}
+
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(128, 0, 32, 0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 80% 60%, rgba(94, 0, 21, 0.1) 0%, transparent 60%);
+    color: var(--text-main);
+    font-family: 'Georgia', serif;
+    min-height: 100vh;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    width: 70%;
+    margin: 0 auto;
+}
+
+/* ===================== HEADER ===================== */
 .pannello-superiore {
-    display: flex; /* linea in orizzontale */
-    align-items: center; /* allinea al centro e verticalmente */
-    background: linear-gradient(90deg, #5e0015 0%, #800020 50%, #5e0015 100%);
-    padding: 2px 40px;
-    color: white; /* testo bianco */
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    background: linear-gradient(90deg, var(--burgundy-deep) 0%, var(--burgundy-dark) 40%, var(--burgundy) 60%, var(--burgundy-dark) 80%, var(--burgundy-deep) 100%);
+    padding: 0 40px;
+    color: white;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255,255,255,0.05) inset;
+    position: relative;
+    z-index: 10;
+}
+
+.pannello-superiore::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,100,120,0.3), transparent);
 }
 
 /* --- MENU SINISTRA --- */
 .menu-sx {
     flex: 1;
     display: flex;
-    gap: 60px; /* DISTANZA tra i LINK */
+    gap: 80px;
 }
 
 .menu-sx a {
     font-family: 'Stronger-Thinker-Bold';
-    color: #ffffff;
-    text-decoration: none; /* NO sottolineatura Link */
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
 .menu-sx a:hover {
-    color: #f0c0d0; /* Cambio COLORE se si passa sopra */
-    transform: scale(1.1);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #fff;
+    letter-spacing: 3px;
 }
 
-/* --- LOGO CENTRO --- */
+/* --- LOGO --- */
 .logo-centro {
     display: flex;
-    justify-content: center; 
-    padding-left: 0;
+    justify-content: center;
 }
+
 .img-logo {
-    height: 180px; /* Altezza LOGO */
-    width: auto; 
+    height: 160px;
+    width: auto;
     cursor: pointer;
+    filter: drop-shadow(0 0 20px rgba(255, 77, 109, 0.2));
+    transition: filter 0.3s ease;
+}
+
+.img-logo:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 77, 109, 0.4));
 }
 
 /* --- MENU DESTRA --- */
-.bottone-profilo {
-    background: none; /* Rimuove lo sfondo grigio di default del bottone */
-    border: none; 
-    color: white; 
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: transform 0.2s ease; /* DURATA movimento ANIMAZIONE */
-    margin-right: 40px; 
-    transform: scale(1.3);
-}
-
-.bottone-profilo:hover {
-    transform: scale(1.5); /* L'omino si ingrandisce di un certo valore quando ci passo sopra */
-}
-
 .menu-destra {
-    flex: 1; 
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: 120px;
+    justify-content: flex-end;
+    gap: 30px;
+}
+
+.contenitore-ricerca {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.icona-lente {
+    position: absolute;
+    left: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    pointer-events: none;
 }
 
 .input-ricerca {
     padding: 8px 16px 8px 40px;
-    border-radius: 20px; /*Arrotonda i BORDI della BARRA di RICERCA*/
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
     outline: none;
-    font-size: 14px;
-    width: 200px;
-    height: 20px;
-    line-height: 20px;
-    background-color:transparent;
+    font-size: 13px;
+    width: 180px;
+    height: 36px;
+    background-color: rgba(255,255,255,0.06);
     color: white;
-    transition: width 0.3s, box-shadow 0.3s ease;
-    text-align: left;
-    margin-left: 50px;
+    transition: width 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    letter-spacing: 0.5px;
+    margin-right: 80px;
+}
+
+.input-ricerca::placeholder {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.input-ricerca:focus {
+    width: 220px;
+    border-color: rgba(255, 77, 109, 0.5);
+    background-color: rgba(255,255,255,0.1);
 }
 
 .input-ricerca:focus::placeholder {
     color: transparent;
 }
 
-.input-ricerca::placeholder {
-    color: rgba(255, 255, 255, 0.2);
-    text-align: left;
-}
-
-/* --- STILE BARRA DI RICERCA --- */
-.contenitore-ricerca {
-    position: relative; /* Serve per poter posizionare la lente liberamente qui dentro */
-    display: flex;
-    align-items: center;
-}
-
-.icona-lente {
-    position: absolute; 
-    left: 12px; /* Sposta la LENTE leggermente verso l'interno partendo da sinistra */
-    color: rgba(255, 255, 255, 0.7); 
-    pointer-events: none;
-    margin-left: 50px;
-}
-
-/* Quando l'utente clicca sulla barra per scrivere */
-.input-ricerca:focus {
-    width: 250px; /* Quando premo sulla BARRA di RICERCA, quest'ultima si ALLUNGA */
-    border-color: white; 
-    background-color: rgba(0, 0, 0, 0.1); 
-}
-
-/* Card singola — ridimensionata per la riga orizzontale */
-.film-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex-shrink: 0;       /* impedisce che si restringano */
-    flex-basis: calc(25% - 23px); /*max 4 per riga*/
-    min-width: 160px;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
-    padding: 0;
-    line-height: normal;
-}
-
-.film-card img {
-    display: block;
-    box-shadow: 12px 12px 20px rgba(0, 0, 0, 0.4);
-    border-radius: 16px;
-    width:100%;
-    aspect-ratio: 2/3;
-    object-fit: cover;
-}
-
-.film-card.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.film-card.visible:hover {
-    transform: scale(1.05) translateY(-5px);
-    transition: transform 0.3s ease;
-}
-
-.orari {
-    margin: 5px 0;
-}
-
-.bottone-orario {
-    background-color: #800020; /* Colore BOTTONE */
-    color: white; /* Colore SCRITTA nel BOTTONE */
+.bottone-profilo {
+    background: none;
     border: none;
-    border-radius: 20px;
-    padding: 6px 14px;
-    margin: 4px;
+    color: rgba(255,255,255,0.7);
     cursor: pointer;
-    font-size: 14px;
-    transition: transform 0.3s ease;
-}
-
-.orari strong {
-    font-size: 14px;
-    letter-spacing: 1px;
-    opacity: 0.6;
-    display: block;
-}
-
-#contenitore-film {
     display: flex;
-    flex-direction: column;
-    padding: 20px 80px;
+    align-items: center;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-    /* - - - - - */
-
-#scelta-film {
-    /* NECESSARIO per far FUNZIONARE 'border-radius' su una 'select' */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-        border-radius: 25px;
-    
-    height: 30px;
-    width: 200px;
-    padding-left: 35px;
+.bottone-profilo:hover {
+    color: white;
+    transform: scale(1.15);
 }
 
-#scelta-film option[value="tutti"] {
-    color: #800020;
-    font-weight: bold;
-    font-size: 16px;
+/* ===================== SUGGERITI ===================== */
+.suggeriti-per-te {
+    text-align: center;
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    padding: 18px 0;
 }
 
+/* ===================== CONTENITORE SCELTA FILM ===================== */
 .contenitore-scelta-film {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    padding-left: 100px;
-    margin: 30px 0;
-    gap:240px;
+    align-items: flex-start;
+    padding: 30px 60px 20px 60px;
+    gap: 60px;
 }
 
+/* ===================== CALENDARIO ===================== */
 #wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: scale(0.8);
-    /* margin-left: -50px; */
+    transform: scale(0.78);
+    transform-origin: top left;
+    flex-shrink: 0;
 }
 
 #calendario {
@@ -223,24 +204,27 @@
     grid-template-columns: repeat(7, 50px);
     gap: 8px;
     justify-content: center;
-    margin: 20px auto;
+    margin: 10px auto;
 }
 
 .cal-titolo {
     grid-column: span 7;
     text-align: center;
     font-family: 'Stronger-Thinker-Bold';
-    font-size: 18px;
-    color: #800020;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
+    font-size: 16px;
+    color: var(--text-muted);
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
 }
 
 .cal-intestazione {
     text-align: center;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--burgundy-light);
     font-weight: bold;
-    color: #800020;
-    font-size: 13px;
+    text-transform: uppercase;
 }
 
 .cal-giorno {
@@ -250,117 +234,211 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: 13px;
+    color: var(--text-muted);
 }
 
 .cal-attivo {
-    background-color: #800020;
+    background-color: var(--burgundy);
     color: white;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 10px rgba(128, 0, 32, 0.4);
 }
 
 .cal-attivo:hover {
     transform: scale(1.15);
+    background-color: var(--burgundy-light);
+    box-shadow: 0 4px 16px rgba(187, 34, 72, 0.5);
 }
 
 .cal-selezionato {
-    background-color: #ff4d6d;
+    background-color: var(--rose) !important;
     color: white;
+    box-shadow: 0 4px 16px rgba(255, 77, 109, 0.5) !important;
 }
 
 .cal-disabilitato {
-    color: #aaa;
-    opacity: 0.4;
+    color: rgba(255,255,255,0.1);
     cursor: default;
 }
 
 .cal-btn-tutti {
     display: block;
-    background-color: #800020;
+    margin-top: 14px;
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
     color: white;
-    border: none;
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 20px;
-    padding: 8px 20px;
+    padding: 8px 22px;
     cursor: pointer;
-    font-size: 14px;
-    transition: transform 0.2s ease;
+    font-size: 13px;
+    letter-spacing: 1px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     align-self: center;
 }
 
 .cal-btn-tutti:hover {
-    transform: scale(1.05);
+    transform: scale(1.06);
+    box-shadow: 0 4px 16px var(--burgundy-glow);
 }
 
-#mood-btn{
+/* ===================== BOTTONI MOOD ===================== */
+#mood-btn {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 14px;
     align-self: center;
-    margin-bottom: 10px;
-    margin-left: 170px;
+    flex: 1;
 }
 
 #mood-btn button {
-    background-color: #bb2248;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(128, 0, 32, 0.5) 0%, rgba(187, 34, 72, 0.6) 100%);
+    color: var(--cream);
+    border: 1px solid rgba(187, 34, 72, 0.6);
+    border-radius: 12px;
+    padding: 18px 22px;
     cursor: pointer;
     font-size: 14px;
-    transition: transform 0.2s ease;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.3px;
     text-align: left;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+    line-height: 1.4;
+    position: relative;
+    overflow: hidden;
+}
+
+#mood-btn button::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,150,170,0.3), transparent);
 }
 
 #mood-btn button:hover {
-    transform: scale(1.05);
-}
- /*---------*/
- .mood-sezione {
-    padding: 30px 0 10px 0;
-    border-bottom: none;
+    background: linear-gradient(135deg, rgba(128, 0, 32, 0.8) 0%, rgba(187, 34, 72, 0.9) 100%);
+    border-color: rgba(255, 77, 109, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(128, 0, 32, 0.4);
+    color: white;
 }
 
-/* --- INTESTAZIONE DEL MOOD --- */
+#mood-btn button.mood-attivo {
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy-light));
+    border-color: var(--rose);
+    box-shadow: 0 0 20px rgba(255, 77, 109, 0.4);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ===================== CONTENITORE FILM ===================== */
+#contenitore-film {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 60px 60px 60px;
+}
+
+/* ===================== SEZIONI MOOD ===================== */
+.mood-sezione {
+    padding: 40px 0 20px 0;
+}
+
 .mood-sezione-header {
-    margin-bottom: 30px; /* ⬅️ AUMENTATO DRASTICAMENTE: Ora spinge i film molto più in basso, così non coprono la linea! */
-}
-
-/* TESTO CENTRALE */
-.mood-sezione-label {
-    position: relative;
-    font-size: 16px;
-    color: rgba(128, 0, 32, 0.75);
-    letter-spacing: 1.5px;
-    font-weight: bold;
-    text-transform: uppercase;
-    display: inline-flex;
+    margin-bottom: 24px;
+    display: flex;
     align-items: center;
-    padding-left: 15px; /* Spazio per far respirare la linea verticale */
+    gap: 16px;
 }
 
+.mood-sezione-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+}
 
+.mood-sezione-label {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 13px;
+    color: rgba(187, 34, 72, 0.85);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
 
-
-
-/* Riga film che va a capo automaticamente (NO SCROLL) */
+/* ===================== RIGA FILM ===================== */
 .mood-riga-film {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; /*  Manda i film a capo quando finisce lo spazio! */
-    gap: 30px;
-    padding-bottom: 4px;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding-left: 4px;
     justify-content: flex-start;
-    padding-left: 30px;
 }
 
+/* ===================== CARD FILM ===================== */
+.film-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    flex-basis: calc(25% - 18px);
+    min-width: 150px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    padding: 0;
+}
 
+.film-card img {
+    display: block;
+    border-radius: 12px;
+    width: 100%;
+    aspect-ratio: 2/3;
+    object-fit: cover;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(128, 0, 32, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+.film-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
-/* Bottone mood attivo */
-#mood-btn button.mood-attivo {
-    background-color: #5e0015;
-    box-shadow: 0 0 12px rgba(255, 77, 109, 0.5);
+.film-card.visible:hover img {
+    transform: scale(1.04) translateY(-4px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(128, 0, 32, 0.35);
+}
+
+/* ===================== ORARI ===================== */
+.orari {
+    margin: 16px 0 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+}
+
+.orari:empty {
+    display: none;
+}
+
+.bottone-orario {
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 5px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bottone-orario:hover {
     transform: scale(1.08);
+    box-shadow: 0 4px 12px var(--burgundy-glow);
 }
