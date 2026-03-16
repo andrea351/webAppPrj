@@ -1,0 +1,161 @@
+
+.contenitore-dettaglio {
+    display: flex;
+    gap: 60px;
+    padding: 60px 80px;
+    align-items: center; 
+    position: relative;
+}
+
+/* Linea divisoria tra locandina e testi */
+.contenitore-dettaglio::before {
+    content: '';
+    position: absolute;
+    left: calc(96px + 260px + 36px);
+    top: 72px;
+    bottom: 72px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, white 20%, white 80%, transparent);
+    opacity: 0.4;
+}
+
+.dettaglio-sx {
+    flex: 0 0 280px; 
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.media-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3; /* Forma iniziale: Verticale da locandina */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    background-color: #000; 
+    transition: aspect-ratio 0.5s ease, box-shadow 0.3s ease; 
+    view-transition-name: locandina-volante; /*attiva l'animazione  */
+}
+
+.media-container img, 
+.media-container video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    transition: opacity 0.5s ease;
+}
+
+
+.media-container video { opacity: 0; }
+.media-container img { opacity: 1; }
+
+.play-overlay {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.dettaglio-sx.in-preview .media-container,
+.media-container:hover {
+    aspect-ratio: 16/9; /* Diventa orizzontale! */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.dettaglio-sx.in-preview .media-container img,
+.media-container:hover img { 
+    opacity: 0; 
+}
+
+.dettaglio-sx.in-preview .media-container video,
+.media-container:hover video { 
+    opacity: 1; 
+}
+
+.media-container:hover .play-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+
+.media-container.video-ingrandito {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    
+    width: 80vw; 
+    max-width: 1100px; 
+    aspect-ratio: 16/9; 
+    
+    z-index: 99999; /*  in primo piano */
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    box-shadow: 0 40px 30px rgba(0, 0, 0, 0.8), 0 1px 0 rgba(255,255,255,0.05) inset;
+}
+
+.media-container.video-ingrandito img { opacity: 0; }
+.media-container.video-ingrandito video { opacity: 1; }
+
+::view-transition-old(locandina-volante),
+::view-transition-new(locandina-volante) {
+    animation-duration: 0.8s; 
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+.dettaglio-dx {
+    flex: 1;
+    color: white;
+}
+
+.titolo-film-dettaglio {
+    font-size: 42px;
+    color: #bc4143; 
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.info-tecniche {
+    color: #bc4143;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.cast-film {
+    font-family: "Arial", sans-serif;
+    opacity: 0.8;
+}
+
+.trama-film {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: "Arial", sans-serif;
+    opacity: 0.8;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.media-container        { animation: fadeIn 0.6s ease 0.05s both; }
+.titolo-film-dettaglio  { animation: fadeSlideUp 0.5s ease 0.25s both; }
+.info-tecniche          { animation: fadeSlideUp 0.5s ease 0.38s both; }
+.trama-film             { animation: fadeSlideUp 0.5s ease 0.50s both; }
+.cast-film              { animation: fadeSlideUp 0.5s ease 0.56s both; }
