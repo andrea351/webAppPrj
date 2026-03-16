@@ -12,9 +12,9 @@
     --burgundy-glow:  rgba(128, 0, 32, 0.4);
     --rose:           #ff4d6d;
     --cream:          #f5e6ea;
-    --text-main:      #faeef1;
-    --text-muted:     rgba(250, 238, 241, 0.65);
-    --bg:             #1a0810;
+    --text-main:      #f0dde2;
+    --text-muted:     rgba(240, 221, 226, 0.5);
+    --bg:             #0d0508;
     --border:         rgba(128, 0, 32, 0.25);
 }
 
@@ -67,7 +67,7 @@ hr {
 .menu-sx {
     flex: 1;
     display: flex;
-    gap: 80px;
+    gap: 70px;
 }
 
 .menu-sx a {
@@ -109,7 +109,7 @@ hr {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 30px;
+    gap: 130px;
 }
 
 .contenitore-ricerca {
@@ -137,7 +137,6 @@ hr {
     color: white;
     transition: width 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     letter-spacing: 0.5px;
-    margin-right: 80px;
 }
 
 .input-ricerca::placeholder {
@@ -189,98 +188,119 @@ hr {
     gap: 60px;
 }
 
-/* ===================== CALENDARIO ===================== */
+/* ===================== CALENDARIO VERTICALE ===================== */
 #wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    transform: scale(0.78);
-    transform-origin: top left;
+    align-items: stretch;
     flex-shrink: 0;
-}
-
-#calendario {
-    display: grid;
-    grid-template-columns: repeat(7, 50px);
-    gap: 8px;
-    justify-content: center;
-    margin: 10px auto;
-}
-
-.cal-titolo {
-    grid-column: span 7;
-    text-align: center;
-    font-family: 'Stronger-Thinker-Bold';
-    font-size: 16px;
-    color: var(--text-muted);
-    letter-spacing: 4px;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-}
-
-.cal-intestazione {
-    text-align: center;
-    font-size: 11px;
-    letter-spacing: 1px;
-    color: var(--burgundy-light);
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.cal-giorno {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 13px;
-    color: var(--text-muted);
-}
-
-.cal-attivo {
-    background-color: var(--burgundy);
-    color: white;
-    cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 2px 10px rgba(128, 0, 32, 0.4);
-}
-
-.cal-attivo:hover {
-    transform: scale(1.15);
-    background-color: var(--burgundy-light);
-    box-shadow: 0 4px 16px rgba(187, 34, 72, 0.5);
-}
-
-.cal-selezionato {
-    background-color: var(--rose) !important;
-    color: white;
-    box-shadow: 0 4px 16px rgba(255, 77, 109, 0.5) !important;
-}
-
-.cal-disabilitato {
-    color: rgba(255,255,255,0.1);
-    cursor: default;
+    width: 90px;
 }
 
 .cal-btn-tutti {
     display: block;
-    margin-top: 14px;
+    width: 100%;
+    margin-bottom: 10px;
     background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
     color: white;
     border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 20px;
-    padding: 8px 22px;
+    border-radius: 10px;
+    padding: 10px 6px;
     cursor: pointer;
-    font-size: 13px;
-    letter-spacing: 1px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    align-self: center;
 }
 
 .cal-btn-tutti:hover {
-    transform: scale(1.06);
+    transform: scale(1.04);
     box-shadow: 0 4px 16px var(--burgundy-glow);
+}
+
+#calendario {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    max-height: 340px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--burgundy) transparent;
+    padding-right: 4px;
+}
+
+#calendario::-webkit-scrollbar {
+    width: 3px;
+}
+
+#calendario::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#calendario::-webkit-scrollbar-thumb {
+    background-color: var(--burgundy);
+    border-radius: 3px;
+}
+
+/* Card giorno */
+.cal-giorno {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 8px 6px;
+    border-radius: 10px;
+    cursor: pointer;
+    background: rgba(128, 0, 32, 0.15);
+    border: 1px solid rgba(128, 0, 32, 0.25);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cal-giorno:hover {
+    background: rgba(128, 0, 32, 0.35);
+    transform: translateX(3px);
+    box-shadow: 0 2px 10px rgba(128, 0, 32, 0.3);
+}
+
+.cal-selezionato {
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy-light)) !important;
+    border-color: var(--rose) !important;
+    box-shadow: 0 4px 14px rgba(255, 77, 109, 0.35) !important;
+}
+
+/* Numero giorno — grande */
+.cal-giorno h1 {
+    font-size: 22px;
+    font-weight: bold;
+    color: white;
+    line-height: 1;
+    margin: 0;
+    font-family: 'Georgia', serif;
+}
+
+/* Mese — piccolo e opaco */
+.cal-giorno h2 {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+    font-family: 'Stronger-Thinker-Bold';
+    font-weight: normal;
+}
+
+/* Giorno settimana — medio */
+.cal-giorno h3 {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.8);
+    text-transform: uppercase;
+    line-height: 1;
+    margin: 0;
+    font-family: 'Stronger-Thinker-Bold';
+    font-weight: normal;
 }
 
 /* ===================== BOTTONI MOOD ===================== */
@@ -293,16 +313,16 @@ hr {
 }
 
 #mood-btn button {
-    background: linear-gradient(135deg, rgba(128, 0, 32, 0.5) 0%, rgba(187, 34, 72, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(94, 0, 21, 0.6) 0%, rgba(128, 0, 32, 0.8) 100%);
     color: var(--cream);
-    border: 1px solid rgba(187, 34, 72, 0.6);
+    border: 1px solid rgba(128, 0, 32, 0.5);
     border-radius: 12px;
     padding: 18px 22px;
     cursor: pointer;
     font-size: 14px;
     font-family: 'Georgia', serif;
     letter-spacing: 0.3px;
-    text-align: left;
+    text-align: center;
     transition: all 0.25s ease;
     backdrop-filter: blur(4px);
     line-height: 1.4;

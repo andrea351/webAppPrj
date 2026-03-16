@@ -447,41 +447,39 @@ const mappaGiorni = {
 }
 
 function costruisciCalendario() {
-    const cal = document.getElementById("calendario");
-    cal.innerHTML = ``;
+    const cal = document.getElementById("wrapper"); // Sovra - DIV [ Contiene ' Calendario ' e anche ALTRE COSE ]
+    const listaScorrevole = document.getElementById("calendario"); // Sotto - DIV [ Contiene SOLO ' Calendario ' ]
+    listaScorrevole.innerHTML = ``;
+    // cal.innerHTML = ``;
 
-    const titolo = document.createElement("div");
-    titolo.className = "cal-titolo";
-    titolo.textContent = "GIUGNO 2026";
-    cal.appendChild(titolo);
-
-    const intestazioni = ["LUN", "MAR", "MER", "GIO", "VEN", "SAB", "DOM"];
-    intestazioni.forEach(g => {
-        const cell = document.createElement("div");
-        cell.className = "cal-intestazione";
-        cell.textContent = g;
-        cal.appendChild(cell);
-    });
+    const meseDiProgrammazione = "GIU";
 
     for (let giorno = 1; giorno <= 30; giorno++) {
         const cell = document.createElement("div");
         const dataKey = `2026-06-${String(giorno).padStart(2, "0")}`;
         const nomeGiorno = mappaGiorni[dataKey];
 
-        cell.textContent = giorno;
         cell.className = "cal-giorno";
 
-        if (nomeGiorno && giorniConFilm.has(nomeGiorno)) {
-            cell.classList.add("cal-attivo");
-            cell.addEventListener("click", () => {
-                document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
-                cell.classList.add("cal-selezionato");
-                giornoAttivo = nomeGiorno;
-                costruisciPag();
-            });
-        } else cell.classList.add("cal-disabilitato");
-    
-        cal.appendChild(cell);
+        if (!nomeGiorno || !giorniConFilm.has(nomeGiorno)) continue; // Se un GIORNO NON ha FILM in PROGRAMMAZIONE, allora NON rappresentarlo nel CALENDARIO 
+
+        cell.innerHTML += `
+            <h1>${dataKey.split("-")[2]}</h1>
+                <h2>${meseDiProgrammazione}</h2>
+                    <h3>${Object.entries(mappaGiorni).map(([dataNumerica]) => { // ' forEach ' viene usato per ESEGUIRE OPERAZIONI SUGLI ELEMENTI, pertanto NON ritorna niente che possa essere riutilizzato, poichè il suo valore di ritorno è ' undefined '. ' map ', invece, restituisce un ARRAY su cui poter LAVORARE
+                                if (dataNumerica === dataKey) return mappaGiorni[dataNumerica].slice(0, 3);
+                            }).join("")
+                        }
+                    </h3>
+        `
+        cell.addEventListener("click", () => {
+            document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
+            cell.classList.add("cal-selezionato");
+            giornoAttivo = nomeGiorno;
+            costruisciPag();
+        });
+
+        listaScorrevole.appendChild(cell);
     }
 
     const btnTutti = document.createElement("button");
@@ -492,7 +490,7 @@ function costruisciCalendario() {
         giornoAttivo = "tutti";
         costruisciPag();
     });
-    document.getElementById("wrapper").appendChild(btnTutti);
+    cal.appendChild(btnTutti);
 }
 
 // AVVIO
