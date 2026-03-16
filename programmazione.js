@@ -4,7 +4,7 @@ const film = [
     {
         titolo: "Billy Elliot",
         locandina: "locandine/billy_elliot.jpg",
-        pagina: "",
+        pagina: "billy_elliot.html",
         mood: ["Per tutta la famiglia", "Intrattenimento"],
         orari: {
             "LUNEDI 1 GIUGNO":    ["15:00", "21:30"],
