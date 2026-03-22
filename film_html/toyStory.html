@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toy Story - Mood Cinema</title>
+    
+    <link rel="stylesheet" href="../main.css"> 
+    <link rel="stylesheet" href="../struttura_film.css"> </head>
+<body>
+
+    <header class="pannello-superiore">
+        <nav class="menu-sx">
+            <a href="../main.html">⬅ TORNA ALLA HOME</a> <a href="../contatti.html">CONTATTACI</a>
+            <a href="#servizi">SERVIZI</a>
+        </nav>
+        
+        <div class="logo-centro">
+            <a href="../main.html">
+                <img src="../logo.png" alt="Logo Cinema" class="img-logo">
+            </a>
+        </div>
+        
+        <div class="menu-destra">
+            <button id="btn-profilo" class="bottone-profilo">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <hr style="width: 70%;"> <div class="contenitore-dettaglio">
+        
+        <div class="dettaglio-sx">
+            <div class="media-container" id="trailer-container">
+                <img src="../locandine/toy_story.jpg" alt="Locandina La vita è bella" id="poster-img">
+                
+                <video id="trailer-video" src="../trailers\ts.mp4" muted loop preload="auto"></video>
+            </div>
+        </div>
+
+        <div class="dettaglio-dx">
+            <h1 class="titolo-film-dettaglio">Toy Story</h1>
+            
+            <div class="info-tecniche">
+                <span>1995</span> <span class="pallino">•</span>
+                <span>Animazione / Avventura / Commedia</span> <span class="pallino">•</span>
+                <span>1h 21m</span>
+            </div>
+
+            <p class="trama-film">
+              Woody, un cowboy giocattolo, è il leader dei giocattoli di Andy e gode della sua posizione privilegiata. Ma l’arrivo di Buzz Lightyear, un nuovo giocattolo spaziale, mette a rischio il suo ruolo. Tra rivalità e malintesi, Woody e Buzz dovranno imparare a collaborare, affrontare avventure pericolose e scoprire il valore dell’amicizia e della lealtà.
+            </p>
+
+            <div class="cast-film">
+                <p><strong>Regia:</strong> John Lasseter</p>
+                <p><strong>Cast (voci originali):</strong> Tom Hanks, Tim Allen, Don Rickles</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="../film.js"></script>
+
+</body>
+</html>
