@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conclave - Mood Cinema</title>
+    
+    <link rel="stylesheet" href="../main.css"> 
+    <link rel="stylesheet" href="../struttura_film.css"> </head>
+<body>
+
+    <header class="pannello-superiore">
+        <nav class="menu-sx">
+            <a href="../main.html">⬅ TORNA ALLA HOME</a> <a href="../contatti.html">CONTATTACI</a>
+            <a href="#servizi">SERVIZI</a>
+        </nav>
+        
+        <div class="logo-centro">
+            <a href="../main.html">
+                <img src="../logo.png" alt="Logo Cinema" class="img-logo">
+            </a>
+        </div>
+        
+        <div class="menu-destra">
+            <button id="btn-profilo" class="bottone-profilo">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <hr style="width: 70%;"> <div class="contenitore-dettaglio">
+        
+        <div class="dettaglio-sx">
+            <div class="media-container" id="trailer-container">
+                <img src="../locandine/conclave.jpg" alt="Locandina La vita è bella" id="poster-img">
+                
+                <video id="trailer-video" src="../trailers\conclave.mp4" muted loop preload="auto"></video>
+            </div>
+        </div>
+
+        <div class="dettaglio-dx">
+            <h1 class="titolo-film-dettaglio">Conclave</h1>
+            
+            <div class="info-tecniche">
+                <span>2024</span> <span class="pallino">•</span>
+                <span>Drammatico / Thriller / Politico</span> <span class="pallino">•</span>
+                <span>2h 00m</span>
+            </div>
+
+            <p class="trama-film">
+              Dopo la morte improvvisa del Papa, il cardinale Thomas Lawrence viene incaricato di supervisionare il conclave per eleggere il suo successore. Mentre i cardinali si riuniscono nel cuore del Vaticano, emergono intrighi, alleanze segrete e scandali che mettono alla prova la fede, la lealtà e il potere all’interno della Chiesa, rivelando oscure verità che potrebbero cambiare per sempre la sua istituzione.
+            </p>
+
+            <div class="cast-film">
+                <p><strong>Regia:</strong> Edward Berger</p>
+                <p><strong>Cast:</strong> Ralph Fiennes, Stanley Tucci, John Lithgow, Isabella Rossellini, Sergio Castellitto</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="../film.js"></script>
+
+</body>
+</html>

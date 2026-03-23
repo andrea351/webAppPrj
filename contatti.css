@@ -1,174 +1,323 @@
-/* Reset base */
-* {
+@font-face {
+    font-family: 'Stronger-Thinker-Bold';
+    src: url('Stronger-Thinker-Bold.ttf');
+}
+
+/* ===================== VARIABILI ===================== */
+:root {
+    --burgundy:       #800020;
+    --burgundy-dark:  #5e0015;
+    --burgundy-deep:  #3a000d;
+    --burgundy-light: #bb2248;
+    --burgundy-glow:  rgba(128, 0, 32, 0.15);
+    --rose:           #ff4d6d;
+    --bg:             #fdf5f7;
+    --bg-section:     #ffffff;
+    --text-main:      #2a0a10;
+    --text-muted:     #7a4050;
+    --border:         rgba(128, 0, 32, 0.15);
+    --shadow:         0 4px 24px rgba(128, 0, 32, 0.08);
+}
+
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body {
-    line-height: 1.6;
-    background-color: #f8f8f8;
-    color: #333;
+    font-family: 'Georgia', serif;
+    line-height: 1.7;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(128, 0, 32, 0.06) 0%, transparent 70%);
+    color: var(--text-main);
+    min-height: 100vh;
 }
 
+/* ===================== HEADER ===================== */
 .pannello-superiore {
-    display: flex; /* linea in orizzontale */
-    align-items: center; /* allinea al centro e verticalmente */
-    background: linear-gradient(90deg, #5e0015 0%, #800020 50%, #5e0015 100%);
-    padding: 2px 40px;
-    color: white; /* testo bianco */
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
-    position: relative;
-}
-
-/* --- LOGO CENTRO --- */
-
-.logo-centro{
-    flex: 1;
     display: flex;
-    justify-content: center;
-}
-
-.img-logo {
-    height: 120px; /* Altezza LOGO */
-    width: auto; 
-    cursor: pointer;
-}
-
-/* Header */
-header {
-    background-color: #222;
-    color: #fff;
-    padding: 1rem;
-    text-align: center;
+    align-items: center;
+    background: linear-gradient(90deg, var(--burgundy-deep) 0%, var(--burgundy-dark) 40%, var(--burgundy) 60%, var(--burgundy-dark) 80%, var(--burgundy-deep) 100%);
+    padding: 0 40px;
+    color: white;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255,255,255,0.05) inset;
     position: relative;
+    z-index: 10;
+}
+
+.pannello-superiore::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,100,120,0.3), transparent);
 }
 
 header nav {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
-/* Link del menu */
-
-.menu{
+/* --- MENU --- */
+.menu {
     flex: 1;
     display: flex;
-    gap: 60px;
+    gap: 80px;
 }
 
-.menu a{
-    color: #ffffff;
-    text-decoration: none; /* NO sottolineatura Link */
-    font-size: 16px;
-    font-weight: 600;
-    letter-spacing: 1px;
+.menu a {
+    font-family: 'Stronger-Thinker-Bold';
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
 .menu a:hover {
-    color: #f0c0d0; /* Cambio COLORE se si passa sopra */
-    transform: scale(1.1);
-    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    color: #fff;
+    letter-spacing: 3px;
 }
 
-/*BOTTONE PROFILO*/
+/* --- LOGO --- */
+.logo-centro {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
 
+.img-logo {
+    height: 160px;
+    width: auto;
+    cursor: pointer;
+    filter: drop-shadow(0 0 20px rgba(255, 77, 109, 0.2));
+    transition: filter 0.3s ease;
+    margin-left: 80px;
+}
+
+.img-logo:hover {
+    filter: drop-shadow(0 0 30px rgba(255, 77, 109, 0.4));
+}
+
+/* --- BOTTONE PROFILO --- */
 .bottone-profilo {
-    background: none; /* Rimuove lo sfondo grigio di default del bottone */
-    border: none; 
-    color: white; 
+    flex: 1;
+    justify-content: flex-end;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.7);
     cursor: pointer;
     display: flex;
     align-items: center;
-    transition: transform 0.2s ease; /* DURATA movimento ANIMAZIONE */
-    transform: scale(1.3);
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding-right: 70px;
 }
-
 
 .bottone-profilo:hover {
-    color: #f0c0d0; /* Cambio COLORE se si passa sopra */
-    transform: scale(1.5); /* L'omino si ingrandisce di un certo valore quando ci passo sopra */
+    color: white;
+    transform: scale(1.15);
 }
 
-
-/* Main */
+/* ===================== MAIN ===================== */
 main {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 2rem;
 }
 
-/* Container per due sezioni affiancate */
+/* ===================== CONTENITORE SEZIONI ===================== */
 .contenitore-sezioni {
     display: flex;
     gap: 2rem;
     flex-wrap: wrap;
+    align-items: flex-start;
 }
 
-/* Stile base per le sezioni */
+/* ===================== SEZIONI ===================== */
 section {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 1.5rem;
+    background-color: var(--bg-section);
+    border-radius: 16px;
+    padding: 2rem;
     flex: 1 1 45%;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--burgundy-dark), var(--burgundy-light), var(--burgundy-dark));
 }
 
 h2 {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin-bottom: 1.5rem;
+}
+
+h3 {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
     margin-bottom: 1rem;
-    color: #d6336c;
+    margin-top: 1.5rem;
 }
 
+/* ===================== CONTATTI ===================== */
 .info-contatti p {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 15px;
+    color: var(--text-main);
 }
 
+.info-contatti a {
+    color: var(--burgundy);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(128, 0, 32, 0.2);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.info-contatti a:hover {
+    color: var(--burgundy-light);
+    border-color: var(--burgundy-light);
+}
+
+/* ===================== MAPPA ===================== */
 .mappa {
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
-/* Form */
+.mappa iframe {
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(128, 0, 32, 0.1);
+    display: block;
+}
+
+/* ===================== LAVORA CON NOI ===================== */
+.lavora-con-noi p {
+    font-size: 15px;
+    color: var(--text-main);
+    margin-bottom: 0.75rem;
+}
+
+.lavora-con-noi a {
+    color: var(--burgundy);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(128, 0, 32, 0.2);
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.lavora-con-noi a:hover {
+    color: var(--burgundy-light);
+    border-color: var(--burgundy-light);
+}
+
+.lavora-con-noi ul {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.lavora-con-noi ul li {
+    font-size: 15px;
+    color: var(--text-main);
+    margin-bottom: 0.3rem;
+}
+
+/* ===================== FORM ===================== */
+.form-contatti {
+    margin-top: 1.5rem;
+}
+
 form {
     display: flex;
     flex-direction: column;
+    gap: 0.3rem;
 }
 
 form label {
-    margin-top: 0.5rem;
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.75rem;
 }
 
-form input, form textarea {
-    padding: 0.5rem;
-    margin-top: 0.2rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+form input,
+form textarea {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    color: var(--text-main);
+    background-color: #fdf5f7;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none;
 }
 
-form button {
-    margin-top: 1rem;
-    padding: 0.7rem;
+form input:focus,
+form textarea:focus {
+    border-color: rgba(128, 0, 32, 0.4);
+    box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.06);
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+form button[type="submit"] {
+    margin-top: 1.2rem;
+    padding: 12px 28px;
     border: none;
-    background-color: #d6336c;
-    color: #fff;
-    font-size: 1rem;
-    border-radius: 5px;
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+    color: white;
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 8px;
     cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-self: flex-start;
 }
 
-form button:hover {
-    background-color: #b82a57;
+form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--burgundy-glow);
 }
 
-/* Footer */
+/* ===================== FOOTER ===================== */
 footer {
     text-align: center;
-    padding: 1rem;
-    background-color: #222;
-    color: #fff;
+    padding: 1.5rem;
+    margin-top: 3rem;
+    background: linear-gradient(90deg, var(--burgundy-deep), var(--burgundy-dark), var(--burgundy-deep));
+    color: rgba(255,255,255,0.5);
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-/* Responsive */
+/* ===================== RESPONSIVE ===================== */
 @media (max-width: 900px) {
     .contenitore-sezioni {
         flex-direction: column;
