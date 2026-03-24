@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap'); */
 
 .contenitore-dettaglio {
     display: flex;
@@ -67,7 +69,7 @@
 
 .dettaglio-sx.in-preview .media-container,
 .media-container:hover {
-    aspect-ratio: 16/9; /* Diventa orizzontale! */
+    aspect-ratio: 16/9; /* Diventa orizzontale */
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
 }
 
@@ -97,7 +99,7 @@
     max-width: 1100px; 
     aspect-ratio: 16/9; 
     
-    z-index: 99999; /*  in primo piano */
+    z-index: 99999; /* In primo piano */
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.1);
     
@@ -132,7 +134,8 @@
 }
 
 .cast-film {
-    font-family: "Arial", sans-serif;
+    font-weight: normal;
+    font-family: 'Nunito', sans-serif;
     opacity: 0.8;
 }
 
@@ -141,7 +144,8 @@
     line-height: 1.6;
     margin-bottom: 20px;
     font-weight: normal;
-    font-family: "Montserrat", sans-serif;
+    /* font-family: "Lato", sans-serif; */
+    font-family: 'Nunito', sans-serif;
     /* font-family: "Arial", sans-serif; */
     opacity: 0.8;
 }

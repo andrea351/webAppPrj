@@ -441,3 +441,33 @@ hr {
     transform: scale(1.08);
     box-shadow: 0 4px 12px var(--burgundy-glow);
 }
+
+.film-card a {
+    position: relative;
+    display: block;
+}
+
+.etichette {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 3px 7px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.rating {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0,0,0,0.65);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    padding: 3px 7px;
+    border-radius: 6px;
+}
