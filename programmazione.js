@@ -362,7 +362,7 @@ const observer = new IntersectionObserver((entries, obs) => {
 
 // GESTIONE FILM - MOOD ⤵️
 
-let giornoAttivo = "tutti";
+let giornoAttivo = "LUNEDI 1 GIUGNO";
 
 function costruisciPag(){
     contenitore.innerHTML="";
@@ -370,7 +370,6 @@ function costruisciPag(){
     tuttiIMood.forEach(m=>{
         const film_appartiene_al_mood=film.filter(f=>{
             if(!f.mood.includes(m)) return false; // Se il Mood NON appartiene a quel Film, allora lo SCARTA
-            if(giornoAttivo === "tutti") return true;
             return Object.keys(f.orari).includes(giornoAttivo);
         });
 
@@ -392,12 +391,11 @@ function costruisciPag(){
             card.className="film-card"; 
 
             let orari_html = "";
-                if (giornoAttivo !== "tutti") {
-                    f.orari[giornoAttivo]?.forEach(ora => {
-                        orari_html += `<button class="bottone-orario">${ora}</button>`;
-                    });
-                }
-
+                
+                f.orari[giornoAttivo]?.forEach(ora => {
+                    orari_html += `<button class="bottone-orario">${ora}</button>`;
+                });
+                
                 card.innerHTML = `
                     <a href="${f.pagina}">
                         <img src="${f.locandina}" alt="${f.titolo}">
@@ -481,16 +479,6 @@ function costruisciCalendario() {
 
         listaScorrevole.appendChild(cell);
     }
-
-    const btnTutti = document.createElement("button");
-    btnTutti.textContent = "🍿 Tutti i film";
-    btnTutti.className = "cal-btn-tutti";
-    btnTutti.addEventListener("click", () => {
-        document.querySelectorAll(".cal-giorno").forEach(c => c.classList.remove("cal-selezionato"));
-        giornoAttivo = "tutti";
-        costruisciPag();
-    });
-    cal.appendChild(btnTutti);
 }
 
 // AVVIO
