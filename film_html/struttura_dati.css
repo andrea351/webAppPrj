@@ -1,0 +1,300 @@
+.contenitore-dettaglio {
+    display: flex;
+    gap: 60px;
+    padding: 60px 80px;
+    align-items: flex-start; /* ← era center, serve flex-start per il booking */
+    position: relative;
+}
+
+/* Linea divisoria tra locandina e testi */
+.contenitore-dettaglio::before {
+    content: '';
+    position: absolute;
+    left: calc(80px + 280px + 30px);
+    top: 60px;
+   
+    width: 1px;
+    height: 400px;
+    background: linear-gradient(to bottom, transparent, white 20%, white 80%, transparent);
+    opacity: 0.4;
+}
+
+.dettaglio-sx {
+    flex: 0 0 280px; 
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.media-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    background-color: #000; 
+    transition: aspect-ratio 0.5s ease, box-shadow 0.3s ease; 
+    view-transition-name: locandina-volante;
+}
+
+.media-container img, 
+.media-container video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; 
+    height: 100%;
+    object-fit: cover; 
+    transition: opacity 0.5s ease;
+}
+
+.media-container video { opacity: 0; }
+.media-container img { opacity: 1; }
+
+.play-overlay {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    font-size: 50px;
+    color: rgba(255, 255, 255, 0.8);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.dettaglio-sx.in-preview .media-container,
+.media-container:hover {
+    aspect-ratio: 16/9;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+}
+
+.dettaglio-sx.in-preview .media-container img,
+.media-container:hover img { opacity: 0; }
+
+.dettaglio-sx.in-preview .media-container video,
+.media-container:hover video { opacity: 1; }
+
+.media-container:hover .play-overlay {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.media-container.video-ingrandito {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 80vw; 
+    max-width: 1100px; 
+    aspect-ratio: 16/9; 
+    z-index: 99999;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 0 100vmax rgba(0,0,0,0.9), 0 40px 60px rgba(0,0,0,0.8);
+}
+
+.media-container.video-ingrandito img { opacity: 0; }
+.media-container.video-ingrandito video { opacity: 1; }
+
+::view-transition-old(locandina-volante),
+::view-transition-new(locandina-volante) {
+    animation-duration: 0.8s; 
+    animation-timing-function: cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+
+.dx-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: hidden; /* safe: il video è nella colonna SX separata */
+    min-height: 520px;
+}
+
+/* ── Info film ── */
+.dettaglio-dx {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1), opacity   0.5s ease;
+    will-change: transform;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Quando il booking è attivo: info scorrono su e spariscono */
+.dx-wrapper.booking-attivo .dettaglio-dx {
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.titolo-film-dettaglio {
+    font-size: 42px;
+    color: #bc4143; 
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.info-tecniche {
+    color: #bc4143;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.cast-film {
+    font-family: 'Nunito';
+    opacity: 0.8;
+    margin-bottom: 36px;
+
+}
+
+.trama-film {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-family: 'Nunito';
+    opacity: 0.8;
+}
+
+/* ── Sezione orari ── */
+.orari-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 24px;
+}
+
+.orari-lista {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-orario {
+    font-family: "Arial", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.5);
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 6px;
+    padding: 10px 18px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-orario:hover {
+    border-color: #bc4143;
+    color: white;
+}
+
+.btn-orario.selezionato {
+    background: #bc4143;
+    border-color: #bc4143;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(188, 65, 67, 0.4);
+}
+
+/* Bottoni non selezionati escono durante la transizione */
+.orari-lista.in-uscita .btn-orario:not(.selezionato) {
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* ── Bottone Continua ── */
+.btn-continua {
+    font-family: "Arial", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    padding: 12px 24px;
+    cursor: not-allowed;
+    opacity: 0.3;
+    color: white;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.btn-continua.attivo {
+    background: white;
+    border-color: white;
+    color: #0e0d0c;
+    opacity: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255,255,255,0.12);
+}
+
+.btn-continua.attivo:hover {
+    background: #f0f0f0;
+    transform: translateX(3px);
+}
+
+.freccia-continua {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.btn-continua.attivo:hover .freccia-continua {
+    transform: translateX(4px);
+}
+
+/* ── Badge orario flottante (sopra il booking panel) ── */
+.orario-badge {
+    position: absolute;
+    top: 12px;
+    right: 0;
+    font-family: "Arial", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #fff;
+    background: #bc4143;
+    border-radius: 6px;
+    padding: 8px 16px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.4s ease 0.5s, transform 0.4s ease 0.5s;
+    pointer-events: none;
+    z-index: 10;
+    box-shadow: 0 4px 16px rgba(188,65,67,0.4);
+}
+
+.orario-badge::before {
+    content: '◷  ';
+    opacity: 0.8;
+    font-size: 11px;
+}
+
+.dx-wrapper.booking-attivo .orario-badge {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Animazioni entrata (su figli, mai su .dettaglio-sx) ── */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.media-container        { animation: fadeIn       0.6s ease 0.05s both; }
+.titolo-film-dettaglio  { animation: fadeSlideUp  0.5s ease 0.25s both; }
+.info-tecniche          { animation: fadeSlideUp  0.5s ease 0.38s both; }
+.trama-film             { animation: fadeSlideUp  0.5s ease 0.50s both; }
+.cast-film              { animation: fadeSlideUp  0.5s ease 0.56s both; }
+.orari-section          { animation: fadeSlideUp  0.5s ease 0.62s both; }

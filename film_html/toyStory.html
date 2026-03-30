@@ -6,12 +6,15 @@
     <title>Toy Story - Mood Cinema</title>
     
     <link rel="stylesheet" href="../main.css"> 
-    <link rel="stylesheet" href="../struttura_film.css"> </head>
+    <link rel="stylesheet" href="struttura_dati.css">
+    <link rel="stylesheet" href="booking.css">
+</head>
 <body>
 
     <header class="pannello-superiore">
         <nav class="menu-sx">
-            <a href="../main.html">⬅ TORNA ALLA HOME</a> <a href="../contatti.html">CONTATTACI</a>
+            <a href="../main.html">⬅ TORNA ALLA HOME</a> 
+            <a href="../contatti.html">CONTATTACI</a>
             <a href="#servizi">SERVIZI</a>
         </nav>
         
@@ -30,38 +33,99 @@
         </div>
     </header>
 
-    <hr style="width: 70%;"> <div class="contenitore-dettaglio">
+    <hr style="width: 70%;"> 
+    
+    <div class="contenitore-dettaglio">
         
         <div class="dettaglio-sx">
             <div class="media-container" id="trailer-container">
-                <img src="../locandine/toy_story.jpg" alt="Locandina La vita è bella" id="poster-img">
+                <img src="../locandine/toy_story.jpg" alt="Locandina Toy Story" id="poster-img">
+                <video id="trailer-video" src="../trailers/ts.mp4" muted loop preload="auto"></video>
+                <div class="play-overlay"></div>
+            </div>
+        </div>
+
+        <div class="dx-wrapper" id="dx-wrapper">
+
+            <div class="dettaglio-dx" id="dettaglio-dx">
+
+                <h1 class="titolo-film-dettaglio">Toy Story</h1>
                 
-                <video id="trailer-video" src="../trailers\ts.mp4" muted loop preload="auto"></video>
-            </div>
-        </div>
+                <div class="info-tecniche">
+                    <span>1995</span> <span class="pallino">•</span>
+                    <span>Animazione / Avventura / Commedia</span> <span class="pallino">•</span>
+                    <span>1h 21m</span>
+                </div>
 
-        <div class="dettaglio-dx">
-            <h1 class="titolo-film-dettaglio">Toy Story</h1>
-            
-            <div class="info-tecniche">
-                <span>1995</span> <span class="pallino">•</span>
-                <span>Animazione / Avventura / Commedia</span> <span class="pallino">•</span>
-                <span>1h 21m</span>
-            </div>
+                <p class="trama-film">
+                    Woody, un cowboy giocattolo, è il leader dei giocattoli di Andy e gode della sua posizione privilegiata. Ma l’arrivo di Buzz Lightyear, un nuovo giocattolo spaziale, mette a rischio il suo ruolo. Tra rivalità e malintesi, Woody e Buzz dovranno imparare a collaborare, affrontare avventure pericolose e scoprire il valore dell’amicizia e della lealtà.
+                </p>
 
-            <p class="trama-film">
-              Woody, un cowboy giocattolo, è il leader dei giocattoli di Andy e gode della sua posizione privilegiata. Ma l’arrivo di Buzz Lightyear, un nuovo giocattolo spaziale, mette a rischio il suo ruolo. Tra rivalità e malintesi, Woody e Buzz dovranno imparare a collaborare, affrontare avventure pericolose e scoprire il valore dell’amicizia e della lealtà.
-            </p>
+                <div class="cast-film">
+                    <p><strong>Regia:</strong> John Lasseter</p>
+                    <p><strong>Cast (voci originali):</strong> Tom Hanks, Tim Allen, Don Rickles</p>
+                </div>
 
-            <div class="cast-film">
-                <p><strong>Regia:</strong> John Lasseter</p>
-                <p><strong>Cast (voci originali):</strong> Tom Hanks, Tim Allen, Don Rickles</p>
-            </div>
-        </div>
-        
-    </div>
+                <div class="orari-section">
+                    <div class="orari-lista" id="orari-lista">
+                        <button class="btn-orario" data-orario="14:30">14:30</button>
+                        <button class="btn-orario" data-orario="16:30">16:30</button>
+                        <button class="btn-orario" data-orario="18:30">18:30</button>
+                        <button class="btn-orario" data-orario="20:30">20:30</button>
+                    </div>
+                    <button class="btn-continua" id="btn-continua" disabled>
+                        CONTINUA <span class="freccia-continua">→</span>
+                    </button>
+                </div>
 
-    <script src="../film.js"></script>
+            </div><div class="booking-panel" id="booking-panel">
+                <div class="orario-badge" id="orario-badge"></div>
+                <button class="btn-chiudi-booking" id="btn-chiudi-booking">✕</button>
+                
+                <div class="booking-inner">
+
+                    <div class="sala-container">
+                        <div class="schermo-label"><span>SCHERMO</span></div>
+                        <div class="griglia-posti" id="griglia-posti"></div>
+                        <div class="legenda-posti">
+                            <span class="legenda-item"><i class="posto-sample disponibile"></i> Disponibile</span>
+                            <span class="legenda-item"><i class="posto-sample selezionato"></i> Selezionato</span>
+                            <span class="legenda-item"><i class="posto-sample occupato"></i> Occupato</span>
+                        </div>
+                    </div>
+
+                    <div class="booking-sidebar">
+                        <div class="sidebar-riepilogo">
+                            <h3 class="sidebar-titolo">Riepilogo</h3>
+                            <div class="riepilogo-righe" id="riepilogo-righe">
+                                <p class="nessun-posto">Seleziona i tuoi posti dalla mappa</p>
+                            </div>
+                            <div class="riepilogo-totale">
+                                <span>Totale</span>
+                                <span id="totale-display">€ 0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="timer-box" id="timer-box">
+                            <div class="timer-icona">⏱</div>
+                            <div class="timer-testo">
+                                <span class="timer-label">Tempo per completare</span>
+                                <span class="timer-display" id="timer-display">15:00</span>
+                            </div>
+                        </div>
+
+                        <div class="pagamento-form">
+                            <p class="pagamento-titolo">Pagamento</p>
+                            <input type="text" placeholder="Numero carta" class="input-carta" maxlength="19" id="input-carta">
+                            <div class="input-row">
+                                <input type="text" placeholder="MM / AA" class="input-carta half" maxlength="5">
+                                <input type="text" placeholder="CVV" class="input-carta half" maxlength="3">
+                            </div>
+                            <input type="text" placeholder="Nome del titolare" class="input-carta">
+                            <button class="btn-paga" id="btn-paga" disabled>ACQUISTA ORA</button>
+                        </div>
+                    </div></div></div></div></div><script src="../film.js"></script>
+    <script src="booking.js"></script>
 
 </body>
 </html>

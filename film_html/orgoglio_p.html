@@ -6,12 +6,15 @@
     <title>Orgoglio e Pregiudizio - Mood Cinema</title>
     
     <link rel="stylesheet" href="../main.css"> 
-    <link rel="stylesheet" href="../struttura_film.css"> </head>
+    <link rel="stylesheet" href="struttura_dati.css">
+    <link rel="stylesheet" href="booking.css">
+</head>
 <body>
 
     <header class="pannello-superiore">
         <nav class="menu-sx">
-            <a href="../main.html">⬅ TORNA ALLA HOME</a> <a href="../contatti.html">CONTATTACI</a>
+            <a href="../main.html">⬅ TORNA ALLA HOME</a> 
+            <a href="../contatti.html">CONTATTACI</a>
             <a href="#servizi">SERVIZI</a>
         </nav>
         
@@ -30,38 +33,98 @@
         </div>
     </header>
 
-    <hr style="width: 70%;"> <div class="contenitore-dettaglio">
+    <hr style="width: 70%;"> 
+    
+    <div class="contenitore-dettaglio">
         
         <div class="dettaglio-sx">
             <div class="media-container" id="trailer-container">
-                <img src="../locandine/org_pred.jpg" alt="Locandina La vita è bella" id="poster-img">
+                <img src="../locandine/org_pred.jpg" alt="Locandina Orgoglio e Pregiudizio" id="poster-img">
+                <video id="trailer-video" src="../trailers/org_pred.mp4" muted loop preload="auto"></video>
+                <div class="play-overlay"></div>
+            </div>
+        </div>
+
+        <div class="dx-wrapper" id="dx-wrapper">
+
+            <div class="dettaglio-dx" id="dettaglio-dx">
+
+                <h1 class="titolo-film-dettaglio">Orgoglio e Pregiudizio</h1>
                 
-                <video id="trailer-video" src="../trailers\org_pred.mp4" muted loop preload="auto"></video>
-            </div>
-        </div>
+                <div class="info-tecniche">
+                    <span>2005</span> <span class="pallino">•</span>
+                    <span>Romantico</span> <span class="pallino">•</span>
+                    <span>2h 9m</span>
+                </div>
 
-        <div class="dettaglio-dx">
-            <h1 class="titolo-film-dettaglio">Orgoglio e Pregiudizio</h1>
-            
-            <div class="info-tecniche">
-                <span>2005</span> <span class="pallino">•</span>
-                <span>Romantico</span> <span class="pallino">•</span>
-                <span>2h 9m</span>
-            </div>
+                <p class="trama-film">
+                    Nella campagna inglese del XIX secolo, Elizabeth Bennet, una giovane donna intelligente e indipendente, deve confrontarsi con le rigide convenzioni sociali e con l’orgoglio del ricco e riservato Mr. Darcy. Tra equivoci, malintesi e incontri romantici, Elizabeth e Darcy scopriranno l’importanza di superare i pregiudizi per trovare l’amore e la felicità.
+                </p>
 
-            <p class="trama-film">
-              Nella campagna inglese del XIX secolo, Elizabeth Bennet, una giovane donna intelligente e indipendente, deve confrontarsi con le rigide convenzioni sociali e con l’orgoglio del ricco e riservato Mr. Darcy. Tra equivoci, malintesi e incontri romantici, Elizabeth e Darcy scopriranno l’importanza di superare i pregiudizi per trovare l’amore e la felicità.
-            </p>
+                <div class="cast-film">
+                    <p><strong>Regia:</strong> Joe Wright</p>
+                    <p><strong>Cast:</strong> Keira Knightley, Matthew Macfadyen, Donald Sutherland</p>
+                </div>
 
-            <div class="cast-film">
-                <p><strong>Regia:</strong> Joe Wright</p>
-                <p><strong>Cast:</strong> Keira Knightley, Matthew Macfadyen, Donald Sutherland</p>
-            </div>
-        </div>
-        
-    </div>
+                <div class="orari-section">
+                    <div class="orari-lista" id="orari-lista">
+                        <button class="btn-orario" data-orario="16:30">16:30</button>
+                        <button class="btn-orario" data-orario="18:45">18:45</button>
+                        <button class="btn-orario" data-orario="21:00">21:00</button>
+                    </div>
+                    <button class="btn-continua" id="btn-continua" disabled>
+                        CONTINUA <span class="freccia-continua">→</span>
+                    </button>
+                </div>
 
-    <script src="../film.js"></script>
+            </div><div class="booking-panel" id="booking-panel">
+                <div class="orario-badge" id="orario-badge"></div>
+                <button class="btn-chiudi-booking" id="btn-chiudi-booking">✕</button>
+                
+                <div class="booking-inner">
+
+                    <div class="sala-container">
+                        <div class="schermo-label"><span>SCHERMO</span></div>
+                        <div class="griglia-posti" id="griglia-posti"></div>
+                        <div class="legenda-posti">
+                            <span class="legenda-item"><i class="posto-sample disponibile"></i> Disponibile</span>
+                            <span class="legenda-item"><i class="posto-sample selezionato"></i> Selezionato</span>
+                            <span class="legenda-item"><i class="posto-sample occupato"></i> Occupato</span>
+                        </div>
+                    </div>
+
+                    <div class="booking-sidebar">
+                        <div class="sidebar-riepilogo">
+                            <h3 class="sidebar-titolo">Riepilogo</h3>
+                            <div class="riepilogo-righe" id="riepilogo-righe">
+                                <p class="nessun-posto">Seleziona i tuoi posti dalla mappa</p>
+                            </div>
+                            <div class="riepilogo-totale">
+                                <span>Totale</span>
+                                <span id="totale-display">€ 0.00</span>
+                            </div>
+                        </div>
+
+                        <div class="timer-box" id="timer-box">
+                            <div class="timer-icona">⏱</div>
+                            <div class="timer-testo">
+                                <span class="timer-label">Tempo per completare</span>
+                                <span class="timer-display" id="timer-display">15:00</span>
+                            </div>
+                        </div>
+
+                        <div class="pagamento-form">
+                            <p class="pagamento-titolo">Pagamento</p>
+                            <input type="text" placeholder="Numero carta" class="input-carta" maxlength="19" id="input-carta">
+                            <div class="input-row">
+                                <input type="text" placeholder="MM / AA" class="input-carta half" maxlength="5">
+                                <input type="text" placeholder="CVV" class="input-carta half" maxlength="3">
+                            </div>
+                            <input type="text" placeholder="Nome del titolare" class="input-carta">
+                            <button class="btn-paga" id="btn-paga" disabled>ACQUISTA ORA</button>
+                        </div>
+                    </div></div></div></div></div><script src="../film.js"></script>
+    <script src="booking.js"></script>
 
 </body>
 </html>
