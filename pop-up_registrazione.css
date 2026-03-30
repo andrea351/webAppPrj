@@ -1,261 +1,429 @@
-/* PAGINA */
-body{
-    margin:0;
-    font-family: sans-serif;
+@font-face {
+    font-family: 'Stronger-Thinker-Bold';
+    src: url('Stronger-Thinker-Bold.ttf');
 }
 
-/* SFONDO SCURO */
-.overlay{
+/* ===================== VARIABILI ===================== */
+:root {
+    --burgundy:       #800020;
+    --burgundy-dark:  #5e0015;
+    --burgundy-deep:  #3a000d;
+    --burgundy-light: #bb2248;
+    --burgundy-glow:  rgba(128, 0, 32, 0.4);
+    --rose:           #ff4d6d;
+    --cream:          #f5e6ea;
+    --text-main:      #faeef1;
+    --text-muted:     rgba(250, 238, 241, 0.55);
+    --bg:             #0d0508;
+    --border:         rgba(128, 0, 32, 0.35);
+    --border-light:   rgba(187, 34, 72, 0.25);
+    --glass:          rgba(58, 0, 13, 0.55);
+    --glass-light:    rgba(128, 0, 32, 0.12);
+}
+
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    background-color: var(--bg);
+}
+
+/* ===================== OVERLAY ===================== */
+.overlay {
     position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100vh;
-    background: rgba(0,0,0,0.5);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-/* POPUP */
-.pop-up-contenuto{
-    position: relative;
-    background:#FFFDD0;
-    width:350px;
-    padding:50px 30px;
-    border-radius:15px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    animation: slideIn 0.5s ease;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-/* Fade-out */
-.overlay.closing {
-    animation: fadeOut 0.3s forwards;
-}
-
-@keyframes slideIn{
-    from{
-        opacity:0;
-        transform:translateY(-40px) scale(0.95);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-@keyframes fadeOut{
-    from{ opacity:1; }
-    to{ opacity:0; }
-}
-
-/* X chiudi */
-.chiudi {
-    position: absolute;
-    top:10px;
-    right:15px;
-    font-size:28px;
-    cursor:pointer;
-    z-index:10;
-    transition: transform 0.2s ease;
-}
-
-.chiudi:hover{
-    transform: rotate(90deg);
-}
-
-/* Logo */
-.immagine-logo {
-    background-color: rgba(0, 0, 0, 0.6);
+    inset: 0;
+    background: rgba(5, 0, 3, 0.82);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80px;
-    border-radius: 15px;
+    z-index: 9999;
+    animation: fadeInOverlay 0.35s ease both;
 }
 
-.immagine-logo img{
-    width:120px;
+.overlay.closing {
+    animation: fadeOutOverlay 0.3s forwards;
 }
 
-/* Titolo */
-.testo-log-in{
-    text-align: center;
-    margin-top:20px;
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
-/* CAMPI */
-.campo{
+@keyframes fadeOutOverlay {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+}
+
+/* ===================== POPUP CONTENUTO ===================== */
+.pop-up-contenuto {
     position: relative;
-    margin:20px auto;
-    width:80%;
-    max-width:300px;
+    width: 420px;
+    max-width: 95vw;
+    max-height: 92vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--burgundy) transparent;
+
+    background:
+        linear-gradient(160deg, rgba(94, 0, 21, 0.18) 0%, rgba(10, 2, 5, 0.95) 40%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 0;
+
+    box-shadow:
+        0 40px 80px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(187, 34, 72, 0.1) inset,
+        0 1px 0 rgba(255, 100, 130, 0.15) inset;
+
+    animation: slideIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* INPUT */
-.campo input{
-    width:100%;
-    padding:14px 12px;
-    border-radius:10px;
-    border:1px solid #ccc;
-    outline:none;
-    font-size:16px;
-
-    transition: 
-    border-color 0.25s ease,
-    transform 0.15s ease,
-    background-color 0.25s ease;
+.pop-up-contenuto::-webkit-scrollbar {
+    width: 3px;
+}
+.pop-up-contenuto::-webkit-scrollbar-thumb {
+    background: var(--burgundy);
+    border-radius: 3px;
 }
 
-.campo input:hover{
-    border-color:#1e90ff;
-    transform:scale(1.02);
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-28px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
-.campo input:focus{
-    border-color:#1e90ff;
-    border-width: 2px;
-    transform:scale(1.02);
+/* ===================== BARRA SUPERIORE (LOGO HEADER) ===================== */
+.popup-header {
+    background: linear-gradient(90deg, var(--burgundy-deep) 0%, var(--burgundy-dark) 40%, var(--burgundy) 60%, var(--burgundy-dark) 80%, var(--burgundy-deep) 100%);
+    padding: 28px 30px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border-radius: 20px 20px 0 0;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* LABEL floating */
-.campo label{
-    position:absolute;
-    left:12px;
-    top:50%;
-    transform:translateY(-50%);
-    color:gray;
-    font-size:15px;
-    pointer-events:none;
-    transition: all 0.25s ease;
+.popup-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 100, 120, 0.4), transparent);
+}
+
+.immagine-logo img {
+    height: 80px;
+    width: auto;
+    filter: drop-shadow(0 0 18px rgba(255, 77, 109, 0.3));
+}
+
+/* ===================== PULSANTE CHIUDI ===================== */
+.chiudi {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 22px;
+    color: rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.25s ease;
+    z-index: 10;
+    font-family: sans-serif;
+}
+
+.chiudi:hover {
+    color: var(--rose);
+    transform: rotate(90deg);
+}
+
+/* ===================== CORPO POPUP ===================== */
+.popup-body {
+    padding: 28px 36px 32px;
+}
+
+/* ===================== TABS LOGIN / REGISTRATI ===================== */
+.tab-switcher {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 28px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+
+.tab-btn.attivo {
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+    color: white;
+}
+
+.tab-btn:not(.attivo):hover {
+    background: var(--glass-light);
+    color: var(--cream);
+}
+
+/* ===================== TITOLO SEZIONE ===================== */
+.testo-log-in {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* ===================== CAMPO INPUT ===================== */
+.campo {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.campo input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    background: rgba(128, 0, 32, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    color: var(--text-main);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.campo input::placeholder {
+    color: rgba(250, 238, 241, 0.28);
+    font-size: 13px;
+}
+
+.campo input:focus {
+    border-color: var(--burgundy-light);
+    background: rgba(128, 0, 32, 0.14);
+    box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.15);
+}
+
+/* Label floating */
+.campo label {
+    position: absolute;
+    left: 44px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    pointer-events: none;
+    transition: all 0.22s ease;
 }
 
 .campo input:focus + label,
-.campo input:valid + label{
-    top:-8px;
-    left:10px;
-    font-size:11px;
-    color:#1e90ff;
-    
-    padding:0 5px;
+.campo input:not(:placeholder-shown) + label {
+    top: 0;
+    left: 14px;
+    font-size: 9px;
+    color: var(--burgundy-light);
+    background: #0d0508;
+    padding: 0 5px;
+    border-radius: 3px;
+    letter-spacing: 1.5px;
+}
+
+/* Icona campo */
+.icona-campo {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+
+.campo:focus-within .icona-campo {
+    color: var(--rose);
 }
 
 /* Mostra/nascondi password */
 .show-pass {
-    position:absolute;
-    right:10px;
-    top:50%;
-    transform:translateY(-50%);
-    cursor:pointer;
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    transition: color 0.2s ease;
+    font-size: 0; /* nasconde eventuali emoji residue */
 }
 
-/* Bottone Login */
+.show-pass:hover {
+    color: var(--rose);
+}
+
+/* ===================== LINK RECUPERO PASSWORD ===================== */
+.link-recupero-pswd {
+    display: block;
+    text-align: right;
+    margin-bottom: 22px;
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.link-recupero-pswd:hover {
+    color: var(--rose);
+}
+
+/* ===================== BOTTONE PRINCIPALE ===================== */
 .btn-login {
-    width:80%;
-    max-width:300px;
-    margin:20px auto;
-    display:block;
-    padding:12px;
-    border-radius:10px;
-    border:none;
-    background-color:rgba(0, 0, 0, 0.6);
-    color:white;
-    font-size:16px;
-    cursor:pointer;
-    transition: all 0.3s ease;
+    width: 100%;
+    padding: 13px;
+    border: none;
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+    color: white;
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
 }
 
-.btn-login:active{
-    transform: scale(0.97);
+.btn-login::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.4), transparent);
 }
 
-.btn-login:hover{
-    background-color:#0d6efd;
+.btn-login:hover {
     transform: translateY(-2px);
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 24px var(--burgundy-glow);
 }
 
-.btn-login:active{
-    transform: translateY(-2px) scale(0.97);
-}
-/* Link password dimenticata */
-.link-recupero-pswd{
-    color: black;
-    display:block;
-    text-align:center;
-    margin-top:10px;
+.btn-login:active {
+    transform: translateY(0);
 }
 
-/* Separatore */
+/* ===================== SEPARATORE ===================== */
 .linea-con-testo {
-    display:flex;
-    align-items:center;
-    text-align:center;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
 }
 
 .linea-con-testo hr {
-    flex:1;
-    border:none;
-    border-top:1px solid #000;
+    flex: 1;
+    border: none;
+    border-top: 1px solid var(--border);
 }
 
 .linea-con-testo span {
-    padding:0 10px;
-    font-family:sans-serif;
-    white-space:nowrap;
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
 }
 
-/* TESTO NON HAI ACCOUNT */
-.noAccount{
-    text-align:center;
-    margin-top:20px;
-    color:#444;
-    font-size:14px;
+/* ===================== BOTTONE GOOGLE ===================== */
+.btn-google {
+    width: 100%;
+    padding: 12px;
+    background: #ffffff;
+    border: none;
+    border-radius: 10px;
+    color: #3c3c3c;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
-/* BOTTONE REGISTRATI */
-.btn-sign{
-    width:80%;
-    max-width:300px;
-    margin:10px auto;
-    display:block;
-    padding:12px;
-
-    border-radius:10px;
-    border:2px solid rgba(0, 0, 0, 0.6);
-
-    background-color:white;
-    color:rgba(0, 0, 0, 0.6);
-
-    font-size:16px;
-    cursor:pointer;
-
-    transition: all 0.25s ease;
+.btn-google:hover {
+    background: #f5f5f5;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+    transform: translateY(-1px);
 }
 
-/* Hover */
-.btn-sign:hover{
-    background-color:#1e90ff;
-    color:white;
-    transform:translateY(-2px);
-    box-shadow:0 5px 15px rgba(0,0,0,0.15);
+.btn-google svg {
+    flex-shrink: 0;
 }
 
-/* Click */
-.btn-sign:active{
-    transform:scale(0.97);
+/* ===================== PANNELLO FORM REGISTRAZIONE ===================== */
+.pannello {
+    display: none;
 }
 
-/* Responsive */
-@media (max-width:400px){
+.pannello.attivo {
+    display: block;
+    animation: fadeSlideUp 0.35s ease both;
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===================== RESPONSIVE ===================== */
+@media (max-width: 460px) {
     .pop-up-contenuto {
-        width:90%;
-        padding:30px 20px;
+        border-radius: 16px;
     }
-    .campo, .btn-login {
-        width:100%;
+    .popup-body {
+        padding: 22px 22px 28px;
+    }
+    .popup-header {
+        border-radius: 16px 16px 0 0;
     }
 }
-
