@@ -15,7 +15,7 @@ CREATE TABLE `utenti` (
   `password` varchar(255) NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `data_registrazione` datetime DEFAULT current_timestamp(),
-  `eta` int(11) NOT NULL,
+  `eta` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

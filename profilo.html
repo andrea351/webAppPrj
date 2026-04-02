@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html lang="eng">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--WIDTH si adatta alla larghezza del dispositivo-->
+        <title>Profilo - Cinema Mood</title> 
+        <link rel="stylesheet" href="profilo.css">
+    </head>
+
+    <body>
+        <div class="foto-container">
+            <input type="file" id="foto-profilo" accept="image/*" style="display:none">
+            <div id="riquadro-foto-profilo">
+                <img id="img-profilo" src="">
+            </div>
+            <div class="azioni-foto" style="text-align: center;">
+                <label for="foto-profilo">Carica immagine profilo</label>
+                <span id="rem-foto-profilo" style="cursor:pointer;">Rimuovi</span>
+            </div>
+        </div>       
+                <script>
+                    // caricaImmagine e SALVALA ad OGNI REFRESH ⤵️
+                    document.getElementById("foto-profilo").addEventListener('change', function() { // Lavora sul FILE di INPUT che CARICO
+                        const fileSelezionato = this.files[0]; // ' this ' si riferisce all'elemento che ha scatenato EVENTO, ovvero il PROTAGONISTA della chiamata a ' getElementById ' ( FILE da CARICARE )
+                                                            // ' files ' è una PROPRIETÀ degli INPUT di TIPO FILE
+                        if (!fileSelezionato) return; // Accade se UTENTE NON SELEZIONA alcun FILE
+
+                        /* const urlTemporaneoImmSel = URL.createObjectURL(fileSelezionato); // URL temporaneo dell'IMMAGINE SELEZIONATA | Lo userò in ' src ' di ' img ' per poter caricare l'IMG nel DIV
+                        document.getElementById("img-profilo").src = urlTemporaneoImmSel;
+                        document.getElementById('img-profilo').style.display = 'block'; */
+
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            const base64 = e.target.result;
+                            localStorage.setItem('fotoProfilo', base64);
+                            document.getElementById('img-profilo').src = base64;
+                            document.getElementById('img-profilo').style.display = 'block';
+                        }
+                        reader.readAsDataURL(fileSelezionato);
+                    });
+
+                    const fotoSalvata = localStorage.getItem('fotoProfilo');
+                    if (fotoSalvata) { document.getElementById('img-profilo').src = fotoSalvata; document.getElementById('img-profilo').style.display = 'block'; }
+
+                    // rimuoviImmagine ⤵️
+                    document.getElementById('rem-foto-profilo').addEventListener('click', function() {
+                        document.getElementById('img-profilo').src = "";
+                        document.getElementById('img-profilo').style.display = 'none';
+                        document.getElementById('foto-profilo').value = "";
+                        localStorage.removeItem('fotoProfilo');
+                    });
+                </script>
+
+        <hr style="width: 50%; margin: 0 auto;">
+        
+        <div style="text-align: center;">
+            <label for="nome-utente">Nome: </label> <input type="text" id="nome-utente" readonly>
+            <label for="cognome-utente">Cognome: </label> <input type="text" id="cognome-utente" readonly>
+            <label for="mail-utente">Mail: </label> <input type="text" id="mail-utente" readonly>
+            <label for="eta-utente">Età: </label>
+                <select id="scelta-eta"></select>
+                    <script>
+                        const select = document.getElementById('scelta-eta');
+                        for (let i = 0; i <= 100; i++) {
+                            select.innerHTML += `<option value="opzione-${i}">${i}</option>`;
+                        }
+
+                        // caricaEta e SALVALA ad OGNI REFRESH ⤵️
+                        document.getElementById('scelta-eta').addEventListener('change', function() {
+                            localStorage.setItem('eta', this.value);
+                        });
+
+                        const etaSalvata = localStorage.getItem('eta');
+                        if (etaSalvata) document.getElementById('scelta-eta').value = etaSalvata;
+                    </script>
+        </div>
+
+        <hr style="width: 50%; margin: 0 auto;">
+
+        <div style="text-align: center;">
+            <a href="pop-up_registrazione.html#accedi">Accedi</a>   <a href="pop-up_registrazione.html#registrati">Registrati</a>
+        </div>
+    </body>
+
+</html>

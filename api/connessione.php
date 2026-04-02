@@ -25,4 +25,5 @@ try {
     // Risponde con un JSON di errore e blocca l'esecuzione
     header('Content-Type: application/json');
     die(json_encode(["successo" => false, "errore" => "Connessione al database fallita."]));
+    // die(json_encode(["successo" => false, "errore" => $e -> getMessage()]));
 }

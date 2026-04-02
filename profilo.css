@@ -1,0 +1,193 @@
+@font-face {
+    font-family: 'Stronger-Thinker-Bold';
+    src: url('Stronger-Thinker-Bold.ttf');
+}
+
+/* ===================== VARIABILI ===================== */
+:root {
+    --burgundy:       #800020;
+    --burgundy-dark:  #5e0015;
+    --burgundy-deep:  #3a000d;
+    --burgundy-light: #bb2248;
+    --burgundy-glow:  rgba(128, 0, 32, 0.15);
+    --rose:           #ff4d6d;
+    --bg:             #fdf5f7;
+    --text-main:      #2a0a10;
+    --text-muted:     #7a4050;
+    --border:         rgba(128, 0, 32, 0.15);
+    --shadow:         0 4px 24px rgba(128, 0, 32, 0.08);
+}
+
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(128, 0, 32, 0.06) 0%, transparent 70%);
+    color: var(--text-main);
+    min-height: 100vh;
+    padding: 60px 20px;
+}
+
+/* ===================== SEZIONE FOTO ===================== */
+.foto-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+#riquadro-foto-profilo {
+    width: 100px;
+    height: 100px;
+    border: 2px dashed rgba(128, 0, 32, 0.35);
+    border-radius: 50%;
+    overflow: hidden;
+    background: rgba(128, 0, 32, 0.04);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+#riquadro-foto-profilo:hover {
+    border-color: var(--burgundy-light);
+    background: rgba(128, 0, 32, 0.08);
+}
+
+#img-profilo {
+    display: none;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.azioni-foto {
+    width: 310px;
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label[for="foto-profilo"],
+#rem-foto-profilo {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+label[for="foto-profilo"] {
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+label[for="foto-profilo"]:hover {
+    color: var(--burgundy);
+}
+
+#rem-foto-profilo {
+    color: var(--rose);
+    transition: color 0.2s ease;
+}
+
+#rem-foto-profilo:hover {
+    color: var(--burgundy);
+}
+
+/* ===================== HR ===================== */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px auto;
+}
+
+/* ===================== SEZIONE DATI ===================== */
+div[style*="text-align: center"] label:not([for="foto-profilo"]) {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-right: 6px;
+}
+
+input[type="text"],
+select {
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Georgia', serif;
+    font-size: 14px;
+    color: var(--text-main);
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    margin: 6px 12px 6px 0;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: rgba(128, 0, 32, 0.4);
+    box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.06);
+}
+
+select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='%237a4050'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+}
+
+/* ===================== LINK ACCEDI / REGISTRATI ===================== */
+div[style*="text-align: center"]:last-of-type {
+    padding-top: 20px;
+}
+
+a {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    display: inline-block;
+    margin: 0 8px;
+}
+
+a[href*="accedi"] {
+    color: white;
+    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+    border: 1px solid transparent;
+}
+
+a[href*="accedi"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--burgundy-glow);
+}
+
+a[href*="registrati"] {
+    color: var(--burgundy);
+    background: transparent;
+    border: 1px solid var(--border);
+}
+
+a[href*="registrati"]:hover {
+    background: rgba(128, 0, 32, 0.05);
+    border-color: var(--burgundy-light);
+    color: var(--burgundy-light);
+}

@@ -527,6 +527,8 @@ function costruisciCalendario() {
             costruisciPag();
         });
 
+        if (nomeGiorno === giornoAttivo) cell.classList.add("cal-selezionato");
+
         listaScorrevole.appendChild(cell);
     }
 }
