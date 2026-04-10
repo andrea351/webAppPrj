@@ -16,6 +16,7 @@
 
             <!-- UTENTE Loggato ⤵️-->
             <div id="vista-loggato" style="display: none;"> <!-- Metto inizialmente ' display: none; ' per renderlo NON VISIBILE. Successivamente, in base a se utenteLoggato o utenteNonLoggato, decido quale DIV rendere VISIBILE -->
+                <div id="saluto-benvenuto" style="text-align: center;"></div>
                 <div class="foto-container">
                     <input type="file" id="foto-profilo" accept="image/*" style="display:none">
                     <div id="riquadro-foto-profilo">
@@ -108,6 +109,9 @@
 
                 const nomeUtente = datiInJSON.utente.nome.trim().split(' ')[0];
                 const cognomeUtente = datiInJSON.utente.nome.trim().split(' ').slice(1).join(' ');
+
+                const msgBenvenuto = document.getElementById('saluto-benvenuto'); msgBenvenuto.innerHTML = `<strong>Ciao, ${nomeUtente}</strong>`;
+                    /* Controllo: */ console.log(document.getElementById('saluto-benvenuto'));
 
                 document.getElementById('nome-utente').value = nomeUtente;
                 document.getElementById('cognome-utente').value = cognomeUtente;
