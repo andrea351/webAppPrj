@@ -3,203 +3,214 @@
     src: url('Stronger-Thinker-Bold.ttf');
 }
 
-/* ===================== VARIABILI ===================== */
-:root {
-    --burgundy:       #800020;
-    --burgundy-dark:  #5e0015;
-    --burgundy-deep:  #3a000d;
-    --burgundy-light: #bb2248;
-    --burgundy-glow:  rgba(128, 0, 32, 0.15);
-    --rose:           #ff4d6d;
-    --bg:             #fdf5f7;
-    --text-main:      #2a0a10;
-    --text-muted:     #7a4050;
-    --border:         rgba(128, 0, 32, 0.15);
-    --shadow:         0 4px 24px rgba(128, 0, 32, 0.08);
-}
-
-/* ===================== RESET & BASE ===================== */
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Georgia', serif;
-    background-color: var(--bg);
-    background-image: radial-gradient(ellipse 70% 40% at 50% 0%, rgba(128, 0, 32, 0.06) 0%, transparent 70%);
-    color: var(--text-main);
-    min-height: 100vh;
+/* ===================== OVERLAY ===================== */
+.profilo-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 0, 3, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
     display: flex;
-    align-items: center;
     justify-content: center;
-    padding: 60px 20px;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
-/* ===================== CARD PRINCIPALE ===================== */
-#vista-loggato,
-#vista-non-loggato {
-    width: 100%;
-    max-width: 480px;
-    background: #ffffff;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 48px 40px;
-    box-shadow:
-        var(--shadow),
-        0 1px 0 rgba(255, 255, 255, 0.8) inset;
+.profilo-overlay.aperto {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ===================== POPUP ===================== */
+.profilo-popup {
     position: relative;
-    overflow: hidden;
+    width: 460px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 0, 32, 0.3) transparent;
+    background: #ffffff;
+    border: 1px solid rgba(128, 0, 32, 0.12);
+    border-radius: 24px;
+    padding: 52px 40px 40px;
+    box-shadow:
+        0 32px 64px rgba(128, 0, 32, 0.12),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+    color: #2a0a10;
+    transform: translateY(-20px) scale(0.97);
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Bordo superiore decorativo */
-#vista-loggato::before,
-#vista-non-loggato::before {
+.profilo-overlay.aperto .profilo-popup {
+    transform: translateY(0) scale(1);
+}
+
+.profilo-popup::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--burgundy-dark), var(--burgundy-light), var(--burgundy-dark));
+    height: 4px;
+    border-radius: 24px 24px 0 0;
+    background: linear-gradient(90deg, #5e0015, #bb2248, #5e0015);
 }
 
-/* ===================== FOTO PROFILO ===================== */
-.foto-container {
+/* ===================== CHIUDI ===================== */
+.profilo-popup .profilo-chiudi {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 20px;
+    color: rgba(42, 10, 16, 0.25);
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    font-family: sans-serif;
+    transition: color 0.2s ease, transform 0.25s ease;
+}
+
+.profilo-popup .profilo-chiudi:hover {
+    color: #ff4d6d;
+    transform: rotate(90deg);
+}
+
+/* ===================== FOTO ===================== */
+.profilo-popup .foto-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
-    margin-bottom: 32px;
+    gap: 12px;
+    margin-bottom: 24px;
 }
 
-#riquadro-foto-profilo {
-    width: 110px;
-    height: 110px;
+.profilo-popup #riquadro-foto-profilo {
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     overflow: hidden;
-    border: 2px solid var(--border);
-    background: rgba(128, 0, 32, 0.04);
-    box-shadow: 0 4px 20px rgba(128, 0, 32, 0.12);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    border: 3px solid rgba(128, 0, 32, 0.12);
+    background: #fdf5f7;
+    box-shadow:
+        0 4px 16px rgba(128, 0, 32, 0.1),
+        0 0 0 6px rgba(128, 0, 32, 0.04);
     cursor: pointer;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-#riquadro-foto-profilo:hover {
-    border-color: var(--burgundy-light);
-    box-shadow: 0 6px 24px rgba(128, 0, 32, 0.2);
+.profilo-popup #riquadro-foto-profilo:hover {
+    border-color: #bb2248;
+    box-shadow:
+        0 6px 20px rgba(128, 0, 32, 0.18),
+        0 0 0 6px rgba(128, 0, 32, 0.07);
 }
 
-#img-profilo {
+.profilo-popup #img-profilo {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.azioni-foto {
+.profilo-popup .azioni-foto {
     display: flex;
-    gap: 20px;
     align-items: center;
+    gap: 16px;
 }
 
-label[for="foto-profilo"] {
+.profilo-popup label[for="foto-profilo"] {
     font-family: 'Stronger-Thinker-Bold';
     font-size: 10px;
-    letter-spacing: 2px;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: #7a4050;
     cursor: pointer;
     transition: color 0.2s ease;
 }
 
-label[for="foto-profilo"]:hover {
-    color: var(--burgundy);
-}
+.profilo-popup label[for="foto-profilo"]:hover { color: #800020; }
 
-#rem-foto-profilo {
+.profilo-popup #rem-foto-profilo {
     font-family: 'Stronger-Thinker-Bold';
     font-size: 10px;
-    letter-spacing: 2px;
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    color: rgba(128, 0, 32, 0.35);
-    cursor: pointer;
+    color: rgba(255, 77, 109, 0.45);
     transition: color 0.2s ease;
 }
 
-#rem-foto-profilo:hover {
-    color: var(--rose);
-}
+.profilo-popup #rem-foto-profilo:hover { color: #ff4d6d; }
 
 /* ===================== HR ===================== */
-hr {
+.profilo-popup hr {
     border: none;
-    border-top: 1px solid var(--border);
-    margin: 28px 0;
+    border-top: 1px solid rgba(128, 0, 32, 0.08);
+    margin: 22px 0;
 }
 
-/* ===================== SEZIONE DATI ===================== */
-.dati-grid {
+/* ===================== GRIGLIA DATI ===================== */
+.profilo-popup .griglia-dati {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 4px;
+    gap: 14px;
 }
 
-.campo {
+.profilo-popup .campo-half,
+.profilo-popup .campo-full {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-/* Campo che occupa tutta la larghezza */
-.campo.full {
+.profilo-popup .campo-full {
     grid-column: 1 / -1;
 }
 
-.campo label {
+.profilo-popup .griglia-dati label {
     font-family: 'Stronger-Thinker-Bold';
-    font-size: 10px;
-    letter-spacing: 2px;
+    font-size: 9px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--text-muted);
+    color: rgba(122, 64, 80, 0.7);
+    padding-left: 2px;
 }
 
-.campo input {
+.profilo-popup .griglia-dati input {
     padding: 10px 14px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    border: 1px solid rgba(128, 0, 32, 0.1);
+    border-radius: 10px;
     font-family: 'Georgia', serif;
     font-size: 14px;
-    color: var(--text-main);
+    color: #2a0a10;
     background-color: #fdf5f7;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-.campo input[readonly] {
-    opacity: 0.65;
+.profilo-popup .griglia-dati input[readonly] {
+    opacity: 0.6;
     cursor: default;
+    background-color: #f8eef1;
 }
 
-.campo input:not([readonly]):focus {
-    border-color: rgba(128, 0, 32, 0.4);
+.profilo-popup .griglia-dati input:not([readonly]):focus {
+    border-color: rgba(128, 0, 32, 0.35);
+    background-color: #ffffff;
     box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.06);
 }
 
 /* ===================== DATE PICKER ===================== */
-input[type="date"] {
+.profilo-popup input[type="date"] {
     position: relative;
     cursor: pointer;
     caret-color: transparent;
 }
 
-input[type="date"]:focus {
-    outline: none;
-    box-shadow: none;
-    border-color: var(--border);
-}
-
-input[type="date"]::-webkit-calendar-picker-indicator {
+.profilo-popup input[type="date"]::-webkit-calendar-picker-indicator {
     position: absolute;
     left: 0; top: 0;
     width: 100%; height: 100%;
@@ -207,115 +218,107 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
-input[type="date"]::-webkit-datetime-edit-fields-wrapper { pointer-events: none; }
+.profilo-popup input[type="date"]::-webkit-datetime-edit-fields-wrapper { pointer-events: none; }
 
-input[type="date"]::-webkit-datetime-edit-day-field,
-input[type="date"]::-webkit-datetime-edit-month-field,
-input[type="date"]::-webkit-datetime-edit-year-field {
+.profilo-popup input[type="date"]::-webkit-datetime-edit-day-field,
+.profilo-popup input[type="date"]::-webkit-datetime-edit-month-field,
+.profilo-popup input[type="date"]::-webkit-datetime-edit-year-field {
     pointer-events: none;
     user-select: none;
     -webkit-user-select: none;
 }
 
-input[type="date"]::-webkit-datetime-edit-day-field:focus,
-input[type="date"]::-webkit-datetime-edit-month-field:focus,
-input[type="date"]::-webkit-datetime-edit-year-field:focus {
+.profilo-popup input[type="date"]::-webkit-datetime-edit-day-field:focus,
+.profilo-popup input[type="date"]::-webkit-datetime-edit-month-field:focus,
+.profilo-popup input[type="date"]::-webkit-datetime-edit-year-field:focus {
     background-color: transparent;
-    color: var(--text-main);
+    color: #2a0a10;
 }
 
-/* ===================== BOTTONE LOGOUT ===================== */
-#logout-btn {
+/* ===================== LOGOUT ===================== */
+.profilo-popup #logout-btn {
     width: 100%;
-    padding: 12px;
+    padding: 13px;
     border: none;
-    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
+    background: linear-gradient(135deg, #5e0015, #800020);
     color: white;
     font-family: 'Stronger-Thinker-Bold';
     font-size: 11px;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    border-radius: 10px;
+    border-radius: 12px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-#logout-btn::before {
+.profilo-popup #logout-btn::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.35), transparent);
 }
 
-#logout-btn:hover {
+.profilo-popup #logout-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px var(--burgundy-glow);
+    box-shadow: 0 8px 24px rgba(128, 0, 32, 0.22);
 }
 
-#logout-btn:active {
-    transform: translateY(0);
-}
+.profilo-popup #logout-btn:active { transform: translateY(0); }
 
 /* ===================== VISTA NON LOGGATO ===================== */
-#vista-non-loggato {
-    text-align: center;
-}
-
-.non-loggato-titolo {
-    font-family: 'Stronger-Thinker-Bold';
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    margin-bottom: 28px;
-}
-
-.auth-links {
+.profilo-popup .a-r-links {
     display: flex;
-    gap: 12px;
-    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 8px 0;
 }
 
-a[href*="accedi"] {
+.profilo-popup .a-r-links a {
     font-family: 'Stronger-Thinker-Bold';
     font-size: 11px;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
     text-decoration: none;
-    padding: 11px 28px;
-    border-radius: 10px;
-    display: inline-block;
-    color: white;
-    background: linear-gradient(135deg, var(--burgundy-dark), var(--burgundy));
-    border: 1px solid transparent;
+    padding: 13px;
+    border-radius: 12px;
+    display: block;
+    text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-a[href*="accedi"]:hover {
+.profilo-popup .a-r-links a[href*="accedi"] {
+    color: white;
+    background: linear-gradient(135deg, #5e0015, #800020);
+    border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.profilo-popup .a-r-links a[href*="accedi"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.35), transparent);
+}
+
+.profilo-popup .a-r-links a[href*="accedi"]:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--burgundy-glow);
+    box-shadow: 0 8px 24px rgba(128, 0, 32, 0.22);
 }
 
-a[href*="registrati"] {
-    font-family: 'Stronger-Thinker-Bold';
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 11px 28px;
-    border-radius: 10px;
-    display: inline-block;
-    color: var(--burgundy);
+.profilo-popup .a-r-links a[href*="registrati"] {
+    color: #800020;
     background: transparent;
-    border: 1px solid var(--border);
-    transition: all 0.2s ease;
+    border: 1px solid rgba(128, 0, 32, 0.15);
 }
 
-a[href*="registrati"]:hover {
-    background: rgba(128, 0, 32, 0.05);
-    border-color: var(--burgundy-light);
-    color: var(--burgundy-light);
+.profilo-popup .a-r-links a[href*="registrati"]:hover {
+    background: rgba(128, 0, 32, 0.04);
+    border-color: rgba(128, 0, 32, 0.3);
+    color: #bb2248;
+    transform: translateY(-1px);
 }
