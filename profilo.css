@@ -323,6 +323,10 @@
     transform: translateY(-1px);
 }
 
-/* #saluto-benvenuto {
-    padding-top: 0;
-} */
+#saluto-benvenuto {
+    font-size: 22px;
+    margin-bottom: 20px;
+    margin-top: -12px;
+    text-align: center;
+    color: #2a0a10;
+}
