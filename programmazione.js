@@ -1,394 +1,28 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => { //aspetta che tutta la pagina HTML sia caricata prima di eseguire questo comando, ecco perche uso async perche devo
+    //scaricare dati dal server quindi ho bisogno di tempo
+ 
+let film = []; //qui metterò i film caricati direttamente dal mio database
+try {
+    const res = await fetch('api/get_dati_database.php'); //la funzone 'fetch' chiede dati al mio get_dati_database.php
+    film = await res.json(); //i dati una volta scaricati vengono tradotti in linguaggio comprensibile per java con JSON e li carica in film
+} catch (e) {
+    console.error('Errore nel caricamento dei film:', e);
+}
 
-const film = [
-    {
-        titolo: "Billy Elliot",
-        locandina: "locandine/billy_elliot.jpg",
-        pagina: "film_html/billy_elliot.html",
-        rating: 3.2,
-        etichetta: "T",
-        mood: ["Per tutta la famiglia", "Intrattenimento"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["15:00", "21:30"],
-            "MERCOLEDI 3 GIUGNO": ["14:00", "19:00"],
-            "SABATO 6 GIUGNO":    ["17:00", "22:30"],
-            "DOMENICA 7 GIUGNO":  ["19:30"]
-        }
-    },
-    {
-        titolo: "La vita è bella",
-        locandina: "locandine/la_vita_e_bella.jpg",
-        pagina: "film_html/la_vita_e_bella.html",
-        rating: 4.3,
-        etichetta: "T",
-        mood: ["Emotivo", "Basato su una storia vera"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["17:00", "21:00"],
-            "MARTEDI 2 GIUGNO":   ["15:00", "20:00"],
-            "GIOVEDI 4 GIUGNO":   ["18:00", "21:30"],
-            "VENERDI 5 GIUGNO":   ["16:00", "19:00", "22:00"],
-            "SABATO 6 GIUGNO":    ["11:00", "15:30", "21:00"],
-            "DOMENICA 7 GIUGNO":  ["14:00", "18:30"]
-        }
-    },
-    {
-        titolo: "Il re leone",
-        locandina: "locandine/re_leone.jpg",
-        pagina: "film_html/re_leone.html",
-        rating: 4.2,
-        etichetta: "T",
-        mood: ["Per tutta la famiglia"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["10:00", "14:30"],
-            "MARTEDI 2 GIUGNO":   ["10:00", "14:00", "17:30"],
-            "MERCOLEDI 3 GIUGNO": ["10:00", "13:00", "16:00"],
-            "SABATO 6 GIUGNO":    ["10:00", "13:00", "16:00", "19:00"],
-            "DOMENICA 7 GIUGNO":  ["10:00", "13:00", "16:30"]
-        }
-    },
-    {
-        titolo: "Fantozzi",
-        locandina: "locandine/fantozzi.jpg",
-        pagina: "film_html/fantozzi.html",
-        rating: 3.5,
-        etichetta: "T",
-        mood: ["Leggerezza", "Intrattenimento"],
-        orari: {
-            "MARTEDI 2 GIUGNO":   ["18:00", "21:00"],
-            "MERCOLEDI 3 GIUGNO": ["17:00", "20:30"],
-            "GIOVEDI 4 GIUGNO":   ["19:00", "22:00"],
-            "VENERDI 5 GIUGNO":   ["18:30", "21:30"],
-            "SABATO 6 GIUGNO":    ["17:00", "20:00"],
-            "LUNEDI 8 GIUGNO":    ["16:00", "19:30"]
-        }
-    },
-    {
-        titolo: "Natale sul Nilo",
-        locandina: "locandine/natale_sul_nilo.jpg",
-        pagina: "film_html/natale_sul_nilo.html",
-        rating: 2.4,
-        etichetta: "T",
-        mood: ["Leggerezza"],
-        orari: {
-            "MERCOLEDI 3 GIUGNO": ["18:00", "21:00"],
-            "VENERDI 5 GIUGNO":   ["20:00", "22:30"],
-            "SABATO 6 GIUGNO":    ["18:30", "21:30"],
-            "DOMENICA 7 GIUGNO":  ["17:00", "20:00"],
-            "MARTEDI 9 GIUGNO":   ["19:30", "22:00"]
-        }
-    },
-    {
-        titolo: "La ladra di libri",
-        locandina: "locandine/ladra_libri.jpg",
-        pagina: "film_html/ladra_libri.html",
-        rating: 4.4,
-        etichetta: "T",
-        mood: ["Emotivo", "Intrigante"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["16:00", "20:00"],
-            "MARTEDI 2 GIUGNO":   ["17:30", "21:00"],
-            "MERCOLEDI 3 GIUGNO": ["16:00", "20:30"],
-            "GIOVEDI 4 GIUGNO":   ["17:00", "21:00"],
-            "DOMENICA 7 GIUGNO":  ["15:00", "19:00", "22:00"]
-        }
-    },
-    {
-        titolo: "C'è ancora domani",
-        locandina: "locandine/ce_ancora_domani.jpg",
-        pagina: "film_html/ancora_domani.html",
-        rating: 3.5,
-        etichetta: "T",
-        mood: ["Basato su una storia vera"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["18:30", "21:30"],
-            "MARTEDI 2 GIUGNO":   ["19:00", "22:00"],
-            "GIOVEDI 4 GIUGNO":   ["18:00", "21:00"],
-            "VENERDI 5 GIUGNO":   ["17:30", "20:30"],
-            "SABATO 6 GIUGNO":    ["16:00", "19:30", "22:30"],
-            "DOMENICA 7 GIUGNO":  ["17:00", "21:00"]
-        }
-    },
-    {
-        titolo: "Wonder",
-        locandina: "locandine/wonder.jpg",
-        pagina: "film_html/wonder.html",
-        rating: 4.2,
-        etichetta: "T",
-        mood: ["Per tutta la famiglia"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["15:00", "19:00"],
-            "MARTEDI 2 GIUGNO":   ["14:30", "18:30"],
-            "MERCOLEDI 3 GIUGNO": ["15:00", "19:30"],
-            "SABATO 6 GIUGNO":    ["11:30", "15:00", "18:30"],
-            "MERCOLEDI 10 GIUGNO":["11:00", "14:30", "18:00"]
-        }
-    },
-    {
-        titolo: "Oppenheimer",
-        locandina: "locandine/oppenheimer.jpg",
-        pagina: "film_html/oppenheimer.html",
-        rating: 5,
-        etichetta: "VM14",
-        mood: ["Tensione", "Basato su una storia vera"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["17:00", "21:00"],
-            "MARTEDI 2 GIUGNO":   ["17:00", "21:00"],
-            "MERCOLEDI 3 GIUGNO": ["17:00", "21:00"],
-            "GIOVEDI 4 GIUGNO":   ["17:00", "21:00"],
-            "VENERDI 5 GIUGNO":   ["16:00", "20:00"],
-            "SABATO 6 GIUGNO":    ["15:00", "19:30"],
-            "DOMENICA 7 GIUGNO":  ["15:00", "19:30"]
-        }
-    },
-    {
-        titolo: "Una notte da leoni",
-        locandina: "locandine/notte_leoni.jpg",
-        pagina: "film_html/una_notte_da_leoni.html",
-        rating: 3.5,
-        etichetta: "VM14",
-        mood: ["Leggerezza", "Intrattenimento"],
-        orari: {
-            "GIOVEDI 4 GIUGNO":   ["21:00"],
-            "VENERDI 5 GIUGNO":   ["21:00", "23:30"],
-            "SABATO 6 GIUGNO":    ["21:00", "23:30"],
-            "DOMENICA 7 GIUGNO":  ["20:30"],
-            "MARTEDI 9 GIUGNO":   ["21:30"]
-        }
-    },
-    {
-        titolo: "Orgoglio e pregiudizio",
-        locandina: "locandine/org_pred.jpg",
-        pagina: "film_html/orgoglio_p.html",
-        rating: 4,
-        etichetta: "T",
-        mood: ["Romantico"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["16:30", "20:00"],
-            "MERCOLEDI 3 GIUGNO": ["15:00", "19:00"],
-            "GIOVEDI 4 GIUGNO":   ["16:00", "20:00"],
-            "SABATO 6 GIUGNO":    ["14:30", "18:00"],
-            "DOMENICA 7 GIUGNO":  ["13:00", "17:00", "21:00"]
-        }
-    },
-    {
-        titolo: "La vita di Pi",
-        locandina: "locandine/vita_pi.jpg",
-        pagina: "film_html/lavitadipi.html",
-        rating: 4.2,
-        etichetta: "T",
-        mood: ["Avventura", "Sorprendente"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["14:00", "18:00"],
-            "MARTEDI 2 GIUGNO":   ["15:30", "20:00"],
-            "VENERDI 5 GIUGNO":   ["15:00", "19:30"],
-            "SABATO 6 GIUGNO":    ["13:30", "17:30", "21:30"],
-            "DOMENICA 7 GIUGNO":  ["14:00", "18:30"]
-        }
-    },
-    {
-        titolo: "La ricerca della felicità",
-        locandina: "locandine/ricerca_felicita.jpg",
-        pagina: "film_html/ricerca_felicita.html",
-        rating: 5,
-        etichetta: "T",
-        mood: ["Emotivo", "Basato su una storia vera"],
-        orari: {
-            "MARTEDI 2 GIUGNO":   ["16:30", "20:30"],
-            "MERCOLEDI 3 GIUGNO": ["17:00", "21:00"],
-            "GIOVEDI 4 GIUGNO":   ["15:30", "19:30"],
-            "VENERDI 5 GIUGNO":   ["16:00", "20:00"],
-            "DOMENICA 7 GIUGNO":  ["16:00", "20:30"]
-        }
-    },
-    {
-        titolo: "Mamma ho perso l'aereo",
-        locandina: "locandine/mamma_perso_aereo.jpg",
-        pagina: "film_html/aereo.html",
-        rating: 4.2,
-        etichetta: "T",
-        mood: ["Leggerezza", "Per tutta la famiglia"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["10:30", "14:00"],
-            "MARTEDI 2 GIUGNO":   ["10:00", "13:30"],
-            "MERCOLEDI 3 GIUGNO": ["10:30", "14:00"],
-            "SABATO 6 GIUGNO":    ["10:00", "12:30", "15:00"],
-            "DOMENICA 7 GIUGNO":  ["10:00", "12:30", "15:00"]
-        }
-    },
-    {
-        titolo: "Toy Story",
-        locandina: "locandine/toy_story.jpg",
-        pagina: "film_html/toyStory.html",
-        rating: 4.5,
-        etichetta: "T",
-        mood: ["Per tutta la famiglia", "Intrattenimento"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["11:00", "14:30"],
-            "MERCOLEDI 3 GIUGNO": ["11:00", "14:00"],
-            "GIOVEDI 4 GIUGNO":   ["10:30", "13:30"],
-            "SABATO 6 GIUGNO":    ["10:30", "13:00", "15:30"],
-            "DOMENICA 7 GIUGNO":  ["10:30", "13:00", "15:30"]
-        }
-    },
-    {
-        titolo: "Il bambino con il pigiama a righe",
-        locandina: "locandine/b_p_righe.jpg",
-        pagina: "film_html/bambino_righe.html",
-        rating: 4.7,
-        etichetta: "VM14",
-        mood: ["Emotivo", "Basato su una storia vera"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["19:00", "21:30"],
-            "MARTEDI 2 GIUGNO":   ["18:30", "21:00"],
-            "GIOVEDI 4 GIUGNO":   ["19:30", "22:00"],
-            "VENERDI 5 GIUGNO":   ["19:00", "21:30"],
-            "SABATO 6 GIUGNO":    ["20:00", "22:30"],
-            "MERCOLEDI 10 GIUGNO":["16:00", "18:30", "22:00"]
-        }
-    },
-    {
-        titolo: "Conclave",
-        locandina: "locandine/conclave.jpg",
-        pagina: "film_html/conclave.html",
-        rating: 4.3,
-        etichetta: "VM14",
-        mood: ["Tensione", "Sorprendente"],
-        orari: {
-            "MARTEDI 2 GIUGNO":   ["19:30", "22:30"],
-            "MERCOLEDI 3 GIUGNO": ["20:00", "22:30"],
-            "GIOVEDI 4 GIUGNO":   ["20:00", "22:30"],
-            "VENERDI 5 GIUGNO":   ["19:00", "22:00"],
-            "SABATO 6 GIUGNO":    ["18:00", "21:00"],
-            "DOMENICA 7 GIUGNO":  ["18:00", "21:00"]
-        }
-    },
-    {
-        titolo: "Snowden",
-        locandina: "locandine/snowden.jpg",
-        pagina: "film_html/snowden.html",
-        rating: 3.7,
-        etichetta: "VM14",
-        mood: ["Intrigante", "Basato su una storia vera", "Adrenalina"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["19:00", "21:00"],
-            "MARTEDI 2 GIUGNO":   ["20:00", "22:30"],
-            "MERCOLEDI 3 GIUGNO": ["19:30", "21:30"],
-            "GIOVEDI 4 GIUGNO":   ["20:00", "22:30"],
-            "VENERDI 5 GIUGNO":   ["19:00", "21:00", "23:00"],
-            "SABATO 6 GIUGNO":    ["18:30", "20:30", "23:00"],
-            "DOMENICA 7 GIUGNO":  ["18:00", "20:00"]
-        }
-    },
-    {
-        titolo: "The Conjuring",
-        locandina: "locandine/t_c.jpg",
-        pagina: "film_html/the_conjuring.html",
-        rating: 4,
-        etichetta: "VM14",
-        mood: ["Horror", "Tensione"],
-        orari: {
-            "MARTEDI 2 GIUGNO":   ["21:00", "23:00"],
-            "GIOVEDI 4 GIUGNO":   ["21:30", "23:30"],
-            "VENERDI 5 GIUGNO":   ["21:00", "23:00"],
-            "SABATO 6 GIUGNO":    ["22:00"],
-            "DOMENICA 7 GIUGNO":  ["21:30"]
-        }
-    },
-    {
-        titolo: "Cena con delitto",
-        locandina: "locandine/c_c_d.jpg",
-        pagina: "film_html/cena_con_delitto.html",
-        rating: 4.2,
-        etichetta: "VM12",
-        mood: ["Tensione", "Intrigante", "Leggerezza"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["20:00"],
-            "MERCOLEDI 3 GIUGNO": ["20:30"],
-            "GIOVEDI 4 GIUGNO":   ["19:00", "21:30"],
-            "SABATO 6 GIUGNO":    ["19:30", "22:00"],
-            "DOMENICA 7 GIUGNO":  ["19:00", "21:30"],
-            "LUNEDI 8 GIUGNO":    ["20:00", "22:30"]
-        }
-    },
-    {
-        titolo: "Avatar",
-        locandina: "locandine/avatar.jpg",
-        pagina: "film_html/avatar.html",
-        rating: 4.4,
-        etichetta: "T",
-        mood: ["Avventura", "Adrenalina", "Sorprendente"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["16:00", "20:30"],
-            "MARTEDI 2 GIUGNO":   ["16:00", "20:30"],
-            "MERCOLEDI 3 GIUGNO": ["15:30", "20:00"],
-            "SABATO 6 GIUGNO":    ["14:00", "18:30"],
-            "DOMENICA 7 GIUGNO":  ["14:00", "18:30"],
-            "MARTEDI 9 GIUGNO":   ["17:00", "21:00"]
-        }
-    },
-    {
-        titolo: "Interstellar",
-        locandina: "locandine/interstellar.jpg",
-        pagina: "film_html/interstellar.html",
-        rating: 4.3,
-        etichetta: "VM12",
-        mood: ["Avventura", "Sorprendente", "Tensione"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["17:30", "21:30"],
-            "MARTEDI 2 GIUGNO":   ["17:30", "21:30"],
-            "MERCOLEDI 3 GIUGNO": ["17:00", "21:00"],
-            "GIOVEDI 4 GIUGNO":   ["17:00", "21:30"],
-            "VENERDI 5 GIUGNO":   ["17:00", "21:00"],
-            "MERCOLEDI 10 GIUGNO":["17:00", "21:00"]
-        }
-    },
-    {
-        titolo: "Top Gun - Maverick",
-        locandina: "locandine/t_g_m.jpg",
-        pagina: "film_html/top_gun.html",
-        rating: 4.4,
-        etichetta: "VM12",
-        mood: ["Adrenalina", "Avventura", "Intrattenimento"],
-        orari: {
-            "MARTEDI 2 GIUGNO":   ["16:00", "20:00"],
-            "MERCOLEDI 3 GIUGNO": ["16:30", "20:30"],
-            "GIOVEDI 4 GIUGNO":   ["16:00", "20:00"],
-            "VENERDI 5 GIUGNO":   ["15:30", "19:30"],
-            "SABATO 6 GIUGNO":    ["15:00", "19:00"],
-            "MARTEDI 9 GIUGNO":   ["16:00", "20:00"]
-        }
-    },
-    {
-        titolo: "Le pagine della nostra vita",
-        locandina: "locandine/le_pag_vita.jpg",
-        pagina: "film_html/pagine_vita.html",
-        rating: 4.1,
-        etichetta: "VM14",
-        mood: ["Romantico", "Emotivo"],
-        orari: {
-            "LUNEDI 1 GIUGNO":    ["15:30", "19:30"],
-            "MERCOLEDI 3 GIUGNO": ["15:30", "19:30"],
-            "GIOVEDI 4 GIUGNO":   ["15:00", "19:00"],
-            "SABATO 6 GIUGNO":    ["13:00", "17:00"],
-            "DOMENICA 7 GIUGNO":  ["13:00", "17:00"],
-            "LUNEDI 8 GIUGNO":    ["15:00", "19:00"]
-        }
-    }
-];
 
 const tuttiIMood = [
-    "Tensione",
-    "Leggerezza",
-    "Intrigante",
-    "Emotivo",
-    "Romantico",
-    "Sorprendente",
-    "Per tutta la famiglia",
-    "Adrenalina",
-    "Basato su una storia vera",
-    "Avventura",
-    "Intrattenimento",
-    "Horror"
+    "Fiato sospeso",
+    "Curioso",
+    "Mind-blowing",
+    "Storie vere",
+    "Serata in famiglia",
+    "Solo adrenalina",
+    "Love",
+    "All'avventura",
+    "Zero pensieri",
+    "Da urlo",
+    "Risate",
+    "Lacrime in arrivo"
 ];
 
 const contenitore = document.getElementById("contenitore-film"); // Indica dove METTERE le CARD dei FILM
@@ -408,7 +42,7 @@ const observer = new IntersectionObserver((entries, obs) => {
     threshold: 0        
 });
 
-// GESTIONE FILM - MOOD ⤵️
+
 
 let giornoAttivo = "LUNEDI 1 GIUGNO";
 
@@ -461,7 +95,7 @@ function costruisciPag(){
     });
 }
 
-// Bottoni Mood → Scroll alla SEZIONE CORRISPONDENTE
+// Bottoni Mood -> Scroll alla SEZIONE CORRISPONDENTE
 document.querySelectorAll("#mood-btn button").forEach(btn => {
     btn.addEventListener("click", () => {
         const moodLabel = btn.textContent.trim();

@@ -4,34 +4,33 @@ const video = document.getElementById('trailer-video');
 
 if (colonnaSx && container && video) { 
     
-    // 1. MOUSE ENTRA: Aggiunge la classe che trasforma in video 16:9
-    colonnaSx.addEventListener('mouseenter', () => {
-        if (!container.classList.contains('video-ingrandito')) {
-            colonnaSx.classList.add('in-preview'); // ⬅️ Attiva l'anteprima
+    // 1. diventa locandina -> video
+    colonnaSx.addEventListener('mouseenter', () => { //la locandina entra in ascolto
+        if (!container.classList.contains('video-ingrandito')) { //se il video è gia partito, l'effetto preview scompare
+            colonnaSx.classList.add('in-preview'); //  Attiva l'anteprima
             video.currentTime = 0;
             video.muted = true;
             video.play();
         }
     });
 
-    // 2. MOUSE ESCE: Toglie la classe, torna locandina
+    // 2. torna a locandina
     colonnaSx.addEventListener('mouseleave', () => {
         if (!container.classList.contains('video-ingrandito')) {
-            colonnaSx.classList.remove('in-preview'); // ⬅️ Disattiva l'anteprima
+            colonnaSx.classList.remove('in-preview'); // Disattiva l'anteprima
             video.pause();
         }
     });
 
-    // 3. LA LOGICA DI APERTURA E CHIUSURA
     function azionaVideo() {
         if (container.classList.contains('video-ingrandito')) {
-            // SE E' GRANDE -> Lo chiude e lo forza a tornare locandina!
+            //se il video è in play, lo fa tornare locandina
             container.classList.remove('video-ingrandito');
-            colonnaSx.classList.remove('in-preview'); // ⬅️ MAGIA 2: Spegne l'anteprima istantaneamente!
+            colonnaSx.classList.remove('in-preview'); // Spegne l'anteprima 
             video.muted = true;  
             video.pause();       
         } else {
-            // SE E' PICCOLO -> Lo ingrandisce
+            //se è locandina e ci si clicca sopra parte il video
             container.classList.add('video-ingrandito');
             video.currentTime = 0; 
             video.muted = false;   
@@ -39,11 +38,11 @@ if (colonnaSx && container && video) {
         }
     }
 
-    // 4. IL CLICK SUL VIDEO (Zoom IN e Zoom OUT)
+    // zoom in - zoom out
     container.addEventListener('click', () => {
-        if (document.startViewTransition) {
+        if (document.startViewTransition) { //solo transition fluida (se supportato la transition)
             document.startViewTransition(() => azionaVideo());
-        } else {
+        } else { //se la transition non è supportata fa partire comunque il video
             azionaVideo();
         }
     });

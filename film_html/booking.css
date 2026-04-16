@@ -1,9 +1,5 @@
-/* ================================================================
-   BOOKING.CSS — Solo gli stili del booking panel
-   Non ridefinisce nulla che sia già in struttura_dati.css
-   ================================================================ */
 
-/* ── Booking panel (sale dal basso) ── */
+/* sale dal basso il booking */
 .booking-panel {
     position: absolute;
     top: 0; left: 0; right: 0;
@@ -32,8 +28,8 @@
     gap: 20px;
     border-left: 1px solid rgba(255,255,255,0.07);
     padding-left: 24px;
-    width: 100%;        /* ⬅️ aggiunge questo */
-    box-sizing: border-box; /* ⬅️ aggiunge questo */
+    width: 100%;        
+    box-sizing: border-box; 
     padding-right:24px;
 }
 
@@ -41,7 +37,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    align-items: center; /* ⬅️ aggiunge questo */
+    align-items: center; 
     width: 100%;
 }
 

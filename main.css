@@ -333,14 +333,14 @@ hr {
     transform: translateY(-2px);
 }
 
-/* ===================== CONTENITORE FILM ===================== */
+/* CONTENITORE FILM*/
 #contenitore-film {
     display: flex;
     flex-direction: column;
     padding: 10px 60px 60px 60px;
 }
 
-/* ===================== SEZIONI MOOD ===================== */
+/*  SEZIONI MOOD  */
 .mood-sezione {
     padding: 40px 0 20px 0;
 }
@@ -368,27 +368,28 @@ hr {
     white-space: nowrap;
 }
 
-/* ===================== RIGA FILM ===================== */
+/*  RIGA FILM  */
 .mood-riga-film {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 24px;
+    gap: 40px;
     padding-left: 4px;
-    justify-content: flex-start;
+    justify-content: center;
 }
 
-/* ===================== CARD FILM ===================== */
+/* CARD FILM */
 .film-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-shrink: 0;
-    flex-basis: calc(25% - 18px);
-    min-width: 150px;
+    flex-basis: calc(25% - 40px);
+    max-width: 200px;
+    min-width: 140px;
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    transition: opacity 0.8s cubic-bezier(0.25,1,0.5,1), transform 0.8s cubic-bezier(0.25,1,0.5,1);
     padding: 0;
 }
 
@@ -399,7 +400,7 @@ hr {
     aspect-ratio: 2/3;
     object-fit: cover;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(128, 0, 32, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease;
 }
 
 .film-card.visible {
@@ -408,11 +409,11 @@ hr {
 }
 
 .film-card.visible:hover img {
-    transform: scale(1.04) translateY(-4px);
+    transform: scale(1.06) translateY(-6px);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(128, 0, 32, 0.35);
 }
 
-/* ===================== ORARI ===================== */
+/* ORARI  */
 .orari {
     margin: 16px 0 0 0;
     display: flex;
