@@ -3,8 +3,8 @@ const PREZZO_POSTO = 8.50;
 const TIMER_DURATA = 15 * 60;
 
 const stato = {
-    orarioSelezionato: null, //memorizza l'orario scelto
-    postiSelezionati: new Set(), //salva gli id (no duplicati) dei posti cliccati
+    orarioSelezionato: null, // Memorizza l'orario scelto
+    postiSelezionati: new Set(), // Salva gli ID (NO duplicati) dei POSTI CLICCATI
     timerInterval: null,
     timerSecondi: TIMER_DURATA,
     timerAvviato: false,
@@ -21,9 +21,9 @@ const timerBox       = document.getElementById('timer-box');
 const timerDisplay   = document.getElementById('timer-display');
 const btnPaga        = document.getElementById('btn-paga');
 
-orariLista.querySelectorAll('.btn-orario').forEach(btn => { //ad ogni bottone-orario aggiunge un 'click'
+orariLista.querySelectorAll('.btn-orario').forEach(btn => { // Dd ogni ' .btn-orario ' aggiunge un CLICK
     btn.addEventListener('click', () => {
-        orariLista.querySelectorAll('.btn-orario').forEach(b => b.classList.remove('selezionato')); //deseleziona tutti i pulsanti non scelti
+        orariLista.querySelectorAll('.btn-orario').forEach(b => b.classList.remove('selezionato')); // Deseleziona tutti i pulsanti NON scelti
         btn.classList.add('selezionato'); 
         stato.orarioSelezionato = btn.dataset.orario;
         btnContinua.classList.add('attivo');
@@ -47,7 +47,7 @@ btnContinua.addEventListener('click', () => {
     dxWrapper.classList.add('booking-attivo');
 });
 
-// Mappa posti 
+// Mappa Posti 
 function costruisciMappa() {
     const righe = ['A','B','C','D','E','F','G','H'];
     const postiPerFila = 12;
@@ -93,7 +93,7 @@ function costruisciMappa() {
     });
 }
 
-// Selezione posto
+// Selezione Posto
 function selezionaPosto(el, id) {
     if (stato.postiSelezionati.has(id)) {
         stato.postiSelezionati.delete(id);
@@ -179,7 +179,7 @@ function resetTimer() {
     timerDisplay.textContent = '15:00';
 }
 
-// ── 7. Formato numero carta ──────────────────────────────────────
+// ── 7. Formato Numero Carta ──────────────────────────────────────
 const inputCarta = document.getElementById('input-carta');
 if (inputCarta) {
     inputCarta.addEventListener('input', e => {

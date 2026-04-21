@@ -1,34 +1,34 @@
 <?php
 
-require 'configurazione.php'; //ho bisogno di confugurazione.php perchè contiene i parametri per collegarsi
-                              //al database
+require 'configurazione.php'; // Ho bisogno di ' confugurazione.php ' perchè contiene i parametri per collegarsi al DB
+                              
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0; //$_GET['id'] prende l'id direttamente dall'URL, SE ESISTE LO CONVERTE IN NUM
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0; // $_GET['id'] prende l'ID direttamente dall'URL, se esiste lo CONVERTE in NUM
 
 if ($id <= 0) {
     header("Location: ../main.html");
     exit;
 }
 
-//CERCO nel db il film corrispondente all'id,(solo gli attivi)
+// CERCO nel DB il film corrispondente all'ID (SOLO gli ATTIVI)
 $stmt = $conn->prepare("SELECT * FROM film WHERE id = ? AND attivo = 1");
 $stmt->bind_param("i", $id);
 $stmt->execute();
-$film = $stmt->get_result()->fetch_assoc(); //prendo tutti i valori dalla tabella film nel mio db
+$film = $stmt->get_result()->fetch_assoc(); // Prendo tutti i valori dalla TABELLA ' film ' nel mio DB
 
 if (!$film) {
     header("HTTP/1.0 404 Not Found");
     die("Film non trovato.");
 }
 
-//cerco nel mio db gli orari per il film in questione (l'id preso su)
+// Cerco nel mio DB gli ORARI per il FILM in QUESTIONE ( ID precedentemente preso )
 $oggi = '2026-06-01';
 $stmtOrari = $conn->prepare(
-    "SELECT orario, sala FROM orari WHERE film_id = ? AND data = ? ORDER BY orario ASC" // il ? ha il ruolo di segnaposto, ovvero valori vacanti
+    "SELECT orario, sala FROM orari WHERE film_id = ? AND data = ? ORDER BY orario ASC"
 );
 $stmtOrari->bind_param("is", $id, $oggi);
 $stmtOrari->execute();
-$orari = $stmtOrari->get_result()->fetch_all(MYSQLI_ASSOC); //fetch_all(MYSQLI_ASSOC) mi crea un array multidimensionale, perche posso avere piu orari per un film
+$orari = $stmtOrari->get_result()->fetch_all(MYSQLI_ASSOC); // ' fetch_all(MYSQLI_ASSOC) ' mi crea un ARRAY MULTIDIMENSIONALE, perchè posso avere più ORARI per un FILM
 
 $durata = $film['durata'];
 
@@ -49,7 +49,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
 <body>
     <header class="pannello-superiore">
         <nav class="menu-sx">
-            <a href="../main.html">⬅ TORNA ALLA HOME</a>
+            <a href="../main.html">TORNA ALLA HOME</a>
             <a href="../contatti.html">CONTATTACI</a>
             <a href="#servizi">SERVIZI</a>
         </nav>
@@ -74,7 +74,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
   
     <div class="contenitore-dettaglio">
 
-        <!-- locandina + trailer -->
+        <!-- Locandina + Trailer -->
         <div class="dettaglio-sx">
             <div class="media-container" id="trailer-container">
                 <img
@@ -91,7 +91,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
             </div>
         </div>
 
-        <!-- info + booking -->
+        <!-- Info + Booking -->
         <div class="dx-wrapper" id="dx-wrapper">
 
             <div class="dettaglio-dx" id="dettaglio-dx">
@@ -113,7 +113,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
                     <p><strong>Cast:</strong> <?= e($film['cast_film']) ?></p>
                 </div>
 
-                <!-- orari, presi direttamente dal mio database -->
+                <!-- Orari, presi direttamente dal mio DB -->
                 <div class="orari-section">
                     <div class="orari-lista" id="orari-lista">
 
@@ -123,7 +123,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
                             </p>
                         <?php else: ?>
                             <?php foreach ($orari as $o):
-                                $orarioFormattato = substr($o['orario'], 0, 5); // Formatta l'orario "14:30:00" -> "14:30"
+                                $orarioFormattato = substr($o['orario'], 0, 5); // Formatta l'orario [ Es. "14:30:00" -> "14:30" ]
                             ?>
                                 <button
                                     class="btn-orario"
@@ -144,7 +144,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
 
             </div>
 
-            <!-- Booking panel -->
+            <!-- Booking Panel -->
             <div class="booking-panel" id="booking-panel">
                 <div class="orario-badge" id="orario-badge"></div>
                 <button class="btn-chiudi-booking" id="btn-chiudi-booking">✕</button>

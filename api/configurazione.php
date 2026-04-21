@@ -1,14 +1,16 @@
 <?php
-//lo scopo principale di questo file è quello di stabolore una connessione tra il sito del cinema e il mio DB sql
-//chiavi per entrare nel database - quelle che avevo gia preimpostato io in .env/XAMPP
+
+    // Lo scopo principale di questo FILE è quello di stabilire una connessione tra il Sito del Cinema e il mio DB SQL
+    // Chiavi per entrare nel DB : quelle che avevo gia preimpostato in ' .env/XAMPP '
+
 $host     = "localhost";
-$user     = "root";       // utente XAMPP default
-$password = "";           // password vuota in XAMPP
+$user     = "root";       // Utente XAMPP Default
+$password = "";           // PW vuota in XAMPP
 $database = "cinemood";
  
-$conn = new mysqli($host, $user, $password, $database); //apre una connessione con il databse e lo salva in "conn"
-$conn->set_charset("utf8mb4"); //usa la codificca universale che mi permette di usare .jpg, video, emoji ecc
+$conn = new mysqli($host, $user, $password, $database); // Apre una connessione con il DB e la salva in ' $conn '
+$conn->set_charset("utf8mb4"); // Usa la codifica universale
  
 if ($conn->connect_error) {
-    die("Connessione fallita: " . $conn->connect_error); //in caso di errore di connessione mi stampa a schermo l'errore
+    die("Connessione fallita: " . $conn->connect_error);
 }
