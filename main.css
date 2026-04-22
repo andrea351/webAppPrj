@@ -14,7 +14,7 @@
     --cream:          #f5e6ea;
     --text-main:      #faeef1;
     --text-muted:     rgba(250, 238, 241, 0.65);
-    --bg:             #0d0508; /* #0d0508 | #1a0810 */
+    --bg:             #0d0508;
     --border:         rgba(128, 0, 32, 0.25);
 }
 
@@ -248,7 +248,6 @@ hr {
     box-shadow: 0 4px 14px rgba(255, 77, 109, 0.35) !important;
 }
 
-/* Numero giorno — grande */
 .cal-giorno h1 {
     font-size: 22px;
     font-weight: bold;
@@ -258,7 +257,6 @@ hr {
     font-family: 'Georgia', serif;
 }
 
-/* Mese — piccolo e opaco */
 .cal-giorno h2 {
     font-size: 10px;
     letter-spacing: 1.5px;
@@ -270,7 +268,6 @@ hr {
     font-weight: normal;
 }
 
-/* Giorno settimana — medio */
 .cal-giorno h3 {
     font-size: 11px;
     letter-spacing: 1px;
@@ -333,18 +330,19 @@ hr {
     transform: translateY(-2px);
 }
 
-/* CONTENITORE FILM*/
+/* ===================== CONTENITORE FILM ===================== */
 #contenitore-film {
     display: flex;
     flex-direction: column;
     padding: 10px 60px 60px 60px;
 }
 
-/*  SEZIONI MOOD  */
+/* ===================== SEZIONI MOOD ===================== */
 .mood-sezione {
     padding: 40px 0 20px 0;
 }
 
+/* ── CORREZIONE: label centrata con righe su entrambi i lati ── */
 .mood-sezione-header {
     margin-bottom: 24px;
     display: flex;
@@ -352,11 +350,18 @@ hr {
     gap: 16px;
 }
 
+.mood-sezione-header::before {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border));
+}
+
 .mood-sezione-header::after {
     content: '';
     flex: 1;
     height: 1px;
-    background: linear-gradient(90deg, var(--border), transparent);
+    background: linear-gradient(270deg, transparent, var(--border));
 }
 
 .mood-sezione-label {
@@ -368,25 +373,23 @@ hr {
     white-space: nowrap;
 }
 
-/*  RIGA FILM  */
+/* ===================== RIGA FILM ===================== */
 .mood-riga-film {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 40px;
-    padding-left: 4px;
-    justify-content: center;
+    justify-content: center;  /* centra le card orizzontalmente */
+    padding-left: 0;           /* rimosso il padding-left che le spostava a sinistra */
 }
 
-/* CARD FILM */
+/* ===================== CARD FILM ===================== */
 .film-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     flex-shrink: 0;
-    flex-basis: calc(25% - 40px);
-    max-width: 200px;
-    min-width: 140px;
+    width: 400px;              /* larghezza fissa invece di flex-basis percentuale */
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.8s cubic-bezier(0.25,1,0.5,1), transform 0.8s cubic-bezier(0.25,1,0.5,1);
@@ -413,7 +416,7 @@ hr {
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.7), 0 4px 16px rgba(128, 0, 32, 0.35);
 }
 
-/* ORARI  */
+/* ===================== ORARI ===================== */
 .orari {
     margin: 16px 0 0 0;
     display: flex;
@@ -446,6 +449,7 @@ hr {
 .film-card a {
     position: relative;
     display: block;
+    width: 100%;
 }
 
 .etichette {

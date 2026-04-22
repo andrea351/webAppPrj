@@ -1,4 +1,3 @@
-
 const PREZZO_POSTO = 8.50;
 const TIMER_DURATA = 15 * 60;
 
@@ -21,7 +20,7 @@ const timerBox       = document.getElementById('timer-box');
 const timerDisplay   = document.getElementById('timer-display');
 const btnPaga        = document.getElementById('btn-paga');
 
-orariLista.querySelectorAll('.btn-orario').forEach(btn => { // Dd ogni ' .btn-orario ' aggiunge un CLICK
+orariLista.querySelectorAll('.btn-orario').forEach(btn => { // Ad ogni ' .btn-orario ' aggiunge un CLICK
     btn.addEventListener('click', () => {
         orariLista.querySelectorAll('.btn-orario').forEach(b => b.classList.remove('selezionato')); // Deseleziona tutti i pulsanti NON scelti
         btn.classList.add('selezionato'); 

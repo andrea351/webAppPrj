@@ -194,7 +194,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /* -------- Chiudi popup -------- */
     function closePopup() {
         overlay.classList.add("closing");
-        setTimeout(() => overlay.style.display = "none", 300);
+        setTimeout(() => window.location.href = "main.html", 300); // Se Premo ' X ' o Fuori dal popUp mi RIPORTA alla Pagina Principale [ ' main ' ]
     }
     chiudi.addEventListener("click", closePopup);
     overlay.addEventListener("click", (e) => { if (e.target === overlay) closePopup(); });

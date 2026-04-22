@@ -9,18 +9,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     const tuttiIMood = [
-        "Fiato sospeso",
+        "Fiato Sospeso",
         "Curioso",
-        "Mind-blowing",
-        "Storie vere",
-        "Serata in famiglia",
-        "Solo adrenalina",
+        "Mind - Blowing",
+        "Storie Vere",
+        "Serata In Famiglia",
+        "Solo Adrenalina",
         "Love",
-        "All'avventura",
-        "Zero pensieri",
-        "Da urlo",
+        "All'Avventura",
+        "Zero Pensieri",
+        "Da Urlo",
         "Risate",
-        "Lacrime in arrivo"
+        "Lacrime In Arrivo"
     ];
 
     const contenitore = document.getElementById("contenitore-film"); // Indica dove METTERE le CARD dei FILM
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             const sezione=document.createElement("div");
             sezione.className="mood-sezione";
-            sezione.id="mood-"+m.replace(/[^a-zA-Z]/g, "");
+            sezione.id="mood-"+m.replace(/[^a-zA-Z]/g, "").toLowerCase();
 
             sezione.innerHTML=`
                 <div class="mood-sezione-header">
@@ -77,10 +77,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                     card.innerHTML = `
                         <a href="${f.pagina}">
                             <img src="${f.locandina}" alt="${f.titolo}">
+                                <div class="etichette">${f.etichetta}</div>
+                                    <div class="rating">${f.rating}☆</div>
                         </a>
                         <div class="orari">${orari_html}</div>
-                            <div class="etichette">${f.etichetta}</div>
-                                <div class="rating">${f.rating}☆</div>
                     `;
                     riga.appendChild(card);
                     observer.observe(card); // Per ogni FILM appartenente al MOOD viene creata una filmCard con gli orari
@@ -95,7 +95,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelectorAll("#mood-btn button").forEach(btn => {
         btn.addEventListener("click", () => {
             const moodLabel = btn.textContent.trim();
-            const idPulito = "mood-" + moodLabel.replace(/[^a-zA-Z]/g, "");
+            const idPulito = "mood-" + moodLabel.replace(/[^a-zA-Z]/g, "").toLowerCase();
+                console.log("ID cercato: ", idPulito);
+                console.log("Sezione trovata: ", document.getElementById(idPulito));
             const sezione = document.getElementById(idPulito);
             if (sezione) {
                 sezione.scrollIntoView({ behavior: "smooth", block: "start" });
