@@ -64,12 +64,13 @@ $scriptPy = __DIR__ . '/genera_biglietto.py';
 
 
 $out = []; $exit = 0;
-exec('python3' . escapeshellarg($scriptPy)
-   . ' ' . escapeshellarg($jsonDati)
-   . ' ' . escapeshellarg($pdfFile) . ' 2>&1', $out, $exit);
+exec('PYTHONPATH=/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages '
+    . '/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 ' . escapeshellarg($scriptPy)
+    . ' ' . escapeshellarg($jsonDati)
+    . ' ' . escapeshellarg($pdfFile) . ' 2>&1', $out, $exit);
  
 if ($exit !== 0 || !file_exists($pdfFile)) {
-    echo json_encode(['successo' => false, 'errore' => 'Errore PDF: ' . implode(' | ', $out)]); exit;
+    echo json_encode(['successo' => false, 'errore' => 'Errore PDF: ' . implode("\n", $out)]); exit;
 }
 
 // Credenziali GMail
