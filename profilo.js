@@ -54,13 +54,7 @@
 
                 <button id="logout-btn">Logout</button>
             </div>
-
-            <!-- UTENTE NON Loggato ⤵️ -->
-            <div id="vista-non-loggato" style="display: none;">
-                <div class="a-r-links">
-                    <a href="pop-up_registrazione.html#accedi">Accedi</a>   <a href="pop-up_registrazione.html#registrati">Registrati</a>
-                </div>
-            </div>
+            
         </div>
     `;
 
@@ -116,8 +110,9 @@
                 document.getElementById('nome-utente').value = nomeUtente;
                 document.getElementById('cognome-utente').value = cognomeUtente;
                 document.getElementById('mail-utente').value = datiInJSON.utente.email;
-            } else document.getElementById('vista-non-loggato').style.display = 'block'; // Altrimenti rendo VISIBILE questo DIV
-        } catch(err) { console.log("Errore in caricamento dati utente in Sezione Profilo: ", err); document.getElementById('vista-non-loggato').style.display = 'block'; }
+            } else /* document.getElementById('vista-non-loggato').style.display = 'block'; */ // Altrimenti rendo VISIBILE questo DIV
+                    window.location.href = "pop-up_registrazione.html";
+        } catch(err) { console.log("Errore in caricamento dati utente in Sezione Profilo: ", err); /* document.getElementById('vista-non-loggato').style.display = 'block'; */ window.location.href = "pop-up_registrazione.html"; }
 
         // Imposta ' max ' con la DATA CORRENTE ⤵️
         const dataAttuale = new Date();

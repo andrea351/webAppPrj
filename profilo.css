@@ -268,61 +268,6 @@
 
 .profilo-popup #logout-btn:active { transform: translateY(0); }
 
-/* ===================== VISTA NON LOGGATO ===================== */
-.profilo-popup .a-r-links {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 8px 0;
-}
-
-.profilo-popup .a-r-links a {
-    font-family: 'Stronger-Thinker-Bold';
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    text-decoration: none;
-    padding: 13px;
-    border-radius: 12px;
-    display: block;
-    text-align: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.profilo-popup .a-r-links a[href*="accedi"] {
-    color: white;
-    background: linear-gradient(135deg, #5e0015, #800020);
-    border: 1px solid transparent;
-    position: relative;
-    overflow: hidden;
-}
-
-.profilo-popup .a-r-links a[href*="accedi"]::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.35), transparent);
-}
-
-.profilo-popup .a-r-links a[href*="accedi"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(128, 0, 32, 0.22);
-}
-
-.profilo-popup .a-r-links a[href*="registrati"] {
-    color: #800020;
-    background: transparent;
-    border: 1px solid rgba(128, 0, 32, 0.15);
-}
-
-.profilo-popup .a-r-links a[href*="registrati"]:hover {
-    background: rgba(128, 0, 32, 0.04);
-    border-color: rgba(128, 0, 32, 0.3);
-    color: #bb2248;
-    transform: translateY(-1px);
-}
-
 #saluto-benvenuto {
     font-size: 22px;
     margin-bottom: 20px;

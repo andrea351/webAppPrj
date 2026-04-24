@@ -208,8 +208,19 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
         </div>
     </div>
 
+    <script>
+        window._cmDatiFilm = {
+            titolo:     <?= json_encode($film['titolo']) ?>,
+            locandina:  <?= json_encode($film['locandina']) ?>,
+            dataAttiva: '<?= $oggi ?>',
+        };
+    </script>
     <script src="../film.js"></script>
     <script src="../film_html/booking.js"></script>
+    <script>
+        if (typeof stato !== 'undefined' && window._cmDatiFilm)
+            stato.datiFilm = window._cmDatiFilm;
+    </script>
 
 </body>
 </html>
