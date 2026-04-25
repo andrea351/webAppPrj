@@ -360,3 +360,19 @@
 .orari-section {
     padding-right: 25px;
 }
+
+
+/*layout pagina responsive*/
+@media (max-width: 1200px) {
+    .booking-inner {
+        grid-template-columns: 1fr 220px;
+        gap: 16px;
+    }
+    .posto {
+        width: 28px;
+        height: 24px;
+    }
+    .posto.corridoio {
+        width: 14px;
+    }
+}
