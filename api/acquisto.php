@@ -61,14 +61,24 @@ $jsonDati = json_encode([
 
 $scriptPy = __DIR__ . '/genera_biglietto.py';
 
-
+$pythonBin  = '/Library/Frameworks/Python.framework/Versions/3.11/bin/python3';
+$pythonPath = '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages';
 
 $out = []; $exit = 0;
-exec('PYTHONPATH=/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages '
-    . '/Library/Frameworks/Python.framework/Versions/3.11/bin/python3 ' . escapeshellarg($scriptPy)
+exec(
+    'arch -x86_64 env PYTHONPATH=' . escapeshellarg($pythonPath)
+    . ' ' . escapeshellarg($pythonBin)
+    . ' ' . escapeshellarg($scriptPy)
     . ' ' . escapeshellarg($jsonDati)
-    . ' ' . escapeshellarg($pdfFile) . ' 2>&1', $out, $exit);
- 
+    . ' ' . escapeshellarg($pdfFile)
+    . ' 2>&1',
+    $out, $exit
+);
+
+file_put_contents(BASE_DIR . '/tmp_biglietti/debug.txt',
+    "Exit: $exit\nOutput:\n" . implode("\n", $out)
+);
+
 if ($exit !== 0 || !file_exists($pdfFile)) {
     echo json_encode(['successo' => false, 'errore' => 'Errore PDF: ' . implode("\n", $out)]); exit;
 }
