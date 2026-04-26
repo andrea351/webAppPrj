@@ -365,6 +365,11 @@ function chiudiPopupEmail() {
 
 // ── Esegui acquisto ───────────────────────────────────────────────
 async function eseguiAcquisto(email) {
+    // Se stato.datiFilm è vuoto, aggiorna i dati film da window._cmDatiFilm
+    if (window._cmDatiFilm && !stato.datiFilm.titolo) {
+        stato.datiFilm = window._cmDatiFilm;
+    }
+
     const posti  = Array.from(stato.postiSelezionati).sort();
     const totale = (posti.length * PREZZO_POSTO).toFixed(2);
 

@@ -215,8 +215,8 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
             dataAttiva: '<?= $oggi ?>',
         };
     </script>
-    <script src="../film.js"></script>
-    <script src="../film_html/booking.js"></script>
+    <script defer src="../film.js"></script>
+    <script defer src="../film_html/booking.js"></script>
     <script>
         if (typeof stato !== 'undefined' && window._cmDatiFilm)
             stato.datiFilm = window._cmDatiFilm;
