@@ -201,7 +201,7 @@ btnPaga.addEventListener('click', async () => {
     }
 
     try {
-        const sessione = await (await fetch('api/sessione.php')).json();
+        const sessione = await (await fetch('/webAppPrj/api/sessione.php')).json();
         if (sessione.loggato) {
             // Utente loggato: usa direttamente la sua email
             await eseguiAcquisto(sessione.utente.email);
@@ -372,7 +372,7 @@ async function eseguiAcquisto(email) {
     btnPaga.disabled    = true;
 
     try {
-        const risposta = await fetch('api/acquisto.php', {
+        const risposta = await fetch('/webAppPrj/api/acquisto.php', {
             method:  'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
