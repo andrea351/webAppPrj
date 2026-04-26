@@ -5,6 +5,11 @@ error_reporting(E_ALL);
 
 session_start();
 header('Content-Type: application/json');
+// modifica
+file_put_contents(BASE_DIR . '/tmp_biglietti/log.txt', 
+    json_encode($body, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+);
+//fine modifica
 define('BASE_DIR', realpath(__DIR__ . '/..'));
 
 require BASE_DIR . '/vendor/autoload.php';
