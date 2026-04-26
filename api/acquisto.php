@@ -61,10 +61,12 @@ $jsonDati = json_encode([
 
 $scriptPy = __DIR__ . '/genera_biglietto.py';
 
-$pythonBin  = '/Library/Frameworks/Python.framework/Versions/3.11/bin/python3';
-$pythonPath = '/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages';
+$pythonBin = $_ENV['PYTHON BIN'] ?? 'python3';
+$pythonPath = $_ENV['PYTHON PATH'] ?? '';
+$osType = $_ENV['OS_TYPE'] ?? 'linux';
 
 $out = []; $exit = 0;
+/* codice precedente
 exec(
     'arch -x86_64 env PYTHONPATH=' . escapeshellarg($pythonPath)
     . ' ' . escapeshellarg($pythonBin)
@@ -74,6 +76,28 @@ exec(
     . ' 2>&1',
     $out, $exit
 );
+*/
+
+if ($osType === 'windows') {
+    $cmd = 'set PYTHONPATH=' . $pythonPath
+         . ' && ' . escapeshellarg($pythonBin)
+         . ' ' . escapeshellarg($scriptPy)
+         . ' ' . escapeshellarg($jsonDati)
+         . ' ' . escapeshellarg($pdfFile)
+         . ' 2>&1';
+} else {
+    $envPythonPath = !empty($pythonPath)
+        ? 'PYTHONPATH=' . escapeshellarg($pythonPath) . ' '
+        : '';
+    $cmd = 'env ' . $envPythonPath
+         . escapeshellarg($pythonBin)
+         . ' ' . escapeshellarg($scriptPy)
+         . ' ' . escapeshellarg($jsonDati)
+         . ' ' . escapeshellarg($pdfFile)
+         . ' 2>&1';
+}
+
+exec($cmd, $out, $exit);
 
 file_put_contents(BASE_DIR . '/tmp_biglietti/debug.txt',
     "Exit: $exit\nOutput:\n" . implode("\n", $out)
