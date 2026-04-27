@@ -5,11 +5,7 @@ error_reporting(E_ALL);
 
 session_start();
 header('Content-Type: application/json');
-// modifica
-file_put_contents(BASE_DIR . '/tmp_biglietti/log.txt', 
-    json_encode($body, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
-);
-//fine modifica
+
 define('BASE_DIR', realpath(__DIR__ . '/..'));
 
 require BASE_DIR . '/vendor/autoload.php';
@@ -22,6 +18,13 @@ $dotenv->safeLoad();
 
 // Salvo i DATI che mi serviranno DOPO
 $body = json_decode(file_get_contents('php://input'), true); // Trasforma in STRUCT il Contenuto della Richiesta arrivata a PHP da ' booking.js '
+
+// modifica
+file_put_contents(BASE_DIR . '/tmp_biglietti/log.txt', 
+    json_encode($body, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE)
+);
+//fine modifica
+
 $email = trim($body['email'] ?? '');
 $titolo = trim($body['titolo'] ?? '');
 $orario = trim($body['orario'] ?? '');
@@ -62,12 +65,12 @@ $jsonDati = json_encode([
     'data' => $dataStr,
     'locandina_path' => $locAssoluta,
     'codice' => $codice,
-], JSON_UNESCAPED_UNICODE);
+], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 $scriptPy = __DIR__ . '/genera_biglietto.py';
 
-$pythonBin = $_ENV['PYTHON BIN'] ?? 'python3';
-$pythonPath = $_ENV['PYTHON PATH'] ?? '';
+$pythonBin = $_ENV['PYTHON_BIN'] ?? 'python3';
+$pythonPath = $_ENV['PYTHON_PATH'] ?? '';
 $osType = $_ENV['OS_TYPE'] ?? 'linux';
 
 $out = []; $exit = 0;
@@ -83,11 +86,13 @@ exec(
 );
 */
 
+$jsonFile = $tmpDir . '/dati_biglietto.json';
+file_put_contents($jsonFile, $jsonDati);
+
 if ($osType === 'windows') {
-    $cmd = 'set PYTHONPATH=' . $pythonPath
-         . ' && ' . escapeshellarg($pythonBin)
+    $cmd = escapeshellarg($pythonBin)
          . ' ' . escapeshellarg($scriptPy)
-         . ' ' . escapeshellarg($jsonDati)
+         . ' ' . escapeshellarg($jsonFile)
          . ' ' . escapeshellarg($pdfFile)
          . ' 2>&1';
 } else {

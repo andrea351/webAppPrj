@@ -185,7 +185,8 @@ if __name__ == '__main__':
         print('Uso: python3 genera_biglietto.py \'<json>\' <output.pdf>', file=sys.stderr)
         sys.exit(1)
     try:
-        dati = json.loads(sys.argv[1])
+        with open(sys.argv[1], 'r', encoding='utf-8') as f:
+            dati = json.load(f)
     except json.JSONDecodeError as e:
         print(f'JSON non valido: {e}', file=sys.stderr)
         sys.exit(1)

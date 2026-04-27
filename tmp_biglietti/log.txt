@@ -1,0 +1,12 @@
+{
+    "email": "leo.guerriero30@gmail.com",
+    "titolo": "Il bambino con il pigiama a righe",
+    "orario": "21:30",
+    "sala": "Sala 1",
+    "posti": [
+        "F9"
+    ],
+    "totale": "8.50",
+    "data": "2026-06-01",
+    "locandina": "locandine\/b_p_righe.jpg"
+}
