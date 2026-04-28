@@ -92,9 +92,9 @@
         const rispostaDaCron = await fetch('api/cronologia.php');
         const datiJSON = await rispostaDaCron.json();
 
-        datiJSON.forEach(locandina => {
+        datiJSON.forEach(loc => {
             var elem = document.createElement("img");
-            elem.src = locandina;
+            elem.src = loc.locandina;
             document.getElementById('cronologia').appendChild(elem);
         });
     }

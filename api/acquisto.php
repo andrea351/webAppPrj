@@ -4,11 +4,14 @@
 // error_reporting(E_ALL);
 
 session_start();
-header('Content-Type: application/json');
 
 define('BASE_DIR', realpath(__DIR__ . '/..'));
 
 require BASE_DIR . '/vendor/autoload.php';
+require BASE_DIR . '/api/connessione.php';
+
+header('Content-Type: application/json');
+
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception as MailException;
@@ -189,11 +192,12 @@ try {
 
     // if (!empty($_SESSION['utente_id'])) { ... }
     if (isset($_SESSION['utente_id'])) {
-        // Preparo l'ISTRUZIONE SQL
-            $stmt = $pdo->prepare("INSERT INTO acquisti (utente_id, locandina) VALUES (?, ?)"); 
-        // Riempie i campi [ ?, ? ]
-            $stmt->execute([$_SESSION['utente_id'], $locPaht]);
-
+        try {
+            // Preparo l'ISTRUZIONE SQL
+                $stmt = $pdo->prepare("INSERT INTO acquisti (utente_id, locandina) VALUES (?, ?)"); 
+            // Riempie i campi [ ?, ? ]
+                $stmt->execute([$_SESSION['utente_id'], $locPath]);
+        } catch (Exception $e) { error_log('Errore salvataggio acquisto: ' . $e->getMessage());}
     }
 
     echo json_encode(['successo' => true, 'codice' => $codice]);
