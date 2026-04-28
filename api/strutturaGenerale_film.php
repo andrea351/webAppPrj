@@ -22,7 +22,23 @@ if (!$film) {
 }
 
 // Cerco nel mio DB gli ORARI per il FILM in QUESTIONE ( ID precedentemente preso )
-$oggi = '2026-06-01';
+
+$mappaInversaGiorni = [
+    'LUNEDI 1 GIUGNO'    => '2026-06-01',
+    'MARTEDI 2 GIUGNO'   => '2026-06-02',
+    'MERCOLEDI 3 GIUGNO' => '2026-06-03',
+    'GIOVEDI 4 GIUGNO'   => '2026-06-04',
+    'VENERDI 5 GIUGNO'   => '2026-06-05',
+    'SABATO 6 GIUGNO'    => '2026-06-06',
+    'DOMENICA 7 GIUGNO'  => '2026-06-07',
+    'LUNEDI 8 GIUGNO'    => '2026-06-08',
+    'MARTEDI 9 GIUGNO'   => '2026-06-09',
+    'MERCOLEDI 10 GIUGNO'=> '2026-06-10',
+];
+
+$giornoRicevuto = $_GET['data'] ?? 'LUNEDI 1 GIUGNO';
+$oggi = $mappaInversaGiorni[$giornoRicevuto] ?? '2026-06-01';
+
 $stmtOrari = $conn->prepare(
     "SELECT orario, sala FROM orari WHERE film_id = ? AND data = ? ORDER BY orario ASC"
 );
