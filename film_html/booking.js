@@ -391,6 +391,9 @@ async function eseguiAcquisto(email) {
                 locandina: stato.datiFilm.locandina  || '',
             }),
         });
+        /* const testoGrezzo = await risposta.text();
+                console.log('Risposta grezza acquisto.php:', testoGrezzo);
+                    const dati = JSON.parse(testoGrezzo); */
         const dati = await risposta.json();
 
         if (dati.successo) {

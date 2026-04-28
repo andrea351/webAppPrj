@@ -51,6 +51,10 @@
                 </div>
 
                 <hr style="width: 50%; margin: 0 auto;">
+                
+                <!-- CRONOLOGIA Film Acquistati ⤵️ -->
+                <div id="cronologia">
+                </div>
 
                 <button id="logout-btn">Logout</button>
             </div>
@@ -84,6 +88,17 @@
     const btnProfilo = document.getElementById('btn-profilo');
     if (btnProfilo) btnProfilo.addEventListener('click', apriPU);
 
+    async function caricaCronologia() {
+        const rispostaDaCron = await fetch('api/cronologia.php');
+        const datiJSON = await rispostaDaCron.json();
+
+        datiJSON.forEach(locandina => {
+            var elem = document.createElement("img");
+            elem.src = locandina;
+            document.getElementById('cronologia').appendChild(elem);
+        });
+    }
+
     async function caricaProfilo() {
         /* let keyFoto = 'fotoProfilo';
         let keyEta = 'eta'; */
@@ -110,6 +125,8 @@
                 document.getElementById('nome-utente').value = nomeUtente;
                 document.getElementById('cognome-utente').value = cognomeUtente;
                 document.getElementById('mail-utente').value = datiInJSON.utente.email;
+
+                caricaCronologia();
             } else /* document.getElementById('vista-non-loggato').style.display = 'block'; */ // Altrimenti rendo VISIBILE questo DIV
                     window.location.href = "pop-up_registrazione.html";
         } catch(err) { console.log("Errore in caricamento dati utente in Sezione Profilo: ", err); /* document.getElementById('vista-non-loggato').style.display = 'block'; */ window.location.href = "pop-up_registrazione.html"; }

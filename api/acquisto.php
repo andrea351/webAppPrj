@@ -1,7 +1,7 @@
 <?php
 
-ini_set('display_errors', 1);
-error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// error_reporting(E_ALL);
 
 session_start();
 header('Content-Type: application/json');
@@ -74,7 +74,7 @@ $pythonPath = $_ENV['PYTHON_PATH'] ?? '';
 $osType = $_ENV['OS_TYPE'] ?? 'linux';
 
 $out = []; $exit = 0;
-/* codice precedente
+/* CODICE PRECEDENTE
 exec(
     'arch -x86_64 env PYTHONPATH=' . escapeshellarg($pythonPath)
     . ' ' . escapeshellarg($pythonBin)
@@ -102,7 +102,7 @@ if ($osType === 'windows') {
     $cmd = 'env ' . $envPythonPath
          . escapeshellarg($pythonBin)
          . ' ' . escapeshellarg($scriptPy)
-         . ' ' . escapeshellarg($jsonDati)
+         . ' ' . escapeshellarg($jsonFile)
          . ' ' . escapeshellarg($pdfFile)
          . ' 2>&1';
 }
@@ -186,6 +186,16 @@ try {
     $mail->addAttachment($pdfFile, $nomeFile);
     $mail->send();
     @unlink($pdfFile);
+
+    // if (!empty($_SESSION['utente_id'])) { ... }
+    if (isset($_SESSION['utente_id'])) {
+        // Preparo l'ISTRUZIONE SQL
+            $stmt = $pdo->prepare("INSERT INTO acquisti (utente_id, locandina) VALUES (?, ?)"); 
+        // Riempie i campi [ ?, ? ]
+            $stmt->execute([$_SESSION['utente_id'], $locPaht]);
+
+    }
+
     echo json_encode(['successo' => true, 'codice' => $codice]);
 } catch (MailException $e) {
     @unlink($pdfFile);
