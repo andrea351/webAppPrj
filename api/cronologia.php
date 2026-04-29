@@ -5,7 +5,7 @@ require __DIR__ . '/../api/connessione.php';
 header('Content-Type: application/json');
 
 if (!empty($_SESSION['utente_id'])) {
-    $stmt = $pdo->prepare("SELECT locandina FROM acquisti WHERE utente_id = ?");
+    $stmt = $pdo->prepare("SELECT DISTINCT locandina FROM acquisti WHERE utente_id = ?");
         // ' $stmt->execute() ' Restituisce un BOOL se la QUERY PREPARATA con ' $pdo->prepare ' è stata ESEGUITA CORRETTAMENTE
     if ($stmt->execute([$_SESSION['utente_id']])) {
         $risultatiQuerySQL = $stmt->fetchAll(PDO::FETCH_ASSOC); // ' risultatiQuerySQL ' è un ARRAY ASSOCIATIVO [ Coppia CHIAVE - VALORE ]

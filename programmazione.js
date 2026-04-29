@@ -75,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     });
                     
                     card.innerHTML = `
-                        // <a href="${f.pagina}">
+                        <!-- <a href="${f.pagina}"> -->
                         <a href="${f.pagina}&data=${encodeURIComponent(giornoAttivo)}">
                             <img src="${f.locandina}" alt="${f.titolo}">
                                 <div class="etichette">${f.etichetta}</div>
