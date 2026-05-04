@@ -594,3 +594,15 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- Tabella ACQUISTI
+CREATE TABLE `acquisti` (
+  `id`            int(11)      NOT NULL AUTO_INCREMENT,
+  `utente_id`     int(11)      NOT NULL,
+  `locandina`     varchar(255) NOT NULL,
+  `data_acquisto` datetime     NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`id`),
+  KEY `utente_id` (`utente_id`),
+  CONSTRAINT `acquisti_ibfk_1`
+    FOREIGN KEY (`utente_id`) REFERENCES `utenti` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
