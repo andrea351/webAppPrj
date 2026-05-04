@@ -214,10 +214,22 @@ btnPaga.addEventListener('click', async () => {
     if (btnPaga.disabled || !btnPaga.classList.contains('attivo')) return;
 
     const carta = document.getElementById('input-carta')?.value.replace(/\s/g, '') || '';
+    const scadenza = document.getElementById('input-scadenza')?.value.trim() || '';
+    const cvv = document.getElementById('input-cvv')?.value.trim() || '';
+    const nome = document.getElementById('input-nome')?.value.trim() || '';
+
     if (carta.length < 16) {
         mostraMessaggioAcquisto('Inserisci un numero di carta valido (16 cifre).', 'errore');
         return;
     }
+
+    const regexScadenza = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    if (!regexScadenza.test(scadenza)) { mostraMessaggioAcquisto('Inserisci una scadenza valida (MM/AA).', 'errore'); return; }
+    
+    if (cvv.length !== 3 && cvv.length !== 4) { mostraMessaggioAcquisto('Inserisci un CVV valido (3 cifre | 4 cifre).', 'errore'); return; }
+
+    const regexNome = /^([a-zA-Z]{1,}\s)+[a-zA-Z]{1,}$/;
+    if (!regexNome.test(nome)) { mostraMessaggioAcquisto('Inserisci un nome valido (Nome Cognome).', 'errore'); return; }
 
     try {
         const sessione = await (await fetch('/webAppPrj/api/sessione.php')).json();
