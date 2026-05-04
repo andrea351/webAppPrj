@@ -18,6 +18,7 @@
                 <div class="immagine-logo">
                     <img src="logo.png" alt="Cinema Mood">
                 </div>
+                <!-- span necessario solo per stilizzare il glifo a parte -->
                 <span class="chiudi" id="chiudi">&times;</span>
             </div>
 
@@ -30,7 +31,7 @@
                     <button class="tab-btn" id="tab-registrati" onclick="mostraTab('registrati')">Registrati</button>
                 </div>
 
-                <!-- ===== PANNELLO LOGIN ===== -->
+                <!------- PANNELLO LOGIN ------->
                 <div class="pannello attivo" id="pannello-accedi">
 
                     <p class="testo-log-in">Bentornato a Cinema Mood</p>
@@ -42,6 +43,7 @@
                                 <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
                             </svg>
                         </span>
+                        <!-- placeholder, necessario per attivare le "floating labels"-->
                         <input type="email" id="login-email" placeholder=" " required>
                         <label for="login-email">Indirizzo email</label>
                     </div>
@@ -94,7 +96,8 @@
 
                     <p class="testo-log-in">Crea il tuo account</p>
 
-                    <!-- Nome -->
+                    <!-- Nome e Cognome-->
+                     <!-- messi insieme pk sennò il pop up viene troppo lungo -->
                     <div class="campo">
                         <span class="icona-campo">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
@@ -106,6 +109,7 @@
                     </div>
 
                     <!-- Email -->
+                        <!--OSS: unica cosa che cambia da Email-login è l'id (necessario che sia così per il js) -->
                     <div class="campo">
                         <span class="icona-campo">
                             <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
