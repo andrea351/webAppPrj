@@ -36,16 +36,35 @@ orariLista.querySelectorAll('.btn-orario').forEach(btn => { // Ad ogni ' .btn-or
 document.getElementById('btn-chiudi-booking').addEventListener('click', () => {
     dxWrapper.classList.remove('booking-attivo');
     resetTimer();
+
+    stato.postiSelezionati.forEach(id => {
+        const a = document.querySelector(`[data-id="${id}"]`);
+        if (a) { 
+            a.classList.remove('selezionato'); 
+            a.classList.add('disponibile'); 
+        }
+    }); 
+    stato.postiSelezionati.clear();
+    aggiornaRiepilogo();
+    
+    const salaContainer = document.querySelector('.sala-container');
+    if (salaContainer) salaContainer.classList.remove('acquisto-completato');
 });
 
 // CONTINUA 
 btnContinua.addEventListener('click', () => {
     if (!stato.orarioSelezionato) return;
 
+    stato.postiSelezionati.clear();
+    aggiornaRiepilogo();
+
+    document.querySelectorAll('.posto.selezionato').forEach(el => {
+        el.classList.remove('selezionato');
+        el.classList.add('disponibile');
+    });
+
     orarioBadge.textContent = stato.orarioSelezionato;
-
     if (!grigliaPosti.hasChildNodes()) costruisciMappa();
-
     dxWrapper.classList.add('booking-attivo');
 });
 
@@ -448,6 +467,8 @@ function mostraSchermataConferma(email, codice) {
 
     btnPaga.style.display = 'none';
     resetTimer();
+    const salaContainer = document.querySelector('.sala-container');
+    if (salaContainer) salaContainer.classList.add('acquisto-completato');
 }
 
 // ── Messaggio errore sotto il bottone ─────────────────────────────

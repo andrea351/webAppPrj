@@ -3,7 +3,7 @@
 .booking-panel {
     position: absolute;
     top: 0; left: 0; right: 0;
-    min-height: 100%;
+    bottom: 0;
     background: #0e0d0c;
     transform: translateY(105%);
     transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
@@ -16,10 +16,13 @@
 
 .booking-inner {
     display: grid;
-    grid-template-columns: 1fr 280px;  /* era 260px */
-    gap: 24px;                          /* era 32px */
+    grid-template-columns: 1fr 280px;  
+    gap: 24px;                         
     padding-top: 48px;
     justify-items: center;
+    height: 100%;          
+    box-sizing: border-box; 
+    padding-bottom: 24px;
 }
 
 .booking-sidebar {
@@ -30,7 +33,9 @@
     padding-left: 24px;
     width: 100%;        
     box-sizing: border-box; 
-    padding-right:24px;
+    padding-right: 24px;
+    height: 100%;     /* <-- LA CHIAVE 2: si blocca all'altezza massima */
+    overflow-y: auto; /* <-- Fa scattare lo scroll! */
 }
 
 .sala-container {
@@ -158,6 +163,20 @@
     flex-direction: column;
     gap: 6px;
     min-height: 48px;
+}
+.booking-sidebar::-webkit-scrollbar {
+    width: 4px;
+}
+.booking-sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+.booking-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(188, 65, 67, 0.5); 
+    border-radius: 4px;
+}
+.booking-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #bc4143;
 }
 
 .nessun-posto {
@@ -361,7 +380,26 @@
     padding-right: 25px;
 }
 
+.sala-container.acquisto-completato {
+    opacity: 0.35;
+    filter: grayscale(80%);
+    transition: all 0.5s ease;
+    }
 
+    .sala-container.acquisto-completato .posto {
+        pointer-events: none;
+    }
+
+    .sala-container.acquisto-completato::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 10;
+    }
+    .sala-container {
+    position: relative;
+    } 
 /*layout pagina responsive*/
 @media (max-width: 1200px) {
     .booking-inner {
@@ -374,5 +412,5 @@
     }
     .posto.corridoio {
         width: 14px;
-    }
+    }  
 }
