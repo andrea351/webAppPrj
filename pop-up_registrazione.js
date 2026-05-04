@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /* -------- Chiudi popup -------- */
     function closePopup() {
+        // non la posso dichiarare dentro html, altrimenti si chiude subito
         overlay.classList.add("closing");
         setTimeout(() => window.location.href = "main.html", 300); // Se Premo ' X ' o Fuori dal popUp mi RIPORTA alla Pagina Principale [ ' main ' ]
     }
