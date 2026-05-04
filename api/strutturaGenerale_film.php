@@ -208,14 +208,14 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
                         <div class="pagamento-form">
                             <p class="pagamento-titolo">Pagamento</p>
                             <input type="text" placeholder="Numero carta"
-                                   class="input-carta" maxlength="19" id="input-carta">
+                                   class="input-carta" maxlength="19" id="input-carta"> <!-- INPUT - CARTA -->
                             <div class="input-row">
                                 <input type="text" placeholder="MM / AA"
-                                       class="input-carta half" maxlength="5">
+                                       class="input-carta half" maxlength="5" id="input-scadenza"> <!-- INPUT - SCADENZA -->
                                 <input type="text" placeholder="CVV"
-                                       class="input-carta half" maxlength="3">
+                                       class="input-carta half" maxlength="4" id="input-cvv"> <!-- INPUT - CVV -->
                             </div>
-                            <input type="text" placeholder="Nome del titolare" class="input-carta">
+                            <input type="text" placeholder="Nome del titolare" class="input-carta" id="input-nome"> <!-- INPUT - NOME -->
                             <button class="btn-paga" id="btn-paga" disabled>ACQUISTA ORA</button>
                         </div>
                     </div>

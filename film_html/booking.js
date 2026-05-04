@@ -36,16 +36,35 @@ orariLista.querySelectorAll('.btn-orario').forEach(btn => { // Ad ogni ' .btn-or
 document.getElementById('btn-chiudi-booking').addEventListener('click', () => {
     dxWrapper.classList.remove('booking-attivo');
     resetTimer();
+
+    stato.postiSelezionati.forEach(id => {
+        const a = document.querySelector(`[data-id="${id}"]`);
+        if (a) { 
+            a.classList.remove('selezionato'); 
+            a.classList.add('disponibile'); 
+        }
+    }); 
+    stato.postiSelezionati.clear();
+    aggiornaRiepilogo();
+    
+    const salaContainer = document.querySelector('.sala-container');
+    if (salaContainer) salaContainer.classList.remove('acquisto-completato');
 });
 
 // CONTINUA 
 btnContinua.addEventListener('click', () => {
     if (!stato.orarioSelezionato) return;
 
+    stato.postiSelezionati.clear();
+    aggiornaRiepilogo();
+
+    document.querySelectorAll('.posto.selezionato').forEach(el => {
+        el.classList.remove('selezionato');
+        el.classList.add('disponibile');
+    });
+
     orarioBadge.textContent = stato.orarioSelezionato;
-
     if (!grigliaPosti.hasChildNodes()) costruisciMappa();
-
     dxWrapper.classList.add('booking-attivo');
 });
 
@@ -195,10 +214,22 @@ btnPaga.addEventListener('click', async () => {
     if (btnPaga.disabled || !btnPaga.classList.contains('attivo')) return;
 
     const carta = document.getElementById('input-carta')?.value.replace(/\s/g, '') || '';
+    const scadenza = document.getElementById('input-scadenza')?.value.trim() || '';
+    const cvv = document.getElementById('input-cvv')?.value.trim() || '';
+    const nome = document.getElementById('input-nome')?.value.trim() || '';
+
     if (carta.length < 16) {
         mostraMessaggioAcquisto('Inserisci un numero di carta valido (16 cifre).', 'errore');
         return;
     }
+
+    const regexScadenza = /^(0[1-9]|1[0-2])\/\d{2}$/;
+    if (!regexScadenza.test(scadenza)) { mostraMessaggioAcquisto('Inserisci una scadenza valida (MM/AA).', 'errore'); return; }
+    
+    if (cvv.length !== 3 && cvv.length !== 4) { mostraMessaggioAcquisto('Inserisci un CVV valido (3 cifre | 4 cifre).', 'errore'); return; }
+
+    const regexNome = /^([a-zA-Z]{1,}\s)+[a-zA-Z]{1,}$/;
+    if (!regexNome.test(nome)) { mostraMessaggioAcquisto('Inserisci un nome valido (Nome Cognome).', 'errore'); return; }
 
     try {
         const sessione = await (await fetch('/webAppPrj/api/sessione.php')).json();
@@ -448,6 +479,8 @@ function mostraSchermataConferma(email, codice) {
 
     btnPaga.style.display = 'none';
     resetTimer();
+    const salaContainer = document.querySelector('.sala-container');
+    if (salaContainer) salaContainer.classList.add('acquisto-completato');
 }
 
 // ── Messaggio errore sotto il bottone ─────────────────────────────

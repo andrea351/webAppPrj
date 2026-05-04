@@ -98,8 +98,9 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        if (password.length < 6) {
-            erroreEl.textContent = "La password deve essere di almeno 6 caratteri.";
+        const regexPW = /^(?=(?:.*[a-zA-Z]){6,})(?=.*[A-Z])(?=.*\d)(?=.*[.,;:!?\-]).+$/;
+        if (!regexPW.test(password)) {
+            erroreEl.textContent = "La password deve essere contenere: almeno 6 caratteri alfabetici, di cui almeno una maiuscola, almeno un numero e almeno un simbolo speciale (.,;:!?-).";
             return;
         }
 
