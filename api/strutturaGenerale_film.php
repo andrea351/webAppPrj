@@ -58,21 +58,23 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($film['titolo']) ?> - Mood Cinema</title>
 
-    <link rel="stylesheet" href="../main.css">
-    <link rel="stylesheet" href="../film_html/struttura_dati.css">
-    <link rel="stylesheet" href="../film_html/booking.css">
+    <base href="/webAppPrj/">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="film_html/struttura_dati.css">
+    <link rel="stylesheet" href="film_html/booking.css">
+    <link rel="icon" href="logo.png">
 </head>
 <body>
     <header class="pannello-superiore">
         <nav class="menu-sx">
-            <a href="../main.html">TORNA ALLA HOME</a>
-            <a href="../contatti.html">CONTATTACI</a>
-            <a href="#servizi">SERVIZI</a>
+            <a href="main.html">TORNA ALLA HOME</a>
+            <a href="contatti.html">CONTATTACI</a>
+            <a href="servizi">SERVIZI</a>
         </nav>
 
         <div class="logo-centro">
             <a href="main.html">
-                <img src="../logo.png" alt="Logo Cinema" class="img-logo">
+                <img src="logo.png" alt="Logo Cinema" class="img-logo">
             </a>
         </div>
 
@@ -94,13 +96,13 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
         <div class="dettaglio-sx">
             <div class="media-container" id="trailer-container">
                 <img
-                    src="../<?= e($film['locandina']) ?>"
+                    src="<?= e($film['locandina']) ?>"
                     alt="Locandina <?= e($film['titolo']) ?>"
                     id="poster-img"
                 >
                 <video
                     id="trailer-video"
-                    src="../<?= e($film['trailer']) ?>"
+                    src="<?= e($film['trailer']) ?>"
                     muted loop preload="auto"
                 ></video>
                 <div class="play-overlay"></div>
@@ -231,8 +233,9 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
             dataAttiva: '<?= $oggi ?>',
         };
     </script>
-    <script defer src="../film.js"></script>
-    <script defer src="../film_html/booking.js"></script>
+    <script defer src="film.js"></script>
+    <script defer src="film_html/booking.js"></script>
+    <script defer src="profilo.js"></script>
     <script>
         if (typeof stato !== 'undefined' && window._cmDatiFilm)
             stato.datiFilm = window._cmDatiFilm;
