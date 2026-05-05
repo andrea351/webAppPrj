@@ -69,8 +69,16 @@
     let keyEta = 'eta';
     let profiloCaricato = false; // Evita che OGNI VOLTA che l'UTENTE APRE il PopUp vengano rifatte nuovamente la CHIAMATA ad ' api/sessione.php ' e tutti gli addEventListener
 
-    function apriPU() {
-        overlay.classList.add('aperto'); caricaProfilo();
+    async function apriPU() {
+        /* document.getElementById('vista-loggato').style.display = 'none'; */
+            /* overlay.classList.add('aperto'); caricaProfilo(); */
+        /* fetch('api/sessione.php').then(r => r.json()).then(dati => { if (!dati.loggato) { window.location.href = "pop-up_registrazione.html"; } else { overlay.classList.add('aperto'); caricaProfilo(); } }).catch(() => { window.location.href = "pop-up_registrazione.html"; }); */
+        try {
+            const r = await fetch('api/sessione.php');
+            const dati = await r.json();
+            if (!dati.loggato) window.location.href = "pop-up_registrazione.html";
+            else { overlay.classList.add('aperto'); caricaProfilo(dati); }
+        } catch(err) { window.location.href = "pop-up_registrazione.html"; }
     }
 
     function chiudiPU() {
@@ -115,16 +123,16 @@
         if (datiRes.successo) { document.getElementById('saluto-benvenuto').innerHTML = `<strong>Ciao, ${nomeUtente}</strong>`; profiloCaricato = false; }
     }
 
-    async function caricaProfilo() {
+    async function caricaProfilo(datiInJSON) {
         /* let keyFoto = 'fotoProfilo';
         let keyEta = 'eta'; */
 
-        if (profiloCaricato) return;
+        if (profiloCaricato) { document.getElementById('vista-loggato').style.display = 'block'; return; }
         profiloCaricato = true;
 
         try {
-            const rispostaDaServer = await fetch('api/sessione.php'); // ASPETTA Risposta da Server
-            const datiInJSON = await rispostaDaServer.json(); // ASPETTA che i Dati vengano CONVERTITI in JSON | Compila ' json_encode ' di ' sessione.php ', sostituendo i campi della STRUCT con i Dati veri e propri dell'UTENTE
+            /* const rispostaDaServer = await fetch('api/sessione.php'); // ASPETTA Risposta da Server */
+            /* const datiInJSON = await rispostaDaServer.json(); // ASPETTA che i Dati vengano CONVERTITI in JSON | Compila ' json_encode ' di ' sessione.php ', sostituendo i campi della STRUCT con i Dati veri e propri dell'UTENTE */
 
             if (datiInJSON.loggato) {
                 document.getElementById('vista-loggato').style.display = 'block'; // Rendo VISIBILE questo DIV
@@ -143,8 +151,8 @@
                 document.getElementById('mail-utente').value = datiInJSON.utente.email;
 
                 caricaCronologia();
-            } else /* document.getElementById('vista-non-loggato').style.display = 'block'; */ // Altrimenti rendo VISIBILE questo DIV
-                    window.location.href = "pop-up_registrazione.html";
+            } // else /* document.getElementById('vista-non-loggato').style.display = 'block'; */ // Altrimenti rendo VISIBILE questo DIV
+                    /* window.location.href = "pop-up_registrazione.html"; */
         } catch(err) { console.log("Errore in caricamento dati utente in Sezione Profilo: ", err); /* document.getElementById('vista-non-loggato').style.display = 'block'; */ window.location.href = "pop-up_registrazione.html"; }
 
         // Imposta ' max ' con la DATA CORRENTE ⤵️
