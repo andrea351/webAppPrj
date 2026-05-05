@@ -112,7 +112,7 @@
         });
         const datiRes = await rispostaDaInvioAdAP.json();
 
-        if (datiRes.successo) { document.getElementById('saluto-benvenuto').innerHTML = ''; document.getElementById('saluto-benvenuto').innerHTML = `<strong>Ciao, ${nomeUtente}</strong>`; }
+        if (datiRes.successo) { document.getElementById('saluto-benvenuto').innerHTML = `<strong>Ciao, ${nomeUtente}</strong>`; profiloCaricato = false; }
     }
 
     async function caricaProfilo() {
