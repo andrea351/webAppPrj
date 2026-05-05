@@ -32,11 +32,12 @@
                 
                 <div class="griglia-dati">
                     <div class="campo-half">
-                        <label for="nome-utente">Nome: </label> <input type="text" id="nome-utente" readonly>
+                        <label for="nome-utente">Nome: </label> <input type="text" id="nome-utente">
                     </div>
                     <div class="campo-half">
-                        <label for="cognome-utente">Cognome: </label> <input type="text" id="cognome-utente" readonly>
+                        <label for="cognome-utente">Cognome: </label> <input type="text" id="cognome-utente">
                     </div>
+                        <button id="salva">Salva</button> <!-- SALVA Modifiche -->
                     <div class="campo-full">
                         <label for="mail-utente">Mail: </label> <input type="text" id="mail-utente" readonly>
                     </div>
@@ -99,6 +100,19 @@
             elem.src = loc.locandina;
             document.getElementById('cronologia').appendChild(elem);
         });
+    }
+
+    async function salvaNomeCognome() {
+        const nomeUtente = document.getElementById('nome-utente').value;
+        const cognomeUtente = document.getElementById('cognome-utente').value;
+        const rispostaDaInvioAdAP = await fetch('api/aggiorna_profilo.php', { // Invia INPUT a ' aggiorna_profilo.php '
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', },
+            body: JSON.stringify( { nome: nomeUtente, cognome: cognomeUtente, } ),
+        });
+        const datiRes = await rispostaDaInvioAdAP.json();
+
+        if (datiRes.successo) { document.getElementById('saluto-benvenuto').innerHTML = ''; document.getElementById('saluto-benvenuto').innerHTML = `<strong>Ciao, ${nomeUtente}</strong>`; }
     }
 
     async function caricaProfilo() {
@@ -191,6 +205,12 @@
                     window.location.href = 'main.html';
                 }
             } catch(err) { console.log("Errore in logout: ", err); }
+        });
+
+        // Salva Nome | Cognome ⤵️
+            // const btnSalva = document.getElementById('salva'); btnSalva.addEventListener('click', ... { ... });
+        document.getElementById('salva').addEventListener('click', function() {
+            salvaNomeCognome();
         });
     };
 
