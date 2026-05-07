@@ -12,10 +12,10 @@ $dati = json_decode(file_get_contents("php://input"), true);
 
 $nome  = trim($dati['nome']     ?? '');
 $email = trim($dati['email']    ?? '');
-$pass  = trim($dati['password'] ?? '');
+$password  = trim($dati['password'] ?? '');
 
 // 2. Validazione base lato server (superflua pk già nel frontend)
-if (empty($nome) || empty($email) || empty($pass)) {
+if (empty($nome) || empty($email) || empty($password)) {
     echo json_encode(["successo" => false, "errore" => "Compila tutti i campi."]);
     exit;
 }

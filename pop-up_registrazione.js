@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const dati = await risposta.json();
 
             if (dati.successo) {
-                // Registrazione riuscita → vai alla home
+                // Registrazione riuscita -> vai alla home
                 window.location.href = "main.html";
             } else {
                 erroreEl.textContent = dati.errore;
