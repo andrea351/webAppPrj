@@ -123,10 +123,4 @@ document.addEventListener("DOMContentLoaded", function () {
             erroreEl.textContent = "Errore di connessione. Riprova.";
         }
     });
-
-    const hash = window.location.hash.replace('#', '');
-    if (hash === 'accedi' || hash === 'registrati') {
-        mostraTab(hash);
-    }
-
 });
