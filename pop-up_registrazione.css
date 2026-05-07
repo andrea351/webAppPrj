@@ -370,6 +370,17 @@ body {
     white-space: nowrap;
 }
 
+/* ===================== MSG ERRORE INLINE ===================== */
+.msg-errore {
+    font-size: 12px;
+    color: #ff4d6d;
+    text-align: center;
+    min-height: 18px;
+    margin-bottom: 10px;
+    font-family: 'Georgia', serif;
+    letter-spacing: 0.3px;
+    }
+
 /* ===================== PANNELLO FORM REGISTRAZIONE ===================== */
 .pannello {
     display: none;

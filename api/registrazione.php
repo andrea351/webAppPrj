@@ -14,7 +14,7 @@ $nome  = trim($dati['nome']     ?? '');
 $email = trim($dati['email']    ?? '');
 $pass  = trim($dati['password'] ?? '');
 
-// 2. Validazione base lato server (non fidarsi mai solo del frontend)
+// 2. Validazione base lato server (superflua pk già nel frontend)
 if (empty($nome) || empty($email) || empty($pass)) {
     echo json_encode(["successo" => false, "errore" => "Compila tutti i campi."]);
     exit;
@@ -25,11 +25,18 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-if (strlen($pass) < 6) {
-    echo json_encode(["successo" => false, "errore" => "La password deve essere di almeno 6 caratteri."]);
+if (
+    preg_match_all('/[a-zA-Z]/', $password) < 6 ||
+    !preg_match('/[A-Z]/', $password) ||
+    !preg_match('/\d/', $password) ||
+    !preg_match('/[.,;:!?\-]/', $password)
+) {
+    echo json_encode([
+        "successo" => false,
+        "errore" => "Password non valida."
+    ]);
     exit;
 }
-
 // 3. Controlla se l'email è già registrata
 $stmt = $pdo->prepare("SELECT id FROM utenti WHERE email = ?");
 $stmt->execute([$email]);
