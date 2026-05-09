@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", async () => {
     
     let film = []; // Qui metterò i FILM caricati direttamente dal mio DataBase
+    let generiFiltrati = {}; // {"Chiave_1": Valore_1, "Chiave_2": Valore_2, ...} | GENERI che Appaiono nella Cronologia dell'Utente
+    let cronologiaArray = [];
     try {
         const res = await fetch('api/get_dati_database.php');
         film = await res.json();
@@ -22,6 +24,24 @@ document.addEventListener("DOMContentLoaded", async () => {
         "Risate",
         "Lacrime In Arrivo"
     ];
+
+    // JSON Ricevuto da ' suggeriti.php ' con [ Locandina, Rating, Genere, countGenere ] ⤵️
+    try {
+        const rispostaSuggPHP = await fetch('api/suggeriti.php');
+        const datiRicevuti = await rispostaSuggPHP.json();
+
+        if (!datiRicevuti.errore) {
+            cronologiaArray = datiRicevuti;
+            datiRicevuti.forEach(insiemeDati => {
+                const generiSingoli = insiemeDati.GenUno.split("/");
+                generiSingoli.forEach(genereSing => {
+                    genereSing = genereSing.trim();
+                    if (!(genereSing in generiFiltrati)) { generiFiltrati[genereSing] = 0; generiFiltrati[genereSing] += 1; }
+                    else generiFiltrati[genereSing] += 1;
+                });
+            });
+        }
+    } catch(e) { console.error('Errore caricamento SUGGERITI: ', e); }
 
     const contenitore = document.getElementById("contenitore-film"); // Indica dove METTERE le CARD dei FILM
 
@@ -89,6 +109,51 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             sezione.appendChild(riga);
             contenitore.appendChild(sezione);
+        }); mostraSuggeriti();
+    }
+
+    function mostraSuggeriti() {
+        let filmDaMostrare = [];
+
+        if (Object.keys(generiFiltrati).length === 0) { // NO Cronologia === NO Generi, perciò FILTRA per RATING | Sceglie i FILM con il Miglior RATING tra TUTTI QUELLI Presenti quel GIORNO, ovviamente Indipendentemente dal GENERE
+            filmDaMostrare = film
+                .filter(f => Object.keys(f.orari).includes(giornoAttivo))
+                    .sort((a, b) => b.rating - a.rating)
+                        .slice(0, 5);
+        } else {
+            filmDaMostrare = film
+                .filter(f => Object.keys(f.orari).includes(giornoAttivo)) // FILM Disponibili OGGI
+                .filter(f => !cronologiaArray.some(datoR => {
+                    return (f.locandina === datoR.LocDue) 
+                }))
+                    .map(f => { // ... E tra quelli Disponibili Oggi effettua la seguente Operazione di MAPPING
+                        let score = 0;
+                        const genF = f.genere.split("/");
+                        genF.forEach(genSingolo => {
+                            genSingolo = genSingolo.trim();
+                            if (genSingolo in generiFiltrati) score += generiFiltrati[genSingolo] * 2;
+                        });
+
+                        score += f.rating;
+
+                        return { ... f, score};
+                    })
+                        .filter(f => f.score > 0) // Scarta FILM il cui GENERE NON è MAI stato ACQUISTATO
+                            .sort((a, b) => b.score - a.score)
+                                .slice(0, 5); // Viene resa VISIBILI SOLO la TOP 5 dei Suggeriti
+        } if (filmDaMostrare.length === 0) return; 
+
+        // Costruisco il DOM con l'HTML ⤵️
+        const divSuggeriti = document.getElementById('suggeriti-per-te');
+        divSuggeriti.innerHTML = '';
+
+        filmDaMostrare.forEach(filmToShow => {
+            const imgSpace = document.createElement('img'); const linkToGo = document.createElement('a');
+            imgSpace.src = filmToShow.locandina; linkToGo.href = `${filmToShow.pagina}&data=${encodeURIComponent(giornoAttivo)}`;
+
+            linkToGo.appendChild(imgSpace);
+            divSuggeriti.appendChild(linkToGo);
+            observer.observe(linkToGo);
         });
     }
 

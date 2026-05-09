@@ -59,6 +59,7 @@ foreach ($filmRows as $f) { // PER OGNI FILM PRESO DAL DATABASE, qui sto nel MAI
         'pagina'    => 'api/strutturaGenerale_film.php?id=' . $id,  
         'rating'    => (float) $f['rating'],
         'etichetta' => $f['etichetta'],
+        'genere'    => $f['genere'],
         'mood'      => $moodPerFilm[$id] ?? [],
         'orari'     => $orariPerFilm[$id] ?? (object)[],
     ];

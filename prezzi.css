@@ -1,0 +1,142 @@
+@font-face {
+    font-family: 'Stronger-Thinker-Bold';
+    src: url('Stronger-Thinker-Bold.ttf');
+}
+
+/* ===================== OVERLAY ===================== */
+.prezzi-overlay {
+    display: none; /* apriPU() lo mette a flex */
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 0, 3, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* ===================== POPUP ===================== */
+#prezzi-popup {
+    display: none; /* apriPU() lo mette a block */
+    position: relative;
+    width: 460px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(128, 0, 32, 0.25) transparent;
+    background: #ffffff;
+    border: 1px solid rgba(128, 0, 32, 0.12);
+    border-radius: 24px;
+    padding: 52px 40px 40px;
+    box-shadow:
+        0 32px 64px rgba(128, 0, 32, 0.12),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+    color: #2a0a10;
+}
+
+#prezzi-popup::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    border-radius: 24px 24px 0 0;
+    background: linear-gradient(90deg, #5e0015, #bb2248, #5e0015);
+}
+
+/* ===================== CHIUDI ===================== */
+.prezzi-chiudi {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 20px;
+    color: rgba(42, 10, 16, 0.25);
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+    font-family: sans-serif;
+    transition: color 0.2s ease, transform 0.25s ease;
+}
+
+.prezzi-chiudi:hover {
+    color: #ff4d6d;
+    transform: rotate(90deg);
+}
+
+/* ===================== TITOLO ===================== */
+#testo_promozioni h1 {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 20px;
+    letter-spacing: 2px;
+    color: #2a0a10;
+    margin: 0 0 8px;
+    text-align: center;
+}
+
+.nota {
+    font-size: 12px;
+    color: rgba(122, 64, 80, 0.7);
+    text-align: center;
+    margin-bottom: 24px;
+    font-style: italic;
+}
+
+/* ===================== SEZIONI ===================== */
+.sezione {
+    margin-bottom: 16px;
+    padding: 16px 20px;
+    border: 1px solid rgba(128, 0, 32, 0.1);
+    border-radius: 12px;
+    background: #fdf5f7;
+}
+
+.sezione.highlight {
+    background: linear-gradient(135deg, rgba(94, 0, 21, 0.06), rgba(187, 34, 72, 0.08));
+    border-color: rgba(128, 0, 32, 0.2);
+}
+
+.sezione.abbonamenti {
+    background: linear-gradient(135deg, rgba(58, 0, 13, 0.05), rgba(94, 0, 21, 0.08));
+    border-color: rgba(128, 0, 32, 0.15);
+}
+
+.sezione h2 {
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: #800020;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+}
+
+.sezione ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sezione ul li {
+    font-size: 14px;
+    color: #2a0a10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(128, 0, 32, 0.06);
+}
+
+.sezione ul li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sezione ul li span {
+    font-size: 11px;
+    color: rgba(122, 64, 80, 0.6);
+    font-style: italic;
+}
