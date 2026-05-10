@@ -37,10 +37,16 @@ body {
 }
 
 /* ===================== HEADER ===================== */
+/* Stile identico al resto del sito (main.css) */
 .pannello-superiore {
     display: flex;
     align-items: center;
-    background: linear-gradient(90deg, var(--burgundy-deep) 0%, var(--burgundy-dark) 40%, var(--burgundy) 60%, var(--burgundy-dark) 80%, var(--burgundy-deep) 100%);
+    background: linear-gradient(90deg,
+        var(--burgundy-deep)  0%,
+        var(--burgundy-dark) 40%,
+        var(--burgundy)      60%,
+        var(--burgundy-dark) 80%,
+        var(--burgundy-deep) 100%);
     padding: 0 40px;
     color: white;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255,255,255,0.05) inset;
@@ -48,6 +54,7 @@ body {
     z-index: 10;
 }
 
+/* Sottile riga luminosa in fondo all'header */
 .pannello-superiore::after {
     content: '';
     position: absolute;
@@ -63,11 +70,11 @@ header nav {
     width: 100%;
 }
 
-/* --- MENU --- */
+/* --- MENU SINISTRA --- */
 .menu {
     flex: 1;
     display: flex;
-    gap: 80px;
+    gap: 60px;
 }
 
 .menu a {
@@ -89,16 +96,19 @@ header nav {
 .logo-centro {
     flex: 1;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
+}
+
+.logo-centro a {
+    display: inline-flex;
 }
 
 .img-logo {
-    height: 160px;
+    height: 140px;
     width: auto;
     cursor: pointer;
     filter: drop-shadow(0 0 20px rgba(255, 77, 109, 0.2));
     transition: filter 0.3s ease;
-    margin-left: 80px;
 }
 
 .img-logo:hover {
@@ -108,20 +118,19 @@ header nav {
 /* --- BOTTONE PROFILO --- */
 .bottone-profilo {
     flex: 1;
+    display: flex;
     justify-content: flex-end;
     background: none;
     border: none;
     color: rgba(255,255,255,0.7);
     cursor: pointer;
-    display: flex;
     align-items: center;
     transition: color 0.2s ease, transform 0.2s ease;
-    padding-right: 70px;
+    padding: 0;
 }
 
 .bottone-profilo:hover {
     color: white;
-    transform: scale(1.15);
 }
 
 /* ===================== MAIN ===================== */
@@ -230,7 +239,7 @@ h3 {
 .lavora-con-noi ul {
     list-style: disc;
     padding-left: 1.5rem;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0 0.75rem;
 }
 
 .lavora-con-noi ul li {
@@ -283,6 +292,32 @@ form textarea {
     min-height: 110px;
 }
 
+/* ===================== FEEDBACK FORM ===================== */
+.form-feedback {
+    font-size: 13px;
+    min-height: 20px;
+    margin-top: 0.5rem;
+    font-family: 'Georgia', serif;
+    border-radius: 6px;
+    padding: 0;
+    transition: all 0.25s ease;
+}
+
+.form-feedback.errore {
+    color: #c0392b;
+    background: rgba(192, 57, 43, 0.06);
+    border: 1px solid rgba(192, 57, 43, 0.2);
+    padding: 8px 12px;
+}
+
+.form-feedback.successo {
+    color: #1a7a3a;
+    background: rgba(26, 122, 58, 0.06);
+    border: 1px solid rgba(26, 122, 58, 0.2);
+    padding: 8px 12px;
+}
+
+/* ===================== BOTTONE SUBMIT ===================== */
 form button[type="submit"] {
     margin-top: 1.2rem;
     padding: 12px 28px;
@@ -295,13 +330,29 @@ form button[type="submit"] {
     text-transform: uppercase;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
     align-self: flex-start;
+    position: relative;
+    overflow: hidden;
 }
 
-form button[type="submit"]:hover {
+form button[type="submit"]::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.35), transparent);
+}
+
+form button[type="submit"]:hover:not(:disabled) {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px var(--burgundy-glow);
+}
+
+form button[type="submit"]:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
 /* ===================== FOOTER ===================== */
@@ -321,5 +372,28 @@ footer {
 @media (max-width: 900px) {
     .contenitore-sezioni {
         flex-direction: column;
+    }
+
+    .menu {
+        gap: 30px;
+    }
+
+    .img-logo {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .pannello-superiore {
+        padding: 0 20px;
+    }
+
+    .menu {
+        gap: 20px;
+    }
+
+    .menu a {
+        font-size: 11px;
+        letter-spacing: 1px;
     }
 }

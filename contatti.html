@@ -5,22 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contatti - Cinema Mood</title>
     <link rel="stylesheet" href="contatti.css">
+    <link rel="icon" href="logo.png">
 </head>
 
 <body>
-    <header class = "pannello-superiore">
+    <header class="pannello-superiore">
         <nav>
             <div class="menu">
                 <a href="main.html">HOME</a>
-                <a href="servizi.html">SERVIZI</a>
-                <a href="prezzi.html">PREZZI</a>
+                <a href="prezzi.html" id="link-prezzi">PREZZI</a>
             </div>
 
             <div class="logo-centro">
-                <img src="logo.png" alt="Logo Cinema" class="img-logo">
+                <a href="main.html">
+                    <img src="logo.png" alt="Logo Cinema" class="img-logo">
+                </a>
             </div>
 
-            <button id="btn-profilo" class="bottone-profilo">
+            <button id="btn-profilo" class="bottone-profilo" title="Profilo">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
                     <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
@@ -29,66 +31,145 @@
     </header>
 
     <main>
-        <!-- Container flessibile per le due sezioni -->
         <div class="contenitore-sezioni">
+
             <!-- Sezione Contatti -->
             <section class="contatti">
                 <h2>Contatti</h2>
                 <div class="info-contatti">
-                    <p>📍 <strong>Indirizzo:</strong><em> Inserire Indirizzo</em></p>
-                    <p>📞 <strong>Telefono:</strong><em> Inserire Numero Telefonico</em></p>
-                    <p>✉️ <strong>Email:</strong> <a href="mailto:cinemamood@gmail.com">cinemamood@gmail.com</a></p>
+                    <p>📍 <strong>Indirizzo:</strong> <em>Viale Battista Bardanzellu 110, Roma</em></p>
+                    <p>📞 <strong>Telefono:</strong> <em>+39 06 0000000</em></p>
+                    <p>✉️ <strong>Email:</strong> <a href="mailto:cinema.cinemamood@gmail.com">cinema.cinemamood@gmail.com</a></p>
                     <p>🕒 <strong>Orari:</strong> Lun-Ven 09:30 – 01:00 | Sab-Dom 09:00 – 02:00</p>
                 </div>
 
                 <div class="mappa">
                     <h3>Dove siamo</h3>
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.1234567890123!2d12.492123456!3d41.890123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61923456789%3A0xabcdef123456789!2sViale+Battista+Bardanzellu+110%2C+Roma!5e0!3m2!1sit!2sit!4v1699999999999!5m2!1sit!2sit" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2993.1234567890123!2d12.492123456!3d41.890123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132f61923456789%3A0xabcdef123456789!2sViale+Battista+Bardanzellu+110%2C+Roma!5e0!3m2!1sit!2sit!4v1699999999999!5m2!1sit!2sit"
                         width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
-
                 </div>
             </section>
 
-            <!-- Sezione ' Lavora Con Noi ' -->
+            <!-- Sezione Lavora Con Noi + Form -->
             <section class="lavora-con-noi">
                 <h2>Lavora con noi</h2>
-                <p>Ti piacerebbe lavorare nel mondo del cinema? Cinema Mood è sempre alla ricerca di persone motivate per il team di:
-                    <ul>
-                        <li>Sala</li>
-                        <li>Biglietteria</li>
-                        <li>Bar</li>
-                    </ul>
-                </p>
-                <p>Invia il tuo CV a <a href="mailto:cinemamood@gmail.com">cinemamood@gmail.com</a></p>
+                <p>Ti piacerebbe lavorare nel mondo del cinema? Cinema Mood è sempre alla ricerca di persone motivate per il team di:</p>
+                <ul>
+                    <li>Sala</li>
+                    <li>Biglietteria</li>
+                    <li>Bar</li>
+                </ul>
+                <p>Invia il tuo CV a <a href="mailto:cinema.cinemamood@gmail.com">cinema.cinemamood@gmail.com</a></p>
 
                 <div class="form-contatti">
                     <h3>Inviaci un messaggio</h3>
-                <!--- # va sostituito col nome del file dove verranno raccolti
-                i dati inseriti dall'utente. file.php o file.js--->
-                    <form action="#" method="post">
+
+                    <form id="form-msg" novalidate>
                         <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" required>
+                        <input type="text" id="nome" name="nome" required placeholder=" ">
 
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
+                        <input type="email" id="email" name="email" required placeholder=" ">
 
                         <label for="oggetto">Oggetto:</label>
-                        <input type="text" id="oggetto" name="oggetto" required>
+                        <input type="text" id="oggetto" name="oggetto" required placeholder=" ">
 
                         <label for="messaggio">Messaggio:</label>
-                        <textarea id="messaggio" name="messaggio" rows="5" required></textarea>
+                        <textarea id="messaggio" name="messaggio" rows="5" required placeholder=" "></textarea>
 
-                        <button type="submit">Invia</button>
+                        <!-- Messaggio feedback -->
+                        <p class="form-feedback" id="form-feedback"></p>
+
+                        <button type="submit" id="btn-invia-msg">Invia</button>
                     </form>
                 </div>
             </section>
+
         </div>
     </main>
 
     <footer>
         <p>&copy; 2026 Cinema Mood - Tutti i diritti riservati</p>
     </footer>
+
+    <!-- Script profilo (gestisce btn-profilo) -->
+    <script src="profilo.js"></script>
+
+    <!-- Script prezzi (intercetta link PREZZI) -->
+    <script src="prezzi.js"></script>
+
+    <!-- Form contatti -->
+    <script>
+    document.getElementById('form-msg').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const nome      = document.getElementById('nome').value.trim();
+        const email     = document.getElementById('email').value.trim();
+        const oggetto   = document.getElementById('oggetto').value.trim();
+        const messaggio = document.getElementById('messaggio').value.trim();
+        const feedback  = document.getElementById('form-feedback');
+        const btn       = document.getElementById('btn-invia-msg');
+
+        feedback.className = 'form-feedback';
+        feedback.textContent = '';
+
+        // Validazione client
+        if (!nome || !email || !oggetto || !messaggio) {
+            feedback.classList.add('errore');
+            feedback.textContent = 'Compila tutti i campi prima di inviare.';
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            feedback.classList.add('errore');
+            feedback.textContent = 'Inserisci un indirizzo email valido.';
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Invio in corso…';
+
+        try {
+            const risposta = await fetch('api/contatti.php', {
+                method:  'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body:    JSON.stringify({ nome, email, oggetto, messaggio })
+            });
+
+            const dati = await risposta.json();
+
+            if (dati.successo) {
+                feedback.classList.add('successo');
+                feedback.textContent = 'Messaggio inviato! Ti risponderemo al più presto.';
+                document.getElementById('form-msg').reset();
+                btn.textContent = 'Invia';
+                btn.disabled = false;
+            } else {
+                feedback.classList.add('errore');
+                feedback.textContent = dati.errore || 'Si è verificato un errore. Riprova.';
+                btn.textContent = 'Invia';
+                btn.disabled = false;
+            }
+        } catch (err) {
+            feedback.classList.add('errore');
+            feedback.textContent = 'Errore di connessione. Riprova più tardi.';
+            btn.textContent = 'Invia';
+            btn.disabled = false;
+        }
+    });
+
+    // Pulisce il feedback mentre l'utente digita
+    ['nome','email','oggetto','messaggio'].forEach(id => {
+        document.getElementById(id).addEventListener('input', () => {
+            const fb = document.getElementById('form-feedback');
+            fb.textContent = '';
+            fb.className = 'form-feedback';
+        });
+    });
+    </script>
+
 </body>
 </html>

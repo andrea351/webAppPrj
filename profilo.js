@@ -69,6 +69,18 @@
     let keyEta = 'eta';
     let profiloCaricato = false; // Evita che OGNI VOLTA che l'UTENTE APRE il PopUp vengano rifatte nuovamente la CHIAMATA ad ' api/sessione.php ' e tutti gli addEventListener
 
+    // AGGIUNTA DA LEO
+    /*FUNZIONAMENTO urlLogin(): 
+    1. Prende il nome della pagina corrente dall'URL del browser
+    2. lo attacca come parametro al link popup
+    3. pop-up_registrazione.js legge quel parametro con URLSearchParams
+    4. lo usa come destinazione dopo il login (invece di mandare sempre su main.html)*/
+
+    function urlLogin() {
+        const paginaCorrente = encodeURIComponent(window.location.href);
+        return '/webAppPrj/pop-up_registrazione.html?ritorno=' + paginaCorrente;
+    }
+
     async function apriPU() {
         /* document.getElementById('vista-loggato').style.display = 'none'; */
             /* overlay.classList.add('aperto'); caricaProfilo(); */
@@ -76,9 +88,9 @@
         try {
             const r = await fetch('api/sessione.php');
             const dati = await r.json();
-            if (!dati.loggato) window.location.href = "pop-up_registrazione.html";
+            if (!dati.loggato) window.location.href = urlLogin();
             else { overlay.classList.add('aperto'); caricaProfilo(dati); }
-        } catch(err) { window.location.href = "pop-up_registrazione.html"; }
+        } catch(err) { window.location.href = urlLogin(); }
     }
 
     function chiudiPU() {
@@ -153,7 +165,7 @@
                 caricaCronologia();
             } // else /* document.getElementById('vista-non-loggato').style.display = 'block'; */ // Altrimenti rendo VISIBILE questo DIV
                     /* window.location.href = "pop-up_registrazione.html"; */
-        } catch(err) { console.log("Errore in caricamento dati utente in Sezione Profilo: ", err); /* document.getElementById('vista-non-loggato').style.display = 'block'; */ window.location.href = "pop-up_registrazione.html"; }
+        } catch(err) { console.log("Errore in caricamento dati utente in Sezione Profilo: ", err); /* document.getElementById('vista-non-loggato').style.display = 'block'; */ window.location.href = urlLogin(); }
 
         // Imposta ' max ' con la DATA CORRENTE ⤵️
         const dataAttuale = new Date();

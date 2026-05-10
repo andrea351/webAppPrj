@@ -3,11 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const overlay = document.getElementById("overlay");
     const chiudi  = document.getElementById("chiudi");
 
+    // legge la pagina di ritorno dal parametro ?ritorno=
+    const params = new URLSearchParams(window.location.search);
+    const paginaRitorno = params.get('ritorno') || 'main.html';
+
     /* -------- Chiudi popup -------- */
     function closePopup() {
         // non la posso dichiarare dentro html, altrimenti si chiude subito
         overlay.classList.add("closing");
-        setTimeout(() => window.location.href = "main.html", 300); // Se Premo ' X ' o Fuori dal popUp mi RIPORTA alla Pagina Principale [ ' main ' ]
+        setTimeout(() => window.location.href = paginaRitorno, 300); // Se Premo ' X ' o Fuori dal popUp mi RIPORTA alla pagina precedente
     }
     chiudi.addEventListener("click", closePopup);
     overlay.addEventListener("click", (e) => { if (e.target === overlay) closePopup(); });
@@ -19,6 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("pannello-" + quale).classList.add("attivo");
         document.getElementById("tab-" + quale).classList.add("attivo");
     };
+
+    //gestione tab iniziale: se l'URL contiene #registrati, apre quel pannello
+    if (window.location.hash === '#registrati'){mostraTab('registrati');}
 
     /* -------- Mostra / Nascondi password -------- */
     setupTogglePassword("toggle-login-pwd", "login-pwd", "icon-eye-login");
@@ -64,9 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const dati = await risposta.json();
 
             if (dati.successo) {
-                // Login riuscito → chiudi popup e vai alla home
-                closePopup();
-                window.location.href = "main.html";
+                window.location.href = paginaRitorno;
             } else {
                 erroreEl.textContent = dati.errore;
             }
@@ -115,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             if (dati.successo) {
                 // Registrazione riuscita -> vai alla home
-                window.location.href = "main.html";
+                window.location.href = paginaRitorno;
             } else {
                 erroreEl.textContent = dati.errore;
             }
