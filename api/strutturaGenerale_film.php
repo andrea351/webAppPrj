@@ -1,25 +1,101 @@
 <?php
 
-require 'configurazione.php'; // Ho bisogno di ' confugurazione.php ' perchè contiene i parametri per collegarsi al DB
+require 'configurazione.php'; 
                               
+$film = null;
+$titolo_cercato = "";
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0; // $_GET['id'] prende l'ID direttamente dall'URL, se esiste lo CONVERTE in NUM
+if (isset($_GET['id']) && intval($_GET['id']) > 0) {
+    $id = intval($_GET['id']);
+    
+    $stmt = $conn->prepare("SELECT * FROM film WHERE id = ? AND attivo = 1");
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $film = $stmt->get_result()->fetch_assoc();
+} 
+// L'utente ha usato la barra di ricerca 
+elseif (isset($_GET['titolo_film']) && !empty(trim($_GET['titolo_film']))) {
+    $titolo_cercato = trim($_GET['titolo_film']);
+    
+    $stmt = $conn->prepare("SELECT * FROM film WHERE titolo = ? AND attivo = 1 LIMIT 1");
+    // CORREZIONE: Usiamo $titolo_cercato, non $titoloFilm
+    $stmt->bind_param("s", $titolo_cercato); 
+    $stmt->execute();
+    $film = $stmt->get_result()->fetch_assoc();
+}
 
-if ($id <= 0) {
-    header("Location: ../main.html");
+// SE IL FILM NON C'È
+if (!$film) {
+    echo '<!DOCTYPE html>
+    <html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Film non in programma - Mood Cinema</title>
+        <base href="/webAppPrj/">
+        <link rel="stylesheet" href="main.css">
+        <link rel="icon" href="logo.png">
+    </head>
+    <body>
+        <header class="pannello-superiore">
+            <nav class="menu-sx">
+                <a href="main.html">HOME</a>
+                <a href="contatti.html">CONTATTACI</a>
+                <a href="servizi.html">SERVIZI</a>
+            </nav>
+            <div class="logo-centro">
+                <a href="main.html">
+                    <img src="logo.png" alt="Logo Cinema" class="img-logo">
+                </a>
+            </div>
+            <div class="menu-destra">
+                <button id="btn-profilo" class="bottone-profilo">
+                    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+                        <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <hr>
+
+        <div style="
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 55vh;
+            gap: 20px;
+        ">
+            <h1 style="
+                font-family: \'Georgia\', serif;
+                font-size: 17px;
+                font-weight: normal;
+                color: rgba(250,238,241,0.5);
+                letter-spacing: 2px;
+                margin: 0;
+                text-align: center;
+            ">Questo film non è in programma</h1>
+
+            <div style="width: 40px; height: 1px; background: rgba(187,34,72,0.35);"></div>
+
+            <p style="
+                font-family: \'Georgia\', serif;
+                font-size: 11px;
+                color: rgba(250,238,241,0.2);
+                letter-spacing: 1px;
+                margin: 0;
+                font-style: italic;
+            "></p>
+
+        <script src="profilo.js"></script>
+    </body>
+    </html>';
     exit;
 }
 
-// CERCO nel DB il film corrispondente all'ID (SOLO gli ATTIVI)
-$stmt = $conn->prepare("SELECT * FROM film WHERE id = ? AND attivo = 1");
-$stmt->bind_param("i", $id);
-$stmt->execute();
-$film = $stmt->get_result()->fetch_assoc(); // Prendo tutti i valori dalla TABELLA ' film ' nel mio DB
-
-if (!$film) {
-    header("HTTP/1.0 404 Not Found");
-    die("Film non trovato.");
-}
+$id = $film['id']; 
+$durata = $film['durata'];
 
 // Cerco nel mio DB gli ORARI per il FILM in QUESTIONE ( ID precedentemente preso )
 

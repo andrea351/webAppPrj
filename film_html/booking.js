@@ -49,6 +49,28 @@ document.getElementById('btn-chiudi-booking').addEventListener('click', () => {
     
     const salaContainer = document.querySelector('.sala-container');
     if (salaContainer) salaContainer.classList.remove('acquisto-completato');
+
+    const boxConferma = document.getElementById('box-conferma-acquisto');
+    if (boxConferma) boxConferma.remove(); 
+
+    const sidebar = document.querySelector('.booking-sidebar');
+    if (sidebar) {
+        const riepilogo = sidebar.querySelector('.sidebar-riepilogo');
+        const pagamento = sidebar.querySelector('.pagamento-form');
+        // Facciamo riapparire il form e il totale
+        if (riepilogo) riepilogo.style.display = '';
+        if (pagamento) pagamento.style.display = '';
+    }
+    
+    if (btnPaga) {
+        btnPaga.textContent = 'ACQUISTA ORA'; // Ripristina il testo del bottone
+    }
+
+    document.getElementById('cm-msg-acquisto')?.remove(); // Toglie eventuali scritte rosse di errore
+    
+    // Svuota i campi di testo per sicurezza e privacy
+    const inputs = ['input-carta', 'input-scadenza', 'input-cvv', 'input-nome'];
+    inputs.forEach(id => { if(document.getElementById(id)) document.getElementById(id).value = ''; });
 });
 
 // CONTINUA 
@@ -116,6 +138,34 @@ function costruisciMappa() {
 
 // Selezione Posto
 function selezionaPosto(el, id) {
+    if (el.classList.contains('occupato')) return;
+    // Se l'utente clicca un posto mentre c'è il messaggio di successo, ripristino tutto
+    const boxConferma = document.getElementById('box-conferma-acquisto');
+    if (boxConferma) {
+        boxConferma.remove(); 
+        const sidebar = document.querySelector('.booking-sidebar');
+        if (sidebar) {
+            const riepilogo = sidebar.querySelector('.sidebar-riepilogo');
+            const pagamento = sidebar.querySelector('.pagamento-form');
+            if (riepilogo) riepilogo.style.display = '';
+            if (pagamento) pagamento.style.display = '';
+        }
+        
+        const salaContainer = document.querySelector('.sala-container');
+        if (salaContainer) salaContainer.classList.remove('acquisto-completato');
+        
+        const btnPaga = document.getElementById('btn-paga');
+        if (btnPaga) btnPaga.textContent = 'ACQUISTA ORA';
+        
+        // Svuoto campi carta
+        const inputs = ['input-carta', 'input-scadenza', 'input-cvv', 'input-nome'];
+        inputs.forEach(inputId => { 
+            const campo = document.getElementById(inputId);
+            if(campo) campo.value = ''; 
+        });
+    }
+
+
     if (stato.postiSelezionati.has(id)) {
         stato.postiSelezionati.delete(id);
         el.classList.remove('selezionato');
@@ -160,6 +210,8 @@ function avviaTimer() {
     stato.timerAvviato = true;
     stato.timerSecondi = TIMER_DURATA;
     timerBox.classList.add('visibile');
+    timerBox.classList.remove('urgente');
+    timerBox.style.opacity = '1';
     aggiornaDisplayTimer();
 
     stato.timerInterval = setInterval(() => {
@@ -447,7 +499,14 @@ function mostraSchermataConferma(email, codice) {
     const sidebar = document.querySelector('.booking-sidebar');
     if (!sidebar) return;
 
-    sidebar.innerHTML = `
+    const riepilogo = sidebar.querySelector('.sidebar-riepilogo');
+    const pagamento = sidebar.querySelector('.pagamento-form');
+    if (riepilogo) riepilogo.style.display = 'none';
+    if (pagamento) pagamento.style.display = 'none';
+
+    const boxConferma = document.createElement('div');
+    boxConferma.id = 'box-conferma-acquisto';
+    boxConferma.innerHTML = `
         <div style="display:flex;flex-direction:column;align-items:center;
                     text-align:center;gap:16px;padding:20px 0;">
             <div style="width:64px;height:64px;border-radius:50%;
@@ -477,7 +536,7 @@ function mostraSchermataConferma(email, codice) {
                 Controlla anche la cartella spam.</p>
         </div>`;
 
-    btnPaga.style.display = 'none';
+    sidebar.appendChild(boxConferma);
     resetTimer();
     const salaContainer = document.querySelector('.sala-container');
     if (salaContainer) salaContainer.classList.add('acquisto-completato');
