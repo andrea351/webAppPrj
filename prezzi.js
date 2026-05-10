@@ -21,17 +21,17 @@
                         <h2>🎟️ Biglietti</h2>
                             <ul>
                                 <li><strong>Prezzo base:</strong> 8,50€ <span>(tutto l'anno)</span></li>
-                                <li><strong>Under 5:</strong> 3€ <span>(tutto l'anno)</span></li>
-                                <li><strong>Studenti:</strong> 6,50€ <span>(Lun - Gio)</span></li>
-                                <li><strong>Over 70:</strong> 6€ <span>(tutto l'anno)</span></li>
+                                <li><strong>Under 5:</strong> 3,00€ <span>(tutto l'anno)</span></li>
+                                <li><strong>Studenti:</strong> 6,50€ <span>(lun - gio)</span></li>
+                                <li><strong>Over 70:</strong> 6,00€ <span>(tutto l'anno)</span></li>
                             </ul>
                     </div>
 
                     <div class="sezione highlight">
                         <h2>🔥 Offerte Speciali</h2>
                             <ul>
-                                <li><strong>Primi Lun - Mar - Mer del mese:</strong> 5€</li>
-                                <li><strong>San Valentino 💘:</strong> 15€ a coppia</li>
+                                <li><strong>Primi Lun - Mar - Mer del mese:</strong> 5,00€</li>
+                                <li><strong>San Valentino 💘:</strong> 15,00€ a coppia</li>
                                 <li><strong>Compleanno 🎂:</strong> biglietto gratis</li>
                             </ul>
                     </div>
@@ -40,8 +40,8 @@
                         <h2>💳 Abbonamenti</h2>
                             <ul>
                                 <li><strong>Mensile:</strong> 19,90€</li>
-                                <li><strong>Semestrale:</strong> 99€</li>
-                                <li><strong>Annuale:</strong> 189€</li>
+                                <li><strong>Semestrale:</strong> 99,00€</li>
+                                <li><strong>Annuale:</strong> 189,00€</li>
                             </ul>
                     </div>
 

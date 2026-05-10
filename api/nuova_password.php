@@ -19,8 +19,8 @@ if (empty($token) || empty($password)) {
     exit;
 }
 
-if (strlen($password) < 6) {
-    echo json_encode(['successo' => false, 'errore' => 'La password deve essere di almeno 6 caratteri.']);
+if (!preg_match("/[A-Z]/", $password) || !preg_match("/[a-z]{5,}/", $password) || !preg_match("/\d+/", $password) || !preg_match("/[.,;:!?-]+/", $password)) {
+    echo json_encode(['successo' => false, 'errore' => 'La password deve essere contenere: almeno 6 caratteri alfabetici, di cui almeno una maiuscola, almeno un numero e almeno un simbolo speciale (.,;:!?-).']);
     exit;
 }
 

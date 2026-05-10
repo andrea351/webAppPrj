@@ -39,9 +39,9 @@ if (!$film) {
     <body>
         <header class="pannello-superiore">
             <nav class="menu-sx">
-                <a href="main.html">HOME</a>
+                <a href="main.html">TORNA ALLA HOME</a>
                 <a href="contatti.html">CONTATTACI</a>
-                <a href="servizi.html">SERVIZI</a>
+                <a href="prezzi.html">PREZZI</a>
             </nav>
             <div class="logo-centro">
                 <a href="main.html">
@@ -145,7 +145,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
         <nav class="menu-sx">
             <a href="main.html">TORNA ALLA HOME</a>
             <a href="contatti.html">CONTATTACI</a>
-            <a href="servizi">SERVIZI</a>
+            <a href="prezzi.html">PREZZI</a>
         </nav>
 
         <div class="logo-centro">
@@ -316,6 +316,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
         if (typeof stato !== 'undefined' && window._cmDatiFilm)
             stato.datiFilm = window._cmDatiFilm;
     </script>
+    <script defer src="prezzi.js"></script>
 
 </body>
 </html>
