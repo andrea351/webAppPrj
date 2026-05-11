@@ -199,6 +199,19 @@ try {
                 $stmt->execute([$_SESSION['utente_id'], $locPath]);
         } catch (Exception $e) { error_log('Errore salvataggio acquisto: ' . $e->getMessage());}
     }
+    $stmtFilm = $pdo->prepare("SELECT id FROM film WHERE locandina=? LIMIT 1");
+    $stmtFilm->execute([$locPath]);
+    $filmRow=$stmtFilm->fetch();
+
+    if ($filmRow) {
+        $film_id = $filmRow['id'];
+        $orarioDb = $orario . ':00';
+        
+        $stmtPosto = $pdo->prepare("INSERT IGNORE INTO postiOccupati (film_id, data, orario, posto) VALUES (?,?,?,?)");
+        foreach ($posti as $posto) {
+            $stmtPosto->execute([$film_id, $dataStr, $orarioDb, $posto]);
+        }
+    }
 
     echo json_encode(['successo' => true, 'codice' => $codice]);
 } catch (MailException $e) {
