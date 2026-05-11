@@ -3,6 +3,10 @@
 // Riceve: { "nome": "...", "email": "...", "oggetto": "...", "messaggio": "..." }
 // Risponde: { "successo": true } oppure { "successo": false, "errore": "..." }
 
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 define('BASE_DIR', realpath(__DIR__ . '/..'));
 
 require BASE_DIR . '/vendor/autoload.php';
@@ -18,9 +22,17 @@ header('Content-Type: application/json');
 
 $dati     = json_decode(file_get_contents('php://input'), true);
 $nome     = trim($dati['nome']     ?? '');
-$email    = trim($dati['email']    ?? '');
+$email    = $_SESSION['utente_email'];
 $oggetto  = trim($dati['oggetto']  ?? '');
 $msg      = trim($dati['messaggio'] ?? '');
+
+// sovrascrivo l'email inserita nel form con quella della sessione.
+// motivo: evito che persona X mandi un msg a nome (email) di persona Y
+
+if (empty($_SESSION['utente_id'])) {
+    echo json_encode(['successo' => false, 'errore' => 'Devi essere loggato per inviare un messaggio.']);
+    exit;
+}
 
 // Validazione
 if (empty($nome) || empty($email) || empty($oggetto) || empty($msg)) {

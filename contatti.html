@@ -102,73 +102,90 @@
 
     <!-- Form contatti -->
     <script>
-    document.getElementById('form-msg').addEventListener('submit', async function (e) {
-        e.preventDefault();
+        async function init() {
+            // caso in cui l'utente non è loggato
+            const sessione = await(await fetch('api/sessione.php')).json();
+            if(!sessione.loggato){
+                document.getElementById('form-msg').innerHTML=
+                '<p>Devi avere un account CineMood per inviare un messaggio. <a href="pop-up_registrazione.html?ritorno=contatti.html"> Accedi o Registrati </a></p>'
+                return;
+            }
 
-        const nome      = document.getElementById('nome').value.trim();
-        const email     = document.getElementById('email').value.trim();
-        const oggetto   = document.getElementById('oggetto').value.trim();
-        const messaggio = document.getElementById('messaggio').value.trim();
-        const feedback  = document.getElementById('form-feedback');
-        const btn       = document.getElementById('btn-invia-msg');
+            // caso in cui l'utente è loggato
+            document.getElementById('email').value = sessione.utente.email;
+            document.getElementById('email').readOnly = true;
 
-        feedback.className = 'form-feedback';
-        feedback.textContent = '';
+            document.getElementById('form-msg').addEventListener('submit', async function (e) {
+                e.preventDefault();
 
-        // Validazione client
-        if (!nome || !email || !oggetto || !messaggio) {
-            feedback.classList.add('errore');
-            feedback.textContent = 'Compila tutti i campi prima di inviare.';
-            return;
-        }
+                const nome      = document.getElementById('nome').value.trim();
+                const email     = document.getElementById('email').value.trim();
+                const oggetto   = document.getElementById('oggetto').value.trim();
+                const messaggio = document.getElementById('messaggio').value.trim();
+                const feedback  = document.getElementById('form-feedback');
+                const btn       = document.getElementById('btn-invia-msg');
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            feedback.classList.add('errore');
-            feedback.textContent = 'Inserisci un indirizzo email valido.';
-            return;
-        }
+                feedback.className = 'form-feedback';
+                feedback.textContent = '';
 
-        btn.disabled = true;
-        btn.textContent = 'Invio in corso…';
+                // Validazione client
+                if (!nome || !email || !oggetto || !messaggio) {
+                    feedback.classList.add('errore');
+                    feedback.textContent = 'Compila tutti i campi prima di inviare.';
+                    return;
+                }
 
-        try {
-            const risposta = await fetch('api/contatti.php', {
-                method:  'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify({ nome, email, oggetto, messaggio })
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    feedback.classList.add('errore');
+                    feedback.textContent = 'Inserisci un indirizzo email valido.';
+                    return;
+                }
+
+                btn.disabled = true;
+                btn.textContent = 'Invio in corso…';
+
+                try {
+                    const risposta = await fetch('api/contatti.php', {
+                        method:  'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body:    JSON.stringify({ nome, email, oggetto, messaggio })
+                    });
+
+                    const dati = await risposta.json();
+
+                    if (dati.successo) {
+                        feedback.classList.add('successo');
+                        feedback.textContent = 'Messaggio inviato! Ti risponderemo al più presto.';
+                        document.getElementById('form-msg').reset();
+                        btn.textContent = 'Invia';
+                        btn.disabled = false;
+                    } else {
+                        feedback.classList.add('errore');
+                        feedback.textContent = dati.errore || 'Si è verificato un errore. Riprova.';
+                        btn.textContent = 'Invia';
+                        btn.disabled = false;
+                    }
+                } catch (err) {
+                    feedback.classList.add('errore');
+                    feedback.textContent = 'Errore di connessione. Riprova più tardi.';
+                    btn.textContent = 'Invia';
+                    btn.disabled = false;
+                }
             });
 
-            const dati = await risposta.json();
-
-            if (dati.successo) {
-                feedback.classList.add('successo');
-                feedback.textContent = 'Messaggio inviato! Ti risponderemo al più presto.';
-                document.getElementById('form-msg').reset();
-                btn.textContent = 'Invia';
-                btn.disabled = false;
-            } else {
-                feedback.classList.add('errore');
-                feedback.textContent = dati.errore || 'Si è verificato un errore. Riprova.';
-                btn.textContent = 'Invia';
-                btn.disabled = false;
-            }
-        } catch (err) {
-            feedback.classList.add('errore');
-            feedback.textContent = 'Errore di connessione. Riprova più tardi.';
-            btn.textContent = 'Invia';
-            btn.disabled = false;
+            // Pulisce il feedback mentre l'utente digita
+            ['nome','email','oggetto','messaggio'].forEach(id => {
+                document.getElementById(id).addEventListener('input', () => {
+                    const fb = document.getElementById('form-feedback');
+                    fb.textContent = '';
+                    fb.className = 'form-feedback';
+                });
+            });   
         }
-    });
 
-    // Pulisce il feedback mentre l'utente digita
-    ['nome','email','oggetto','messaggio'].forEach(id => {
-        document.getElementById(id).addEventListener('input', () => {
-            const fb = document.getElementById('form-feedback');
-            fb.textContent = '';
-            fb.className = 'form-feedback';
-        });
-    });
+        init();
+        
     </script>
 
 </body>
