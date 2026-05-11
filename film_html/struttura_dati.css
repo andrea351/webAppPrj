@@ -298,3 +298,166 @@
 .trama-film             { animation: fadeSlideUp  0.5s ease 0.50s both; }
 .cast-film              { animation: fadeSlideUp  0.5s ease 0.56s both; }
 .orari-section          { animation: fadeSlideUp  0.5s ease 0.62s both; }
+
+/* ===================== RESPONSIVE TABLET (≤1024px) ===================== */
+@media (max-width: 1024px) {
+    .contenitore-dettaglio {
+        gap: 40px;
+        padding: 40px 40px;
+    }
+
+    .contenitore-dettaglio::before {
+        left: calc(40px + 240px + 20px);
+    }
+
+    .dettaglio-sx {
+        flex: 0 0 220px;
+    }
+
+    .titolo-film-dettaglio {
+        font-size: 32px;
+    }
+
+    .trama-film {
+        font-size: 15px;
+    }
+}
+
+/* ===================== RESPONSIVE MOBILE (≤768px) ===================== */
+@media (max-width: 768px) {
+    .contenitore-dettaglio {
+        flex-direction: column;
+        gap: 24px;
+        padding: 24px 20px;
+        align-items: center;
+    }
+
+    .contenitore-dettaglio::before {
+        display: none;
+    }
+
+    .dettaglio-sx {
+        flex: 0 0 auto;
+        width: 180px;
+        min-height: auto;
+    }
+
+    .dx-wrapper {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .dettaglio-dx {
+        width: 100%;
+    }
+
+    .titolo-film-dettaglio {
+        font-size: 26px;
+        text-align: center;
+    }
+
+    .info-tecniche {
+        text-align: center;
+        font-size: 13px;
+    }
+
+    .trama-film {
+        font-size: 14px;
+    }
+
+    .cast-film {
+        font-size: 14px;
+    }
+
+    .orari-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .orari-lista {
+        flex-wrap: wrap;
+    }
+
+    .btn-continua {
+        width: 100%;
+        text-align: center;
+    }
+
+    .orario-badge {
+        top: 8px;
+        right: 8px;
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+}
+
+/* ===================== RESPONSIVE SMALL MOBILE (≤480px) ===================== */
+@media (max-width: 480px) {
+    .contenitore-dettaglio {
+        padding: 16px 14px;
+        gap: 16px;
+    }
+
+    .dettaglio-sx {
+        width: 140px;
+    }
+
+    .dx-wrapper {
+        width: 100%;
+        min-height: auto;
+        overflow: visible;
+        height: auto;
+    }
+
+    .dettaglio-dx {
+        width: 100%;
+        position: static;
+        transform: none !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        overflow: visible;
+    }
+
+    .titolo-film-dettaglio {
+        font-size: 22px;
+    }
+
+    .info-tecniche {
+        font-size: 12px;
+    }
+
+    .trama-film {
+        font-size: 13px;
+        margin-bottom: 14px;
+    }
+
+    .cast-film {
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+
+    .orari-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding-right: 0;
+        padding-top: 16px;
+    }
+
+    .orari-lista {
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .btn-orario {
+        font-size: 12px;
+        padding: 8px 14px;
+    }
+
+    .btn-continua {
+        width: 100%;
+        text-align: center;
+        opacity: 1;
+    }
+}

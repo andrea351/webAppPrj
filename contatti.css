@@ -397,3 +397,117 @@ footer {
         letter-spacing: 1px;
     }
 }
+
+/* ===================== RESPONSIVE TABLET (≤1024px) ===================== */
+@media (max-width: 1024px) {
+    .pannello-superiore {
+        padding: 0 24px;
+    }
+
+    .img-logo {
+        height: 110px;
+    }
+
+    .menu {
+        gap: 30px;
+    }
+
+    main {
+        padding: 0 1.5rem;
+        margin: 2rem auto;
+    }
+
+    .contenitore-sezioni {
+        gap: 1.5rem;
+    }
+
+    section {
+        flex: 1 1 100%;
+    }
+}
+
+/* ===================== RESPONSIVE MOBILE (≤768px) ===================== */
+@media (max-width: 768px) {
+    .pannello-superiore {
+        padding: 0 16px;
+        flex-wrap: wrap;
+    }
+
+    header nav {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        padding: 8px 0;
+        gap: 8px;
+    }
+
+    .menu {
+        order: 2;
+        flex: 1 1 100%;
+        justify-content: center;
+        gap: 20px;
+        padding: 8px 0;
+        border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .menu a {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .logo-centro {
+        order: 1;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .img-logo {
+        height: 80px;
+    }
+
+    .bottone-profilo {
+        order: 1;
+        flex: 0;
+    }
+
+    main {
+        padding: 0 1rem;
+        margin: 1.5rem auto;
+    }
+
+    .contenitore-sezioni {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    section {
+        flex: 1 1 100%;
+        padding: 1.5rem;
+    }
+
+    h2 {
+        font-size: 12px;
+        margin-bottom: 1rem;
+    }
+
+    .info-contatti p {
+        font-size: 14px;
+    }
+
+    .mappa iframe {
+        height: 200px;
+    }
+
+    form button[type="submit"] {
+        width: 100%;
+        text-align: center;
+    }
+
+    .lavora-con-noi ul li {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 10px;
+        padding: 1rem;
+    }
+}

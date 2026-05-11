@@ -524,3 +524,194 @@ hr {
     padding: 3px 7px;
     border-radius: 6px;
 }
+
+/* ===================== RESPONSIVE TABLET (≤1024px) ===================== */
+@media (max-width: 1024px) {
+    .pannello-superiore {
+        padding: 0 24px;
+    }
+
+    .img-logo {
+        height: 120px;
+    }
+
+    .menu-sx {
+        gap: 40px;
+    }
+
+    .menu-destra {
+        gap: 60px;
+    }
+
+    .contenitore-scelta-film {
+        padding: 24px 40px 16px 40px;
+        gap: 40px;
+    }
+
+    #contenitore-film {
+        padding: 10px 40px 40px 40px;
+    }
+
+    #mood-btn {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    #mood-btn button {
+        padding: 14px 16px;
+        font-size: 13px;
+    }
+
+    .film-card {
+        width: calc(33% - 28px);
+    }
+
+    #suggeriti-per-te {
+        gap: 24px;
+        padding: 16px 40px;
+    }
+
+    #suggeriti-per-te a {
+        width: 70px;
+    }
+}
+
+/* ===================== RESPONSIVE MOBILE (≤768px) ===================== */
+@media (max-width: 768px) {
+    .pannello-superiore {
+        padding: 0 16px;
+        flex-wrap: wrap;
+    }
+
+    .menu-sx {
+        order: 2;
+        flex: 1 1 100%;
+        justify-content: center;
+        gap: 20px;
+        padding: 8px 0;
+        border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .menu-sx a {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .logo-centro {
+        order: 1;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .img-logo {
+        height: 80px;
+    }
+
+    .menu-destra {
+        order: 1;
+        flex: 0;
+        gap: 16px;
+    }
+
+    .input-ricerca {
+        width: 130px;
+        font-size: 12px;
+    }
+
+    .input-ricerca:focus {
+        width: 160px;
+    }
+
+    .suggeriti-per-te-label {
+        font-size: 10px;
+        padding-top: 12px;
+    }
+
+    #suggeriti-per-te {
+        gap: 12px;
+        padding: 12px 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #suggeriti-per-te a {
+        width: 60px;
+    }
+
+    .contenitore-scelta-film {
+        flex-direction: column;
+        padding: 16px 20px;
+        gap: 20px;
+        align-items: center;
+    }
+
+    #wrapper {
+        width: 100%;
+    }
+
+    #calendario {
+        flex-direction: row;
+        max-height: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding-right: 0;
+        padding-bottom: 4px;
+        gap: 8px;
+    }
+
+    .cal-giorno {
+        flex-shrink: 0;
+        min-width: 56px;
+        padding: 8px 10px;
+    }
+
+    .cal-giorno h1 {
+        font-size: 18px;
+    }
+
+    .cal-giorno h2 {
+        font-size: 9px;
+    }
+
+    .cal-giorno h3 {
+        font-size: 10px;
+    }
+
+    #mood-btn {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+        width: 100%;
+    }
+
+    #mood-btn button {
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+
+    #contenitore-film {
+        padding: 10px 20px 40px 20px;
+    }
+
+    .mood-sezione {
+        padding: 24px 0 12px 0;
+    }
+
+    .mood-sezione-label {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+
+    .mood-riga-film {
+        gap: 20px;
+    }
+
+    .film-card {
+        width: calc(50% - 12px);
+        min-width: 120px;
+    }
+
+    .bottone-orario {
+        font-size: 11px;
+        padding: 4px 10px;
+    }
+}
