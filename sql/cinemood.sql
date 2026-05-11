@@ -606,3 +606,15 @@ CREATE TABLE `acquisti` (
   CONSTRAINT `acquisti_ibfk_1`
     FOREIGN KEY (`utente_id`) REFERENCES `utenti` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--tabella posti occupati
+CREATE TABLE `postiOccupati` (
+  `id`       int(11) NOT NULL AUTO_INCREMENT,
+  `film_id`  int(11) NOT NULL,
+  `data`     date    NOT NULL,
+  `orario`   time    NOT NULL,
+  `posto`    varchar(5) NOT NULL,   
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `unico_posto` (`film_id`, `data`, `orario`, `posto`),
+  FOREIGN KEY (`film_id`) REFERENCES `film`(`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

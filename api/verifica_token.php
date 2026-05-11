@@ -1,11 +1,5 @@
 <?php
-// ===================== VERIFICA TOKEN (sola lettura) =====================
-// Riceve: ?token=...
-// Risponde: { "valido": true } oppure { "valido": false }
-//
-// Questo endpoint viene chiamato in GET al caricamento di nuova_password.html
-// per mostrare subito la schermata di errore se il token è scaduto o già usato,
-// senza però consumare il token (non lo segna come "usato").
+
 
 require 'connessione.php';
 header('Content-Type: application/json');

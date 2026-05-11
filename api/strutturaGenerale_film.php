@@ -288,8 +288,8 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
                             <div class="input-row">
                                 <input type="text" placeholder="MM / AA"
                                        class="input-carta half" maxlength="5" id="input-scadenza"> <!-- INPUT - SCADENZA -->
-                                <input type="text" placeholder="CVV"
-                                       class="input-carta half" maxlength="4" id="input-cvv"> <!-- INPUT - CVV -->
+                                <input type="password" placeholder="CVV"
+                                       class="input-carta half" maxlength="3" id="input-cvv"> <!-- INPUT - CVV -->
                             </div>
                             <input type="text" placeholder="Nome del titolare" class="input-carta" id="input-nome"> <!-- INPUT - NOME -->
                             <button class="btn-paga" id="btn-paga" disabled>ACQUISTA ORA</button>
@@ -307,6 +307,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
             titolo:     <?= json_encode($film['titolo']) ?>,
             locandina:  <?= json_encode($film['locandina']) ?>,
             dataAttiva: '<?= $oggi ?>',
+            film_id:    <?= $id ?>,
         };
     </script>
     <script defer src="film.js"></script>

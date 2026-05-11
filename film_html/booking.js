@@ -46,6 +46,7 @@ document.getElementById('btn-chiudi-booking').addEventListener('click', () => {
     }); 
     stato.postiSelezionati.clear();
     aggiornaRiepilogo();
+    grigliaPosti.innerHTML = '';
     
     const salaContainer = document.querySelector('.sala-container');
     if (salaContainer) salaContainer.classList.remove('acquisto-completato');
@@ -74,7 +75,7 @@ document.getElementById('btn-chiudi-booking').addEventListener('click', () => {
 });
 
 // CONTINUA 
-btnContinua.addEventListener('click', () => {
+btnContinua.addEventListener('click', async  () => {
     if (!stato.orarioSelezionato) return;
 
     stato.postiSelezionati.clear();
@@ -86,19 +87,28 @@ btnContinua.addEventListener('click', () => {
     });
 
     orarioBadge.textContent = stato.orarioSelezionato;
-    if (!grigliaPosti.hasChildNodes()) costruisciMappa();
+    if (!grigliaPosti.hasChildNodes())  await costruisciMappa();
     dxWrapper.classList.add('booking-attivo');
 });
 
 // Mappa Posti 
-function costruisciMappa() {
-    const righe = ['A','B','C','D','E','F','G','H'];
+async function costruisciMappa() {
+    const righe=['A','B','C','D','E','F','G','H'];
     const postiPerFila = 12;
-    const occupati = new Set([
-        'A3','A4','A9','B1','B2','B7','B8','C5','C6','C11',
-        'D3','D4','D9','D10','E1','E2','E6','E7','F4','F5',
-        'F10','G2','G3','G8','G9','H5','H6','H7'
-    ]);
+
+    // Prende i posti già venduti dal database cosi so che sono occupati
+    const filmId=window._cmDatiFilm?.film_id || 0;
+    const data=stato.datiFilm.dataAttiva   || window._cmDatiFilm?.dataAttiva || '';
+    const orario=stato.orarioSelezionato;
+
+    let occupati=new Set();
+    try {
+        const res=await fetch(`/webAppPrj/api/postoOccupato.php?film_id=${filmId}&data=${data}&orario=${orario}`);
+        const dati=await res.json();
+        occupati=new Set(dati.posti); 
+    } catch (e) {
+        console.warn('Impossibile caricare posti occupati:', e);
+    }
 
     righe.forEach(fila => {
         const rigaEl = document.createElement('div');
@@ -128,14 +138,11 @@ function costruisciMappa() {
                 posto.classList.add('disponibile');
                 posto.addEventListener('click', () => selezionaPosto(posto, id));
             }
-
             rigaEl.appendChild(posto);
         }
-
         grigliaPosti.appendChild(rigaEl);
     });
 }
-
 // Selezione Posto
 function selezionaPosto(el, id) {
     if (el.classList.contains('occupato')) return;
