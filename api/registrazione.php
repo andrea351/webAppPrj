@@ -1,7 +1,4 @@
 <?php
-// ===================== REGISTRAZIONE =====================
-// Riceve: { "nome": "...", "email": "...", "password": "..." }
-// Risponde: { "successo": true } oppure { "successo": false, "errore": "..." }
 
 session_start();
 require 'connessione.php';

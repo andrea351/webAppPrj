@@ -1,10 +1,4 @@
 <?php
-// ===================== RECUPERO PASSWORD =====================
-// Riceve: { "email": "..." }
-// Risponde: { "successo": true } oppure { "successo": false, "errore": "..." }
-//
-// Risponde sempre "successo: true" anche se l'email non esiste,
-// per evitare che un malintenzionato scopra quali email sono registrate.
 
 require 'connessione.php';
 header('Content-Type: application/json');

@@ -1,5 +1,5 @@
 <?php
-require 'configurazione.php';
+require 'connessione.php'; 
 
 header('Content-Type: application/json; charset=utf-8');
 
@@ -18,15 +18,15 @@ $mappaGiorni = [
 ];
 
 // PRENDO TUTTI I FILM
-$filmRows = $conn->query("SELECT * FROM film WHERE attivo = 1 ORDER BY id")->fetch_all(MYSQLI_ASSOC);
+$filmRows = $pdo->query("SELECT * FROM film WHERE attivo = 1 ORDER BY id")->fetchAll();
 
 // PER OGNI FILM VEDO A QUALI MOOD APPARTIENE
-$moodRows = $conn->query("
+$moodRows = $pdo->query("
     SELECT fm.film_id, m.nome
     FROM film_moods fm
     JOIN moods m ON fm.mood_id = m.id
     ORDER BY m.ordine
-")->fetch_all(MYSQLI_ASSOC);
+")->fetchAll();
 
 // Raggruppa i MOOD per ' film_id '
 $moodPerFilm = [];
@@ -35,28 +35,28 @@ foreach ($moodRows as $row) {
 }
 
 // PRENDO TUTTI GLI ORARI
-$orariRows = $conn->query("
+$orariRows = $pdo->query("
     SELECT film_id, data, TIME_FORMAT(orario, '%H:%i') AS orario
     FROM orari
     ORDER BY data, orario
-")->fetch_all(MYSQLI_ASSOC);
+")->fetchAll();
 
 // PER OGNI FILM MOSTRO I SUOI ORARI
 $orariPerFilm = [];
 foreach ($orariRows as $row) {
-    $dataStr = $row['data'];                       // '2026-06-01'
+    $dataStr    = $row['data'];
     $nomeGiorno = $mappaGiorni[$dataStr] ?? null;
     if (!$nomeGiorno) continue;
     $orariPerFilm[$row['film_id']][$nomeGiorno][] = $row['orario'];
 }
 
-$output = []; // METTO TUTTE LE SCHEDE FINALI DEI FILM
-foreach ($filmRows as $f) { // PER OGNI FILM PRESO DAL DATABASE, qui sto nel MAIN, quindi VEDRÒ solo queste INFORMAZIONI
-    $id = $f['id'];
+$output = [];
+foreach ($filmRows as $f) {
+    $id       = $f['id'];
     $output[] = [
         'titolo'    => $f['titolo'],
         'locandina' => $f['locandina'],
-        'pagina'    => 'api/strutturaGenerale_film.php?id=' . $id,  
+        'pagina'    => 'api/strutturaGenerale_film.php?id=' . $id,
         'rating'    => (float) $f['rating'],
         'etichetta' => $f['etichetta'],
         'genere'    => $f['genere'],
@@ -65,5 +65,4 @@ foreach ($filmRows as $f) { // PER OGNI FILM PRESO DAL DATABASE, qui sto nel MAI
     ];
 }
 
-echo json_encode($output, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT); // Il mio ARRAY viene formattato in stringhe di testo, il SECONDO parametro si occupa dei caratteri speciali ( lingue diverse ),
-                                                                      // mentre il TERZO stampa bene e utilizza gli giusti spazi
+echo json_encode($output, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);

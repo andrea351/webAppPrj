@@ -1,7 +1,4 @@
 <?php
-// ===================== LOGIN =====================
-// Riceve: { "email": "...", "password": "..." }
-// Risponde: { "successo": true, "nome": "..." } oppure { "successo": false, "errore": "..." }
 
 session_start();
 require 'connessione.php';
