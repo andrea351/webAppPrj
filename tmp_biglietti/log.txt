@@ -1,12 +1,12 @@
 {
     "email": "leo.guerriero30@gmail.com",
-    "titolo": "Le pagine della nostra vita",
-    "orario": "19:30",
+    "titolo": "Avatar",
+    "orario": "20:30",
     "sala": "Sala 1",
     "posti": [
-        "C8"
+        "D10"
     ],
     "totale": "8.50",
     "data": "2026-06-01",
-    "locandina": "locandine\/le_pag_vita.jpg"
+    "locandina": "locandine\/avatar.jpg"
 }

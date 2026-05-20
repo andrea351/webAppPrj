@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+session_start(); // salva i dati in $_SESSION
 require 'connessione.php';
 header('Content-Type: application/json');
 
@@ -17,6 +17,7 @@ if (empty($email) || empty($pass)) {
 }
 
 // 3. Cerca l'utente nel database tramite email
+// sql injection: preparo prima la query e la riepio dopo con i dati
 $stmt = $pdo->prepare("SELECT * FROM utenti WHERE email = ?");
 $stmt->execute([$email]);
 $utente = $stmt->fetch();

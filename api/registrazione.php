@@ -11,17 +11,17 @@ $nome  = trim($dati['nome']     ?? '');
 $email = trim($dati['email']    ?? '');
 $password  = trim($dati['password'] ?? '');
 
-// 2. Validazione base lato server (superflua pk già nel frontend)
+// 2. Validazione base lato server
 if (empty($nome) || empty($email) || empty($password)) {
     echo json_encode(["successo" => false, "errore" => "Compila tutti i campi."]);
     exit;
 }
-
+// 2.1 validazione mail
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(["successo" => false, "errore" => "Email non valida."]);
     exit;
 }
-
+// 2.2 validazione password
 if (
     preg_match_all('/[a-zA-Z]/', $password) < 6 ||
     !preg_match('/[A-Z]/', $password) ||
@@ -43,7 +43,7 @@ if ($stmt->fetch()) {
     exit;
 }
 
-// 4. Cripta la password (MAI salvarla in chiaro!)
+// 4. Cripto la password 
 $passwordCriptata = password_hash($pass, PASSWORD_BCRYPT);
 
 // 5. Salva il nuovo utente nel database
