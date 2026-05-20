@@ -58,6 +58,7 @@
                 </div>
 
                 <button id="logout-btn">Logout</button>
+                <button id="elimina-btn">Elimina</button>
             </div>
             
         </div>
@@ -231,6 +232,52 @@
             // const btnSalva = document.getElementById('salva'); btnSalva.addEventListener('click', ... { ... });
         document.getElementById('salva').addEventListener('click', function() {
             salvaNomeCognome();
+        });
+
+        // Elimina Definitivamente Account ⤵️
+        document.getElementById('elimina-btn').addEventListener('click', function() {
+                
+                const divConfermaElimAccount = document.createElement('div');
+                divConfermaElimAccount.id = 'conferma-eliminazione';
+                divConfermaElimAccount.style.display = 'block';
+
+                Object.assign(divConfermaElimAccount.style, {
+                    position: 'fixed',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    backgroundColor: '#ffffff',
+                    padding: '20px',
+                    border: '1px solid #ccc',
+                    boxShadow: '0 4px 15px rgba(0,0,0,0.3)',
+                    zIndex: '9999',
+                    borderRadius: '8px',
+                    textAlign: 'center'
+                });
+
+                    const bottoneConferma = document.createElement('button');
+                    bottoneConferma.id = 'btn-conferma';
+                    bottoneConferma.textContent = 'Conferma';
+                        const bottoneNega = document.createElement('button');
+                        bottoneNega.id = 'btn-nega';
+                        bottoneNega.textContent = 'Annulla';
+
+                divConfermaElimAccount.appendChild(bottoneConferma); divConfermaElimAccount.appendChild(bottoneNega);
+                document.body.appendChild(divConfermaElimAccount);
+
+                document.getElementById('btn-conferma').addEventListener('click', async function() {
+                    try {
+                        const rispostaPerElimin = await fetch('api/elimina.php');
+                        const datiRicevutiPerElimin = await rispostaPerElimin.json();
+                        if (datiRicevutiPerElimin.successo) window.location.href = 'main.html';
+                
+                    } catch(err) { console.log("Errore in Eliminazione Account", err); }
+                });
+
+                document.getElementById('btn-nega').addEventListener('click', function() {
+                    // divConfermaElimAccount.style.display = 'none';
+                    divConfermaElimAccount.remove();
+                });
         });
     };
 
