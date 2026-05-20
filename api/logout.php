@@ -1,5 +1,5 @@
 <?php
-// ===================== LOGOUT =====================
+
 session_start();
 
 // Rimuove tutte le variabili di sessione

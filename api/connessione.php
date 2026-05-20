@@ -1,26 +1,24 @@
 <?php
 
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL);
-
 // ===================== CONNESSIONE AL DATABASE =====================
-// Questo file viene incluso dagli altri script PHP per connettersi a MySQL.
-// Modifica le variabili in ' .env ' se cambi configurazione.
+// Questo file viene incluso dagli altri script PHP per connettersi al database MySQL.
 
 require __DIR__ . '/../vendor/autoload.php'; // Carica Composer AutoLoad
 use Dotenv\Dotenv;
 
-// Carica il file ' .env ' dalla ROOT del PROGETTO
-$dotenv = Dotenv::createImmutable(__DIR__ . '/../'); // $dotenv = Dotenv::createUnsafeImmutable(__DIR__ . '/../');
+// 1. carico le variabili d'ambiente
+// Carico il file ' .env ' dalla ROOT del PROGETTO
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->safeLoad(); // safeLoad evita errori se il file ' .env ' non esiste
 
 // ===================== CONNESSIONE AL DATABASE =====================
-// Leggi le variabili dal ' .env '
+// Legge le variabili dal ' .env '
 $host   = $_ENV['DB_HOST'] ?? '127.0.0.1';
 $dbname = $_ENV['DB_NAME'] ?? 'cinemood';
 $user   = $_ENV['DB_USER'] ?? 'root';
 $pass   = $_ENV['DB_PASS'] ?? '';
 
+// 2. creo l'oggetto che rappresenta il db_cinemood 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

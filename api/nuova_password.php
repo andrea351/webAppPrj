@@ -1,10 +1,4 @@
 <?php
-// ===================== NUOVA PASSWORD =====================
-// Riceve: { "token": "...", "password": "..." }
-// Risponde:
-//   { "successo": true }
-//   { "successo": false, "token_non_valido": true }   ← token scaduto/già usato
-//   { "successo": false, "errore": "..." }             ← altri errori
 
 require 'connessione.php';
 header('Content-Type: application/json');

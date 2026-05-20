@@ -1,27 +1,22 @@
 <?php
 
-require 'configurazione.php'; 
-                              
+require 'connessione.php'; 
+
 $film = null;
 $titolo_cercato = "";
 
 if (isset($_GET['id']) && intval($_GET['id']) > 0) {
     $id = intval($_GET['id']);
-    
-    $stmt = $conn->prepare("SELECT * FROM film WHERE id = ? AND attivo = 1");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $film = $stmt->get_result()->fetch_assoc();
-} 
-// L'utente ha usato la barra di ricerca 
-elseif (isset($_GET['titolo_film']) && !empty(trim($_GET['titolo_film']))) {
+    $stmt = $pdo->prepare("SELECT * FROM film WHERE id = ? AND attivo = 1");
+    $stmt->execute([$id]);
+    $film = $stmt->fetch();
+
+} elseif (isset($_GET['titolo_film']) && !empty(trim($_GET['titolo_film']))) {
     $titolo_cercato = trim($_GET['titolo_film']);
-    
-    $stmt = $conn->prepare("SELECT * FROM film WHERE titolo = ? AND attivo = 1 LIMIT 1");
-    // CORREZIONE: Usiamo $titolo_cercato, non $titoloFilm
-    $stmt->bind_param("s", $titolo_cercato); 
-    $stmt->execute();
-    $film = $stmt->get_result()->fetch_assoc();
+
+    $stmt = $pdo->prepare("SELECT * FROM film WHERE titolo = ? AND attivo = 1 LIMIT 1");
+    $stmt->execute([$titolo_cercato]);
+    $film = $stmt->fetch();
 }
 
 // SE IL FILM NON C'È
@@ -59,34 +54,15 @@ if (!$film) {
 
         <hr>
 
-        <div style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 55vh;
-            gap: 20px;
-        ">
-            <h1 style="
-                font-family: \'Georgia\', serif;
-                font-size: 17px;
-                font-weight: normal;
-                color: rgba(250,238,241,0.5);
-                letter-spacing: 2px;
-                margin: 0;
-                text-align: center;
-            ">Questo film non è in programma</h1>
-
-            <div style="width: 40px; height: 1px; background: rgba(187,34,72,0.35);"></div>
-
-            <p style="
-                font-family: \'Georgia\', serif;
-                font-size: 11px;
-                color: rgba(250,238,241,0.2);
-                letter-spacing: 1px;
-                margin: 0;
-                font-style: italic;
-            "></p>
+        <div style="display:flex;flex-direction:column;align-items:center;
+                    justify-content:center;height:55vh;gap:20px;">
+            <h1 style="font-family:\'Georgia\',serif;font-size:17px;font-weight:normal;
+                       color:rgba(250,238,241,0.5);letter-spacing:2px;margin:0;
+                       text-align:center;">
+                Questo film non è in programma
+            </h1>
+            <div style="width:40px;height:1px;background:rgba(187,34,72,0.35);"></div>
+        </div>
 
         <script src="profilo.js"></script>
     </body>
@@ -94,36 +70,32 @@ if (!$film) {
     exit;
 }
 
-$id = $film['id']; 
+$id    = $film['id'];
 $durata = $film['durata'];
 
-// Cerco nel mio DB gli ORARI per il FILM in QUESTIONE ( ID precedentemente preso )
-
 $mappaInversaGiorni = [
-    'LUNEDI 1 GIUGNO'    => '2026-06-01',
-    'MARTEDI 2 GIUGNO'   => '2026-06-02',
-    'MERCOLEDI 3 GIUGNO' => '2026-06-03',
-    'GIOVEDI 4 GIUGNO'   => '2026-06-04',
-    'VENERDI 5 GIUGNO'   => '2026-06-05',
-    'SABATO 6 GIUGNO'    => '2026-06-06',
-    'DOMENICA 7 GIUGNO'  => '2026-06-07',
-    'LUNEDI 8 GIUGNO'    => '2026-06-08',
-    'MARTEDI 9 GIUGNO'   => '2026-06-09',
-    'MERCOLEDI 10 GIUGNO'=> '2026-06-10',
+    'LUNEDI 1 GIUGNO'     => '2026-06-01',
+    'MARTEDI 2 GIUGNO'    => '2026-06-02',
+    'MERCOLEDI 3 GIUGNO'  => '2026-06-03',
+    'GIOVEDI 4 GIUGNO'    => '2026-06-04',
+    'VENERDI 5 GIUGNO'    => '2026-06-05',
+    'SABATO 6 GIUGNO'     => '2026-06-06',
+    'DOMENICA 7 GIUGNO'   => '2026-06-07',
+    'LUNEDI 8 GIUGNO'     => '2026-06-08',
+    'MARTEDI 9 GIUGNO'    => '2026-06-09',
+    'MERCOLEDI 10 GIUGNO' => '2026-06-10',
 ];
 
 $giornoRicevuto = $_GET['data'] ?? 'LUNEDI 1 GIUGNO';
-$oggi = $mappaInversaGiorni[$giornoRicevuto] ?? '2026-06-01';
+$oggi           = $mappaInversaGiorni[$giornoRicevuto] ?? '2026-06-01';
 
-$stmtOrari = $conn->prepare(
+// mysqli: bind_param("is", $id, $oggi)
+// PDO:    execute([$id, $oggi])  ← i tipi vengono inferiti automaticamente
+$stmtOrari = $pdo->prepare(
     "SELECT orario, sala FROM orari WHERE film_id = ? AND data = ? ORDER BY orario ASC"
 );
-$stmtOrari->bind_param("is", $id, $oggi);
-$stmtOrari->execute();
-$orari = $stmtOrari->get_result()->fetch_all(MYSQLI_ASSOC); // ' fetch_all(MYSQLI_ASSOC) ' mi crea un ARRAY MULTIDIMENSIONALE, perchè posso avere più ORARI per un FILM
-
-$durata = $film['durata'];
-
+$stmtOrari->execute([$id, $oggi]);
+$orari = $stmtOrari->fetchAll(); // fetchAll() senza argomenti: FETCH_ASSOC è già il default
 
 function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
 ?>
@@ -133,7 +105,6 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= e($film['titolo']) ?> - Mood Cinema</title>
-
     <base href="/webAppPrj/">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="film_html/struttura_dati.css">
@@ -147,13 +118,11 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
             <a href="contatti.html">CONTATTACI</a>
             <a href="prezzi.html">PREZZI</a>
         </nav>
-
         <div class="logo-centro">
             <a href="main.html">
                 <img src="logo.png" alt="Logo Cinema" class="img-logo">
             </a>
         </div>
-
         <div class="menu-destra">
             <button id="btn-profilo" class="bottone-profilo">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
@@ -165,27 +134,20 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
 
     <hr style="width: 70%;">
 
-  
     <div class="contenitore-dettaglio">
 
-        <!-- Locandina + Trailer -->
         <div class="dettaglio-sx">
             <div class="media-container" id="trailer-container">
-                <img
-                    src="<?= e($film['locandina']) ?>"
-                    alt="Locandina <?= e($film['titolo']) ?>"
-                    id="poster-img"
-                >
-                <video
-                    id="trailer-video"
-                    src="<?= e($film['trailer']) ?>"
-                    muted loop preload="auto"
-                ></video>
+                <img src="<?= e($film['locandina']) ?>"
+                     alt="Locandina <?= e($film['titolo']) ?>"
+                     id="poster-img">
+                <video id="trailer-video"
+                       src="<?= e($film['trailer']) ?>"
+                       muted loop preload="auto"></video>
                 <div class="play-overlay"></div>
             </div>
         </div>
 
-        <!-- Info + Booking -->
         <div class="dx-wrapper" id="dx-wrapper">
 
             <div class="dettaglio-dx" id="dettaglio-dx">
@@ -207,7 +169,6 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
                     <p><strong>Cast:</strong> <?= e($film['cast_film']) ?></p>
                 </div>
 
-                <!-- Orari, presi direttamente dal mio DB -->
                 <div class="orari-section">
                     <div class="orari-lista" id="orari-lista">
 
@@ -217,7 +178,7 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
                             </p>
                         <?php else: ?>
                             <?php foreach ($orari as $o):
-                                $orarioFormattato = substr($o['orario'], 0, 5); // Formatta l'orario [ Es. "14:30:00" -> "14:30" ]
+                                $orarioFormattato = substr($o['orario'], 0, 5);
                             ?>
                                 <button
                                     class="btn-orario"
@@ -238,7 +199,6 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
 
             </div>
 
-            <!-- Booking Panel -->
             <div class="booking-panel" id="booking-panel">
                 <div class="orario-badge" id="orario-badge"></div>
                 <button class="btn-chiudi-booking" id="btn-chiudi-booking">✕</button>
@@ -284,14 +244,15 @@ function e($str) { return htmlspecialchars($str ?? '', ENT_QUOTES, 'UTF-8'); }
                         <div class="pagamento-form">
                             <p class="pagamento-titolo">Pagamento</p>
                             <input type="text" placeholder="Numero carta"
-                                   class="input-carta" maxlength="19" id="input-carta"> <!-- INPUT - CARTA -->
+                                   class="input-carta" maxlength="19" id="input-carta">
                             <div class="input-row">
                                 <input type="text" placeholder="MM / AA"
-                                       class="input-carta half" maxlength="5" id="input-scadenza"> <!-- INPUT - SCADENZA -->
+                                       class="input-carta half" maxlength="5" id="input-scadenza">
                                 <input type="password" placeholder="CVV"
-                                       class="input-carta half" maxlength="3" id="input-cvv"> <!-- INPUT - CVV -->
+                                       class="input-carta half" maxlength="3" id="input-cvv">
                             </div>
-                            <input type="text" placeholder="Nome del titolare" class="input-carta" id="input-nome"> <!-- INPUT - NOME -->
+                            <input type="text" placeholder="Nome del titolare"
+                                   class="input-carta" id="input-nome">
                             <button class="btn-paga" id="btn-paga" disabled>ACQUISTA ORA</button>
                         </div>
                     </div>

@@ -206,8 +206,10 @@
 
     </div>
 </div>
-
+ 
 <script>
+    // poiché <script> è dopo </html> il DOM si è già caricato, quindi non è necessario
+    // fare document.addEventListener("DOMContentLoaded", function(){})
 document.getElementById("btn-invia").addEventListener("click", async function () {
     const email   = document.getElementById("email-recupero").value.trim();
     const errore  = document.getElementById("msg-errore");

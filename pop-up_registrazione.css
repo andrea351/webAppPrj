@@ -23,6 +23,7 @@
 
 /* ===================== RESET & BASE ===================== */
 *, *::before, *::after {
+    /*width e height includono padding e margin*/
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -42,8 +43,8 @@ body {
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /*verticale*/
+    align-items: center;     /*orizzontale*/
     z-index: 9999;
     animation: fadeInOverlay 0.35s ease both;
 }
@@ -65,20 +66,23 @@ body {
 /* ===================== POPUP CONTENUTO ===================== */
 .pop-up-contenuto {
     position: relative;
+    
     width: 420px;
-    max-width: 95vw;
+    /*per mobile il popup si restringe automaticamente*/
+    max-width: 95vw; /*la larghezza del popup non occupa più del 95% della finestra (viewport)*/
     max-height: 92vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+
+    overflow-y: auto; /*fa comparire una scroll bar se il contenuto è troppo alto*/
+    overflow-x: hidden; /*blocco lo scroll orizzontale*/
     scrollbar-width: thin;
     scrollbar-color: var(--burgundy) transparent;
 
+    /*sfumatura, bordo, colori*/
     background:
         linear-gradient(160deg, rgba(94, 0, 21, 0.18) 0%, rgba(10, 2, 5, 0.95) 40%);
     border: 1px solid var(--border);
     border-radius: 20px;
     padding: 0;
-
     box-shadow:
         0 40px 80px rgba(0, 0, 0, 0.8),
         0 0 0 1px rgba(187, 34, 72, 0.1) inset,
@@ -108,17 +112,25 @@ body {
 
 /* ===================== BARRA SUPERIORE (LOGO HEADER) ===================== */
 .popup-header {
+    /*sfondo sfumato orizzontale e simmetrico*/
     background: linear-gradient(90deg, var(--burgundy-deep) 0%, var(--burgundy-dark) 40%, var(--burgundy) 60%, var(--burgundy-dark) 80%, var(--burgundy-deep) 100%);
+    
+    /*separo il logo dai bordi e lo metto al centro*/
     padding: 28px 30px 24px;
+
+    /*per allineare il logo al centro*/
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+
+    /*angoli smussati sotto e sopra*/
     border-radius: 20px 20px 0 0;
 
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
+/*linea luminosa che sfuma ai lati*/
 .popup-header::after {
     content: '';
     position: absolute;
@@ -135,6 +147,7 @@ body {
 
 /* ===================== PULSANTE CHIUDI ===================== */
 .chiudi {
+    /*riferimento = popup-contenuto*/
     position: absolute;
     top: 14px;
     right: 18px;
@@ -167,7 +180,10 @@ body {
 }
 
 .tab-btn {
+    /*l'elemento può espandersi per riempire lo spazio vuoto. Ogni bottone occupa la stessa
+    percentuale di spazio*/
     flex: 1;
+
     padding: 10px;
     background: transparent;
     border: none;
@@ -185,6 +201,7 @@ body {
     color: white;
 }
 
+/*cambia colore quando ci passo sopra il mouse*/
 .tab-btn:not(.attivo):hover {
     background: var(--glass-light);
     color: var(--cream);
@@ -208,7 +225,7 @@ body {
 }
 
 .campo input {
-    width: 100%;
+    width: 100%; /*elemento largo quanto il contenitore*/
     padding: 14px 16px 14px 44px;
     background: rgba(128, 0, 32, 0.08);
     border: 1px solid var(--border);
@@ -246,6 +263,12 @@ body {
     transition: all 0.22s ease;
 }
 
+/*
+Implementazione floating labels
+
+1. quando l’input è selezionato (ci stai scrivendo dentro), modifica il label
+2. quando l’input NON è vuoto (contiene testo), modifica il label
+*/
 .campo input:focus + label,
 .campo input:not(:placeholder-shown) + label {
     top: 0;
@@ -257,7 +280,7 @@ body {
     border-radius: 3px;
     letter-spacing: 1.5px;
 }
-
+/*per mettere l'icona dentro l'input. Così non influisce sul layout degli altri*/
 /* Icona campo */
 .icona-campo {
     position: absolute;
@@ -295,6 +318,11 @@ body {
 
 /* ===================== LINK RECUPERO PASSWORD ===================== */
 .link-recupero-pswd {
+    /*
+    forza "link-recupero-pswd" ad occupare tutta la riga, così da mandare
+    il successivo elemento a capo
+    */
+
     display: block;
     text-align: right;
     margin-bottom: 22px;
@@ -311,7 +339,7 @@ body {
     color: var(--rose);
 }
 
-/* ===================== BOTTONE PRINCIPALE ===================== */
+/* ===================== BOTTONE "ACCEDI" PRINCIPALE ===================== */
 .btn-login {
     width: 100%;
     padding: 13px;
@@ -330,6 +358,7 @@ body {
     margin-bottom: 20px;
 }
 
+/*linea luminosa sopra il bottone*/
 .btn-login::before {
     content: '';
     position: absolute;
@@ -343,31 +372,9 @@ body {
     box-shadow: 0 8px 24px var(--burgundy-glow);
 }
 
+/*quando l'utente tiene premuto il bottone questo non si muove (finché non lo rilascia e torna su)*/
 .btn-login:active {
     transform: translateY(0);
-}
-
-/* ===================== SEPARATORE ===================== */
-.linea-con-testo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.linea-con-testo hr {
-    flex: 1;
-    border: none;
-    border-top: 1px solid var(--border);
-}
-
-.linea-con-testo span {
-    font-family: 'Stronger-Thinker-Bold';
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    white-space: nowrap;
 }
 
 /* ===================== MSG ERRORE INLINE ===================== */
@@ -382,6 +389,8 @@ body {
     }
 
 /* ===================== PANNELLO FORM REGISTRAZIONE ===================== */
+
+/*inizialmente i pannelli non sono visibili*/
 .pannello {
     display: none;
 }
@@ -397,6 +406,8 @@ body {
 }
 
 /* ===================== RESPONSIVE ===================== */
+
+/*se la viewport non è quella di un computer, modifico il padding e gli arrotondamenti*/
 @media (max-width: 460px) {
     .pop-up-contenuto {
         border-radius: 16px;
