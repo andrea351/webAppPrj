@@ -160,6 +160,9 @@
                         feedback.classList.add('successo');
                         feedback.textContent = 'Messaggio inviato! Ti risponderemo al più presto.';
                         document.getElementById('form-msg').reset();
+                        // riempio il campo con la mail
+                        document.getElementById('email').value = sessione.utente.email;
+                        
                         btn.textContent = 'Invia';
                         btn.disabled = false;
                     } else {
