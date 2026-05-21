@@ -268,6 +268,39 @@
 
 .profilo-popup #logout-btn:active { transform: translateY(0); }
 
+.profilo-popup #elimina-btn {
+    width: 100%; /* Occupa TUTTA la LARGHEZZA [ Width ] del Contenitore PADRE, cioè il Contenitore in cui è Contenuto (PopUp) */
+    padding: 13px; /* Spazio Interno */
+    border: none;
+    background: linear-gradient(135deg, #5e0015, #800020);
+    color: white;
+    font-family: 'Stronger-Thinker-Bold';
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border-radius: 12px; /* Stonda gli Angoli del Bottone */
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Gestisce i casi di Overflow | Nasconde [ Hidden ] qualcosa se esce dai Margini del Btn */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animazioni */
+    margin-top: 10px; /* 10 Pixel di Margine dall'elemento che gli sta appena sopra (Btn LogOut) */
+}
+
+.profilo-popup #elimina-btn::before {
+    content: '';
+    position: absolute; /* Cosa Fa: Rimuove un Elemento dal Flusso Naturale della Pagina, POSIZIONANDOLO in modo Esatto RISPETTO AL GENITORE che contiene ' position: relative ' */
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.35), transparent);
+}
+
+.profilo-popup #elimina-btn:hover { /* Quando il CURSORE è SOPRA al Btn */
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(128, 0, 32, 0.22);
+}
+
+.profilo-popup #elimina-btn:active { transform: translateY(0); }
+
 #saluto-benvenuto {
     font-size: 22px;
     margin-bottom: 20px;

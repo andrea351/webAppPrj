@@ -258,11 +258,57 @@
                     const bottoneConferma = document.createElement('button');
                     bottoneConferma.id = 'btn-conferma';
                     bottoneConferma.textContent = 'Conferma';
+
+                    Object.assign(bottoneConferma.style, {
+                        padding: '10px 0',
+                        width:           '48%',
+                        border:          'none',
+                        borderRadius:    '10px',
+                        background:      'linear-gradient(135deg, #8b1a1a, #c0392b)',
+                        color:           'white',
+                        fontFamily:      "'Stronger-Thinker-Bold', sans-serif",
+                        fontSize:        '11px',
+                        letterSpacing:   '1.5px',
+                        textTransform:   'uppercase',
+                        cursor:          'pointer',
+                    });
+
                         const bottoneNega = document.createElement('button');
                         bottoneNega.id = 'btn-nega';
                         bottoneNega.textContent = 'Annulla';
+                        
+                        Object.assign(bottoneNega.style, {
+                            padding:         '10px 0',
+                            width:           '48%',
+                            border:          '1px solid rgba(128,0,32,0.2)',
+                            borderRadius:    '10px',
+                            background:      '#fdf5f7',
+                            color:           '#7a4050',
+                            fontFamily:      "'Stronger-Thinker-Bold', sans-serif",
+                            fontSize:        '11px',
+                            letterSpacing:   '1.5px',
+                            textTransform:   'uppercase',
+                            cursor:          'pointer',
+                        });
 
-                divConfermaElimAccount.appendChild(bottoneConferma); divConfermaElimAccount.appendChild(bottoneNega);
+                            const testoAvviso = document.createElement('p');
+                            testoAvviso.id = 'txt-avviso';
+                            testoAvviso.textContent = 'Questa azione è irreversibile. Tutti i tuoi dati verranno eliminati definitivamente.';
+
+                            Object.assign(testoAvviso.style, {
+                                fontFamily:  'Stronger-Thinker-Bold',
+                                fontSize:    '13px',
+                                color:       '#7a4050',
+                                lineHeight:  '1.6',
+                                marginBottom:'20px',
+                            });
+
+                const divConfAnnBtn = document.createElement('div'); // Creato per Poter Gestire Distanza tra btnConferma e btnNega
+                Object.assign(divConfAnnBtn.style, {
+                    display: 'flex', justifyContent: 'space-between', gap: '8px',
+                }); divConfAnnBtn.appendChild(bottoneConferma); divConfAnnBtn.appendChild(bottoneNega);
+
+                divConfermaElimAccount.appendChild(testoAvviso); divConfermaElimAccount.appendChild(divConfAnnBtn);
                 document.body.appendChild(divConfermaElimAccount);
 
                 document.getElementById('btn-conferma').addEventListener('click', async function() {
