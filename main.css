@@ -64,13 +64,13 @@ hr {
 }
 
 /* --- MENU SINISTRA --- */
-.menu-sx {
+.menu-sx { /* Menù Superiore Sx */
     flex: 1;
     display: flex;
     gap: 70px;
 }
 
-.menu-sx a {
+.menu-sx a { /* ' a ' è il Tag che Richiama ciò che in HTML è stato messo in quel Tag, ovvero le scritte Contattaci | Prezzi */
     font-family: 'Stronger-Thinker-Bold';
     color: rgba(255, 255, 255, 0.75);
     text-decoration: none;
@@ -80,14 +80,14 @@ hr {
     transition: color 0.3s ease, letter-spacing 0.3s ease;
 }
 
-.menu-sx a:hover {
+.menu-sx a:hover { /* ' hover ' indica quando PASSI SOPRA ALLE PAROLE identificate da ' a '. Indica cosa accade alle SINGOLE PAROLE Contattaci | Prezzi quando ci metto il Cursore Sopra */
     color: #fff;
     letter-spacing: 3px;
 }
 
 /* --- LOGO --- */
 .logo-centro {
-    display: flex;
+    display: flex; /* Mette il FIGLIO all'Interno del GENITORE, permette anche un Buon Responsive */
     justify-content: center;
 }
 
@@ -137,10 +137,10 @@ hr {
 
 .icona-lente {
     display: block;     
-    pointer-events: none;
+    pointer-events: none; /* Non accade NIENTE se ci passo Sopra con il Cursore */
 }
 
-.input-ricerca {
+.input-ricerca { /* Lo Spazio vero e proprio dove scrivo il Testo da Ricercare */
     padding: 8px 16px 8px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -172,9 +172,9 @@ hr {
     background: none;
     border: none;
     color: rgba(255,255,255,0.7);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
+    cursor: pointer; /* Il Cursore diventa una MANINA quando PASSO SOPRA al Simbolo del Profilo con il Cursore */
+    display: flex; /* Lo sistema nel contenitore PADRE, nella sua Sezione Dedicata */
+    align-items: center; /* Allinea Centralmente l'Oggetto in Questione [ Simbolo del Profilo ] all'Interno della Sezione a lui dedicata con ' display: flex ' */
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
