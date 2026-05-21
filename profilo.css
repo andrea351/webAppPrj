@@ -3,7 +3,7 @@
     src: url('Stronger-Thinker-Bold.ttf');
 }
 
-/* ===================== OVERLAY ===================== */
+/* OVERLAY */
 .profilo-overlay {
     position: fixed;
     inset: 0;
@@ -24,7 +24,7 @@
     pointer-events: all;
 }
 
-/* ===================== POPUP ===================== */
+/* POPUP Vero e Proprio */
 .profilo-popup {
     position: relative;
     width: 460px;
@@ -58,7 +58,7 @@
     background: linear-gradient(90deg, #5e0015, #bb2248, #5e0015);
 }
 
-/* ===================== CHIUDI ===================== */
+/* CHIUDI [ La X ] */
 .profilo-popup .profilo-chiudi {
     position: absolute;
     top: 16px;
@@ -78,7 +78,7 @@
     transform: rotate(90deg);
 }
 
-/* ===================== FOTO ===================== */
+/* FOTO */
 .profilo-popup .foto-container {
     display: flex;
     flex-direction: column;
@@ -144,14 +144,14 @@
 
 .profilo-popup #rem-foto-profilo:hover { color: #ff4d6d; }
 
-/* ===================== HR ===================== */
+/* HR */
 .profilo-popup hr {
     border: none;
     border-top: 1px solid rgba(128, 0, 32, 0.08);
     margin: 22px 0;
 }
 
-/* ===================== GRIGLIA DATI ===================== */
+/* GRIGLIA DATI | Griglia con Campi Nome, Cognome, Mail ... */
 .profilo-popup .griglia-dati {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -203,7 +203,7 @@
     box-shadow: 0 0 0 3px rgba(128, 0, 32, 0.06);
 }
 
-/* ===================== DATE PICKER ===================== */
+/* Sezione ANNO NASCITA */
 .profilo-popup input[type="date"] {
     position: relative;
     cursor: pointer;
@@ -235,7 +235,7 @@
     color: #2a0a10;
 }
 
-/* ===================== LOGOUT ===================== */
+/* Bottone LOGOUT */
 .profilo-popup #logout-btn {
     width: 100%;
     padding: 13px;
@@ -261,14 +261,14 @@
     background: linear-gradient(90deg, transparent, rgba(255, 150, 170, 0.35), transparent);
 }
 
-.profilo-popup #logout-btn:hover {
+.profilo-popup #logout-btn:hover { /* Quando passo con il Cursore Sopra al btnLogOut */
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(128, 0, 32, 0.22);
 }
 
 .profilo-popup #logout-btn:active { transform: translateY(0); }
 
-.profilo-popup #elimina-btn {
+.profilo-popup #elimina-btn { /* Struttura CSS IDENTICA a quella del btnLogOut, dato che sono due Btn Identici */
     width: 100%; /* Occupa TUTTA la LARGHEZZA [ Width ] del Contenitore PADRE, cioè il Contenitore in cui è Contenuto (PopUp) */
     padding: 13px; /* Spazio Interno */
     border: none;
