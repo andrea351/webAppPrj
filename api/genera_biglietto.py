@@ -21,11 +21,11 @@ def genera_pdf(dati, output_path):
 
     c = canvas.Canvas(output_path, pagesize=A4)
 
-    # ── SFONDO SCURO ──────────────────────────────────────────────
+    # SFONDO SCURO
     c.setFillColor(colors.HexColor('#0d0508'))
     c.rect(0, 0, W, H, fill=1, stroke=0)
 
-    # ── FASCIA HEADER bordeaux ────────────────────────────────────
+    # FASCIA HEADER bordeaux
     header_h = 110
     c.setFillColor(colors.HexColor('#3a000d'))
     c.rect(0, H - header_h, W, header_h, fill=1, stroke=0)
@@ -49,7 +49,7 @@ def genera_pdf(dati, output_path):
     c.setLineWidth(0.5)
     c.line(40, H - header_h - 12, W - 40, H - header_h - 12)
 
-    # ── LOCANDINA ─────────────────────────────────────────────────
+    # LOCANDINA
     loc_x, loc_y = 40, H - header_h - 200
     loc_w, loc_h = 110, 160
 
@@ -63,7 +63,7 @@ def genera_pdf(dati, output_path):
     else:
         _placeholder(c, loc_x, loc_y, loc_w, loc_h, titolo)
 
-    # ── INFO FILM ─────────────────────────────────────────────────
+    # INFO FILM
     info_x   = loc_x + loc_w + 28
     info_top = H - header_h - 36
 
@@ -101,7 +101,7 @@ def genera_pdf(dati, output_path):
     else:
         c.drawString(info_x + 75, info_top - 96, posti_str)
 
-    # ── BOX TOTALE ────────────────────────────────────────────────
+    # BOX TOTALE
     tot_y = loc_y - 28
     c.setFillColor(colors.HexColor('#1a0810'))
     c.roundRect(40, tot_y - 8, W - 80, 44, 6, fill=1, stroke=0)
@@ -121,7 +121,7 @@ def genera_pdf(dati, output_path):
     c.drawRightString(W - 55, tot_y + 12,
                       f'{n} posto{"" if n == 1 else "/i"}  x  EUR 8.50')
 
-    # ── LINEA PERFORATA ───────────────────────────────────────────
+    # LINEA PERFORATA
     perf_y = tot_y - 38
     c.setStrokeColor(colors.HexColor('#3a000d'))
     c.setLineWidth(1)
@@ -132,7 +132,7 @@ def genera_pdf(dati, output_path):
     c.setFillColor(colors.HexColor('#3a000d'))
     c.drawCentredString(W / 2, perf_y - 11, '\u2702  TAGLIA QUI  \u2702')
 
-    # ── TALLONCINO ────────────────────────────────────────────────
+    # TALLONCINO
     tall_top = perf_y - 26
     c.setFillColor(colors.HexColor('#0a0205'))
     c.rect(0, 0, W, tall_top + 2, fill=1, stroke=0)
