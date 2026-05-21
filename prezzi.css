@@ -3,7 +3,7 @@
     src: url('Stronger-Thinker-Bold.ttf');
 }
 
-/* ===================== OVERLAY ===================== */
+/* OVERLAY */
 .prezzi-overlay {
     display: none; /* apriPU() lo mette a flex */
     position: fixed;
@@ -16,7 +16,7 @@
     z-index: 9999;
 }
 
-/* ===================== POPUP ===================== */
+/* POPUP Vero e Proprio [ Come per il Profilo, c'era un Overlay Generale e un popUp Vero e Proprio ] */
 #prezzi-popup {
     display: none; /* apriPU() lo mette a block */
     position: relative;
@@ -45,8 +45,8 @@
     background: linear-gradient(90deg, #5e0015, #bb2248, #5e0015);
 }
 
-/* ===================== CHIUDI ===================== */
-.prezzi-chiudi {
+/* CHIUDI */
+.prezzi-chiudi { /* La X */
     position: absolute;
     top: 16px;
     right: 20px;
@@ -65,7 +65,7 @@
     transform: rotate(90deg);
 }
 
-/* ===================== TITOLO ===================== */
+/* TITOLO */
 #testo_promozioni h1 {
     font-family: 'Stronger-Thinker-Bold';
     font-size: 20px;
@@ -83,7 +83,7 @@
     font-style: italic;
 }
 
-/* ===================== SEZIONI ===================== */
+/* Le Varie SEZIONI | Blocchi */
 .sezione {
     margin-bottom: 16px;
     padding: 16px 20px;
